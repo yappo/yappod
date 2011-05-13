@@ -1,0 +1,411 @@
+# Makefile.in generated automatically by automake 1.5 from Makefile.am.
+
+# Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
+# Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+@SET_MAKE@
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_HEADER = $(INSTALL_DATA)
+transform = @program_transform_name@
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+AMTAR = @AMTAR@
+AWK = @AWK@
+CC = @CC@
+DEPDIR = @DEPDIR@
+EXEEXT = @EXEEXT@
+INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+MAINT = @MAINT@
+OBJEXT = @OBJEXT@
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+am__include = @am__include@
+am__quote = @am__quote@
+install_sh = @install_sh@
+
+bin_PROGRAMS = search yappo_makeindex yappo_margepos yappod_front yappod_core
+include_HEADERS = *.h
+
+YAPPO_BASE_OBJS = yappo_alloc.c yappo_db.c yappo_index.c yappo_index_pos.c yappo_index_filedata.c yappo_index_deletefile.c
+YAPPO_SEARCH_OBJS = yappo_search.c yappo_ngram.c yappo_linklist.c
+
+search_SOURCES = $(YAPPO_BASE_OBJS) $(YAPPO_SEARCH_OBJS) search.c
+
+yappo_makeindex_SOURCES = $(YAPPO_BASE_OBJS) yappo_ngram.c yappo_minibtree.c yappo_makeindex.c
+yappo_margepos_SOURCES = $(YAPPO_BASE_OBJS) $(YAPPO_SEARCH_OBJS) yappo_margepos.c
+
+yappod_front_SOURCES = $(YAPPO_BASE_OBJS) $(YAPPO_SEARCH_OBJS) yappod_front.c
+yappod_core_SOURCES = $(YAPPO_BASE_OBJS) $(YAPPO_SEARCH_OBJS) yappod_core.c
+subdir = src
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_CLEAN_FILES =
+bin_PROGRAMS = search$(EXEEXT) yappo_makeindex$(EXEEXT) \
+	yappo_margepos$(EXEEXT) yappod_front$(EXEEXT) \
+	yappod_core$(EXEEXT)
+PROGRAMS = $(bin_PROGRAMS)
+
+am_search_OBJECTS = yappo_alloc.$(OBJEXT) yappo_db.$(OBJEXT) \
+	yappo_index.$(OBJEXT) yappo_index_pos.$(OBJEXT) \
+	yappo_index_filedata.$(OBJEXT) yappo_index_deletefile.$(OBJEXT) \
+	yappo_search.$(OBJEXT) yappo_ngram.$(OBJEXT) \
+	yappo_linklist.$(OBJEXT) search.$(OBJEXT)
+search_OBJECTS = $(am_search_OBJECTS)
+search_LDADD = $(LDADD)
+search_DEPENDENCIES =
+search_LDFLAGS =
+am_yappo_makeindex_OBJECTS = yappo_alloc.$(OBJEXT) yappo_db.$(OBJEXT) \
+	yappo_index.$(OBJEXT) yappo_index_pos.$(OBJEXT) \
+	yappo_index_filedata.$(OBJEXT) yappo_index_deletefile.$(OBJEXT) \
+	yappo_ngram.$(OBJEXT) yappo_minibtree.$(OBJEXT) \
+	yappo_makeindex.$(OBJEXT)
+yappo_makeindex_OBJECTS = $(am_yappo_makeindex_OBJECTS)
+yappo_makeindex_LDADD = $(LDADD)
+yappo_makeindex_DEPENDENCIES =
+yappo_makeindex_LDFLAGS =
+am_yappo_margepos_OBJECTS = yappo_alloc.$(OBJEXT) yappo_db.$(OBJEXT) \
+	yappo_index.$(OBJEXT) yappo_index_pos.$(OBJEXT) \
+	yappo_index_filedata.$(OBJEXT) yappo_index_deletefile.$(OBJEXT) \
+	yappo_search.$(OBJEXT) yappo_ngram.$(OBJEXT) \
+	yappo_linklist.$(OBJEXT) yappo_margepos.$(OBJEXT)
+yappo_margepos_OBJECTS = $(am_yappo_margepos_OBJECTS)
+yappo_margepos_LDADD = $(LDADD)
+yappo_margepos_DEPENDENCIES =
+yappo_margepos_LDFLAGS =
+am_yappod_core_OBJECTS = yappo_alloc.$(OBJEXT) yappo_db.$(OBJEXT) \
+	yappo_index.$(OBJEXT) yappo_index_pos.$(OBJEXT) \
+	yappo_index_filedata.$(OBJEXT) yappo_index_deletefile.$(OBJEXT) \
+	yappo_search.$(OBJEXT) yappo_ngram.$(OBJEXT) \
+	yappo_linklist.$(OBJEXT) yappod_core.$(OBJEXT)
+yappod_core_OBJECTS = $(am_yappod_core_OBJECTS)
+yappod_core_LDADD = $(LDADD)
+yappod_core_DEPENDENCIES =
+yappod_core_LDFLAGS =
+am_yappod_front_OBJECTS = yappo_alloc.$(OBJEXT) yappo_db.$(OBJEXT) \
+	yappo_index.$(OBJEXT) yappo_index_pos.$(OBJEXT) \
+	yappo_index_filedata.$(OBJEXT) yappo_index_deletefile.$(OBJEXT) \
+	yappo_search.$(OBJEXT) yappo_ngram.$(OBJEXT) \
+	yappo_linklist.$(OBJEXT) yappod_front.$(OBJEXT)
+yappod_front_OBJECTS = $(am_yappod_front_OBJECTS)
+yappod_front_LDADD = $(LDADD)
+yappod_front_DEPENDENCIES =
+yappod_front_LDFLAGS =
+
+DEFS = @DEFS@
+DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/search.Po $(DEPDIR)/yappo_alloc.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_db.Po $(DEPDIR)/yappo_index.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_index_deletefile.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_index_filedata.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_index_pos.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_linklist.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_makeindex.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_margepos.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_minibtree.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappo_ngram.Po $(DEPDIR)/yappo_search.Po \
+@AMDEP_TRUE@	$(DEPDIR)/yappod_core.Po $(DEPDIR)/yappod_front.Po
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+CFLAGS = @CFLAGS@
+DIST_SOURCES = $(search_SOURCES) $(yappo_makeindex_SOURCES) \
+	$(yappo_margepos_SOURCES) $(yappod_core_SOURCES) \
+	$(yappod_front_SOURCES)
+HEADERS = $(include_HEADERS)
+
+DIST_COMMON = $(include_HEADERS) Makefile.am Makefile.in
+SOURCES = $(search_SOURCES) $(yappo_makeindex_SOURCES) $(yappo_margepos_SOURCES) $(yappod_core_SOURCES) $(yappod_front_SOURCES)
+
+all: all-am
+
+.SUFFIXES:
+.SUFFIXES: .c .o .obj
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && \
+	  $(AUTOMAKE) --gnu  src/Makefile
+Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) && \
+	  CONFIG_HEADERS= CONFIG_LINKS= \
+	  CONFIG_FILES=$(subdir)/$@ $(SHELL) ./config.status
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
+	  if test -f $$p \
+	  ; then \
+	    f=`echo $$p1|sed '$(transform);s/$$/$(EXEEXT)/'`; \
+	   echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f"; \
+	   $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  f=`echo $$p|sed 's/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
+	  echo " rm -f $(DESTDIR)$(bindir)/$$f"; \
+	  rm -f $(DESTDIR)$(bindir)/$$f; \
+	done
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+search$(EXEEXT): $(search_OBJECTS) $(search_DEPENDENCIES) 
+	@rm -f search$(EXEEXT)
+	$(LINK) $(search_LDFLAGS) $(search_OBJECTS) $(search_LDADD) $(LIBS)
+yappo_makeindex$(EXEEXT): $(yappo_makeindex_OBJECTS) $(yappo_makeindex_DEPENDENCIES) 
+	@rm -f yappo_makeindex$(EXEEXT)
+	$(LINK) $(yappo_makeindex_LDFLAGS) $(yappo_makeindex_OBJECTS) $(yappo_makeindex_LDADD) $(LIBS)
+yappo_margepos$(EXEEXT): $(yappo_margepos_OBJECTS) $(yappo_margepos_DEPENDENCIES) 
+	@rm -f yappo_margepos$(EXEEXT)
+	$(LINK) $(yappo_margepos_LDFLAGS) $(yappo_margepos_OBJECTS) $(yappo_margepos_LDADD) $(LIBS)
+yappod_core$(EXEEXT): $(yappod_core_OBJECTS) $(yappod_core_DEPENDENCIES) 
+	@rm -f yappod_core$(EXEEXT)
+	$(LINK) $(yappod_core_LDFLAGS) $(yappod_core_OBJECTS) $(yappod_core_LDADD) $(LIBS)
+yappod_front$(EXEEXT): $(yappod_front_OBJECTS) $(yappod_front_DEPENDENCIES) 
+	@rm -f yappod_front$(EXEEXT)
+	$(LINK) $(yappod_front_LDFLAGS) $(yappod_front_OBJECTS) $(yappod_front_LDADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT) core *.core
+
+distclean-compile:
+	-rm -f *.tab.c
+
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/search.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_alloc.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_db.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_index.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_index_deletefile.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_index_filedata.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_index_pos.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_linklist.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_makeindex.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_margepos.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_minibtree.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_ngram.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappo_search.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappod_core.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/yappod_front.Po@am__quote@
+
+distclean-depend:
+	-rm -rf $(DEPDIR)
+
+.c.o:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(COMPILE) -c `test -f $< || echo '$(srcdir)/'`$<
+
+.c.obj:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(COMPILE) -c `cygpath -w $<`
+CCDEPMODE = @CCDEPMODE@
+uninstall-info-am:
+install-includeHEADERS: $(include_HEADERS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(includedir)
+	@list='$(include_HEADERS)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(INSTALL_HEADER) $$d$$p $(DESTDIR)$(includedir)/$$f"; \
+	  $(INSTALL_HEADER) $$d$$p $(DESTDIR)$(includedir)/$$f; \
+	done
+
+uninstall-includeHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(include_HEADERS)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f $(DESTDIR)$(includedir)/$$f"; \
+	  rm -f $(DESTDIR)$(includedir)/$$f; \
+	done
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	mkid -fID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || etags $(ETAGS_ARGS) $$tags  $$unique $(LISP)
+
+GTAGS:
+	here=`CDPATH=: && cd $(top_builddir) && pwd` \
+	  && cd $(top_srcdir) \
+	  && gtags -i $(GTAGS_ARGS) $$here
+
+distclean-tags:
+	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
+
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+
+top_distdir = ..
+distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  if test "$$dir" != "$$file" && test "$$dir" != "."; then \
+	    $(mkinstalldirs) "$(distdir)/$$dir"; \
+	  fi; \
+	  if test -d $$d/$$file; then \
+	    cp -pR $$d/$$file $(distdir) \
+	    || exit 1; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || cp -p $$d/$$file $(distdir)/$$file \
+	    || exit 1; \
+	  fi; \
+	done
+check-am: all-am
+check: check-am
+all-am: Makefile $(PROGRAMS) $(HEADERS)
+
+installdirs:
+	$(mkinstalldirs) $(DESTDIR)$(bindir) $(DESTDIR)$(includedir)
+
+install: install-am
+install-exec: install-exec-am
+install-data: install-data-am
+uninstall: uninstall-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+
+installcheck: installcheck-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
+	  `test -z '$(STRIP)' || \
+	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES) stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+	@echo "This command is intended for maintainers to use"
+	@echo "it deletes files that may require special tools to rebuild."
+clean: clean-am
+
+clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+
+distclean: distclean-am
+
+distclean-am: clean-am distclean-compile distclean-depend \
+	distclean-generic distclean-tags
+
+dvi: dvi-am
+
+dvi-am:
+
+info: info-am
+
+info-am:
+
+install-data-am: install-includeHEADERS
+
+install-exec-am: install-binPROGRAMS
+
+install-info: install-info-am
+
+install-man:
+
+installcheck-am:
+
+maintainer-clean: maintainer-clean-am
+
+maintainer-clean-am: distclean-am maintainer-clean-generic
+
+mostlyclean: mostlyclean-am
+
+mostlyclean-am: mostlyclean-compile mostlyclean-generic
+
+uninstall-am: uninstall-binPROGRAMS uninstall-includeHEADERS \
+	uninstall-info-am
+
+.PHONY: GTAGS all all-am check check-am clean clean-binPROGRAMS \
+	clean-generic distclean distclean-compile distclean-depend \
+	distclean-generic distclean-tags distdir dvi dvi-am info \
+	info-am install install-am install-binPROGRAMS install-data \
+	install-data-am install-exec install-exec-am \
+	install-includeHEADERS install-info install-info-am install-man \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic tags uninstall \
+	uninstall-am uninstall-binPROGRAMS uninstall-includeHEADERS \
+	uninstall-info-am
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

@@ -1,0 +1,14 @@
+yappo検索システムインストール手順
+
+
+$ ./configure
+$ ./make
+$ su
+# ./make install
+
+デフォルトでのインストールディレクトリは
+/usr/local/yappod
+になります。
+
+./configure --prefix=$HOME/yappod
+で、各自のhomeディレクトリにインストールできます。
