@@ -1,86 +1,84 @@
-$B$3$N%Q%C%1!<%8$O(BYappo$B$N(BPC$B8!:w$G;HMQ$5$l$F$$$k$b$N$H$[$\F1$8J*$K$J$C$F$$$^$9!#(B
-$B0lIt$N%9%3%"%j%s%0$K4X$9$k%k!<%A%s$O>J$+$l$F$$$^$9!#(B
+このパッケージはYappoのPC検索で使用されているものとほぼ同じ物になっています。
+一部のスコアリングに関するルーチンは省かれています。
 
-$BK\Ev$KE,Ev$J%I%-%e%a%s%H$G$9$,13$O=q$$$F$J$$$G$9!#(B
+本当に適当なドキュメントですが嘘は書いてないです。
 
-$B$^$?!"%W%m%0%i%`<+BN$K$bMM!9$J$*$+$7$J$H$3$m$,M-$j$^$9!#(B
+また、プログラム自体にも様々なおかしなところが有ります。
 
 -------------------------------------------------------------------------------
-$B%$%s%G%C%/%9$N:n$jJ}(B
+インデックスの作り方
 
-1.$B%$%s%G%C%/%9$r:n$j$?$$J8=q$r=8$a$^$9!#(B
+1.インデックスを作りたい文書を集めます。
 
-2.$BJ8=q$r%$%s%G%/%5$,FI$_9~$a$k7?<0$K%3%s%P!<%H$7$^$9!#(B
+2.文書をインデクサが読み込める型式にコンバートします。
 
-$B%U%)!<%^%C%H$O0l9T$K$D$-!"(B1$B%I%-%e%a%s%HF~$j!"3F9`L\$O%?%V$G6h@Z$i$l$^$9!#(B
-$B4A;z%3!<%I$OM=$a(BEUC$B$KJQ49$7$F$*$$$F2<$5$$!#(B
-$B9`L\$O:8$N%l%3!<%I$+$i=g$K2<5-$NDL$j$K$J$j$^$9!#(B
+フォーマットは一行につき、1ドキュメント入り、各項目はタブで区切られます。
+漢字コードは予めEUCに変換しておいて下さい。
+項目は左のレコードから順に下記の通りになります。
 
 URL\tCOMMAND\tTITLE\tBODY_SIZE\tBODY
 
-URL       = $BJ8=q$N(BURL
-COMMAND   = $B%$%s%G%/%5%X$N;X<((B
-TITLE     = $BJ8=q$N%?%$%H%k(B
-BODY_SIZE = $BJ8=q$N%5%$%:(B
-BODY      = $BJ8=q(B
+URL       = 文書のURL
+COMMAND   = インデクサヘの指示
+TITLE     = 文書のタイトル
+BODY_SIZE = 文書のサイズ
+BODY      = 文書
 
-COMMAND$B$K$O(BADD$B$H(BDELETE$B$,F~$j$^$9!#(B
-ADD$B$OJ8=q$r%$%s%G%C%/%9$KDI2C$9$k!#(B
-DELETE$B$O(BURL$B$r%$%s%G%C%/%9$+$i:o=|$7$^$9!#(B
-BODY$B$K$O2~9T$d%?%V$r4^$a$F$O$$$1$^$;$s!#(B
+COMMANDにはADDとDELETEが入ります。
+ADDは文書をインデックスに追加する。
+DELETEはURLをインデックスから削除します。
+BODYには改行やタブを含めてはいけません。
 
-sample.gz $B$H$$$&%5%s%W%k$rCV$$$?$N$G;29M$K$7$F$/$@$5$$!#(B
+sample.gz というサンプルを置いたので参考にしてください。
 
-3.$B%$%s%G%C%/%93JG<MQ$N%G%#%l%/%H%j$r:n@.$7$^$9!#(B
-  $B9%$-$J>l=j$K%$%s%G%C%/%93JG<>l=jMQ$N%G%#%l%/%H%j$r:n@.$7$F2<$5$$!#(B
-  $BNc$($P(B /tmp/yappoindex $B$H$+(B
-  $B:n@.$7$?%G%#%l%/%H%j$NCf$K$O!"0LCV>pJs%U%!%$%k$r3JG<$9$k$?$a$N%G%#%l%/%H%j(Bpos$B$b:n@.$7$F$/$@$5$$!#(B
+3.インデックス格納用のディレクトリを作成します。
+  好きな場所にインデックス格納場所用のディレクトリを作成して下さい。
+  例えば /tmp/yappoindex とか
+  作成したディレクトリの中には、位置情報ファイルを格納するためのディレクトリposも作成してください。
 
   $ mkdir /tmp/yappoindex
   $ mkdir /tmp/yappoindex/pos
 
-4.$B%$%s%G%C%/%9%3%^%s%I$rAv$i$;$k!#(B
-  $ yappo_makeindex -f (2$B$G:n$C$?%U%!%$%k(B) -d (3$B$G:n$C$?%G%#%l%/%H%j(B)
-  $B>e5-$NMM$J%3%^%s%I$G%$%s%G%C%/%9$,:n@.$5$l$^$9!#(B
-  $B:#2s$NNc$@$H(B $ yappo_makeindex -f sample.gz -d /tmp/yappoindex $B$J$I$G$9!#(B
+4.インデックスコマンドを走らせる。
+  $ yappo_makeindex -f (2で作ったファイル) -d (3で作ったディレクトリ)
+  上記の様なコマンドでインデックスが作成されます。
+  今回の例だと $ yappo_makeindex -f sample.gz -d /tmp/yappoindex などです。
   
 
 -------------------------------------------------------------------------------
-$B8!:w$N$7$+$?(B
+検索のしかた
 
-$B%3%^%s%I%i%$%s$G8!:w$,=PMh$^$9!#(B
-$B=PNO$OE,Ev$G$9!#(B
+コマンドラインで検索が出来ます。
+出力は適当です。
 
-$ search -l ($B%$%s%G%C%/%93JG<%G%#%l%/%H%j(B) ($B%-!<%o!<%I(B)
+$ search -l (インデックス格納ディレクトリ) (キーワード)
 
-$BNc(B/ $ search -l /tmp/yappoindex $B%-!<%o!<%I(B
+例/ $ search -l /tmp/yappoindex キーワード
 
 -------------------------------------------------------------------------------
-$B8!:w%G!<%b%s$r$"$2$k(B
+検索デーモンをあげる
 
 $ yappod_core -l /tmp/yappoindex
 $ yappod_front -l /tmp/yappoindex -s localhost
 
-$B8!:w%G!<%b%s$K%/%(%j!<$rEj$2$kJ}K!$O(B
+検索デーモンにクエリーを投げる方法は
 
-http://localhost:10080/yappo/100000/AND/0-10?$B%-!<%o!<%I(B
+http://localhost:10080/yappo/100000/AND/0-10?キーワード
 
-$B$3$l$G(B100000$B%P%$%HL$K~$NJ8=q$NCf$+$i!V%-!<%o!<%I!W$r(BAND$B8!:w$G(B1$B7oL\$+$i(B10$B7o$^$G$N8!:w7k2L$r<hF@=PMh$^$9!#(B
+これで100000バイト未満の文書の中から「キーワード」をAND検索で1件目から10件までの検索結果を取得出来ます。
 
-$B7k2L$N%U%)!<%^%C%H$O2<5-$NDL$j(B
+結果のフォーマットは下記の通り
 ==========RESULT============
-$B%-!<%o!<%I$KE,9g$7$?J8=q?t(B
-$B7k2L9T?t(B
+キーワードに適合した文書数
+結果行数
 
-URL\t$B%?%$%H%k(B\t$BJ8=q%5%$%:(B\t$B%$%s%G%C%/%9$N:n$jJ}$N(B2$B$N%U%!%$%k$r:n$C$?;~4V(B\t$B%9%3%"(B
+URL\tタイトル\t文書サイズ\tインデックスの作り方の2のファイルを作った時間\tスコア
 ============================
 -------------------------------------------------------------------------------
 
-$BBgBN$N;HMQJ}K!$O$3$s$J46$8$G$9!#(B
+大体の使用方法はこんな感じです。
 
-$BDI2C@bL@$J$I$O(B http://tech.yappo.ne.jp/ $B$K$F8x3+$5$l$k$+$b$7$l$^$;$s!#(B
+追加説明などは http://tech.yappo.ne.jp/ にて公開されるかもしれません。
 
-$B$A$J$_$K8=:_$O3F<o8zN($r$"$2$?(B1.1$B7O$N3+H/$r9T$J$C$F$$$^$9!#(B
-$B$^$?!">-MhE*$K$O$^$C$?$/JL$N<BAu$r:n@.$9$kM=Dj$bM-$j$^$9!#(B
-
-$B%Q%C%A$r:n@.$7$FD:$1$^$7$?$i(B ko@yappo.ne.jp$B$^$G$*Aw$jD:$1$k$H=u$+$j$^$9!#(B
+ちなみに現在は各種効率をあげた1.1系の開発を行なっています。
+また、将来的にはまったく別の実装を作成する予定も有ります。
