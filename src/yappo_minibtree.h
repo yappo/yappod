@@ -1,16 +1,16 @@
 /*
  *
- *¾®µ¬ÌÏ¤Êbtree
- *ÄÉ²Ã»ş¤Î¥Ğ¥é¥ó¥¹¤Ê¤É¤Ï¹Ô¤Ê¤ï¤ì¤Ê¤¤
+ *å°è¦æ¨¡ãªbtree
+ *è¿½åŠ æ™‚ã®ãƒãƒ©ãƒ³ã‚¹ãªã©ã¯è¡Œãªã‚ã‚Œãªã„
  *
  */
 #ifndef __YAPPO_MINIBTREE_H__
 #define __YAPPO_MINIBTREE_H__
 
 typedef struct yap_minibtree{
-  unsigned char *key;/*¥­¡¼¥ï¡¼¥É*/
-  unsigned long id;/*°ì°Õ¤ÊID*/
-  void *data;/*¥Ç¡¼¥¿*/
+  unsigned char *key;/*ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰*/
+  unsigned long id;/*ä¸€æ„ãªID*/
+  void *data;/*ãƒ‡ãƒ¼ã‚¿*/
   struct yap_minibtree *left;
   struct yap_minibtree *right;
   struct yap_minibtree *top;

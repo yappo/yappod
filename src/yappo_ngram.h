@@ -1,14 +1,14 @@
 /*
- *N-gram¤Ë´Ø¤¹¤ë½èÍı
+ *N-gramã«é–¢ã™ã‚‹å‡¦ç†
  */
 #ifndef __NGRAM_H__ 
 #define __NGRAM_H__ 
 
-/* N-gram¤ÇÀÚ¤ê½Ğ¤¹¥Ğ¥¤¥È¿ô */
+/* N-gramã§åˆ‡ã‚Šå‡ºã™ãƒã‚¤ãƒˆæ•° */
 #define Ngram_N 4
 
 /*
- *½Ğ¸½¥­¡¼¥ï¡¼¥É¤È¡¢½Ğ¸½°ÌÃÖ¤ò¼ı¤á¤ë¥ê¥¹¥È
+ *å‡ºç¾ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã¨ã€å‡ºç¾ä½ç½®ã‚’åã‚ã‚‹ãƒªã‚¹ãƒˆ
  */
 typedef struct ngram_list{
   unsigned char *keyword;
@@ -18,11 +18,11 @@ typedef struct ngram_list{
 }NGRAM_LIST;
 
 /*
- *½Ğ¸½¥­¡¼¥ï¡¼¥É¤È½Ğ¸½°ÌÃÖ¤ò³ÊÇ¼¤¹¤ë
+ *å‡ºç¾ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã¨å‡ºç¾ä½ç½®ã‚’æ ¼ç´ã™ã‚‹
  */
 typedef struct{
-  unsigned char *keyword;/* ¥­¡¼¥ï¡¼¥É */
-  int pos;/* ½Ğ¸½°ÌÃÖ */
+  unsigned char *keyword;/* ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ */
+  int pos;/* å‡ºç¾ä½ç½® */
 }NGRAM_SEARCH_LIST;
 
 NGRAM_SEARCH_LIST *YAP_Ngram_tokenize_search(char *body, int *keyword_num);

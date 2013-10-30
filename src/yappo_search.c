@@ -1,6 +1,6 @@
 /*
  *
- *¥­¡¼¥ï¡¼¥É¤òÊİÍ­¤¹¤ë¥É¥­¥å¥á¥ó¥ÈÈÖ¹æ¤Î¼èÆÀÅù
+ *ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’ä¿æœ‰ã™ã‚‹ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆç•ªå·ã®å–å¾—ç­‰
  *
  */
 #include <stdio.h>
@@ -19,7 +19,7 @@
 
 
 /*
- *SEARCH_RESULT¤ÎÃæ¿È¤Î¥á¥â¥ê¤ò²òÊü
+ *SEARCH_RESULTã®ä¸­èº«ã®ãƒ¡ãƒ¢ãƒªã‚’è§£æ”¾
  */
 void YAP_Search_result_free (SEARCH_RESULT *p)
 {
@@ -37,7 +37,7 @@ void YAP_Search_result_free (SEARCH_RESULT *p)
 
 
 /*
- *½Ğ¸½°ÌÃÖ¥ê¥¹¥È¤Î¥½¡¼¥È¤ò¹Ô¤Ê¤¦
+ *å‡ºç¾ä½ç½®ãƒªã‚¹ãƒˆã®ã‚½ãƒ¼ãƒˆã‚’è¡Œãªã†
  */
 int _YAP_Search_result_sort_pos (const void *a, const void *b)
 {
@@ -61,7 +61,7 @@ void YAP_Search_result_sort_pos (SEARCH_DOCUMENT *p)
 
 
 /*
- *¥¹¥³¥¢¤ò¸µ¤Ë¥½¡¼¥È¤ò¹Ô¤Ê¤¦
+ *ã‚¹ã‚³ã‚¢ã‚’å…ƒã«ã‚½ãƒ¼ãƒˆã‚’è¡Œãªã†
  */
 int _YAP_Search_result_sort_score (const void *a, const void *b)
 {
@@ -81,7 +81,7 @@ void YAP_Search_result_sort_score (SEARCH_RESULT *p)
 }
 
 /*
- *»ØÄê¥µ¥¤¥º°Ê²¼¤ÎURL¤Î¤ß¤ò»Ä¤¹
+ *æŒ‡å®šã‚µã‚¤ã‚ºä»¥ä¸‹ã®URLã®ã¿ã‚’æ®‹ã™
  */
 SEARCH_RESULT *YAP_Search_result_delete_size (YAPPO_DB_FILES *ydfp, SEARCH_RESULT *p, int max_size)
 {
@@ -98,7 +98,7 @@ SEARCH_RESULT *YAP_Search_result_delete_size (YAPPO_DB_FILES *ydfp, SEARCH_RESUL
 
   docs_num = total_num = 0;
 
-  /* ¥í¥Ã¥¯³«»Ï */
+  /* ãƒ­ãƒƒã‚¯é–‹å§‹ */
   pthread_mutex_lock(&(ydfp->cache->size_mutex));
   for (i = 0; i < p->keyword_docs_num; i++) {
     size = 0;
@@ -112,17 +112,17 @@ SEARCH_RESULT *YAP_Search_result_delete_size (YAPPO_DB_FILES *ydfp, SEARCH_RESUL
     if (size < max_size) {
       result->docs_list[docs_num].fileindex = p->docs_list[i].fileindex;
       result->docs_list[docs_num].score = p->docs_list[i].score;
-      result->docs_list[docs_num].pos = NULL;/* ½Ğ¸½°ÌÃÖ¤Ï¥³¥Ô¡¼¤·¤Ê¤¤ */
-      result->docs_list[docs_num].pos_len =  0;/* Ä¹¤µ¾ğÊó¤âÆ±¾å */
+      result->docs_list[docs_num].pos = NULL;/* å‡ºç¾ä½ç½®ã¯ã‚³ãƒ”ãƒ¼ã—ãªã„ */
+      result->docs_list[docs_num].pos_len =  0;/* é•·ã•æƒ…å ±ã‚‚åŒä¸Š */
       total_num += p->docs_list[i].pos_len;
       docs_num++;
     }
   }
-  /* ¥í¥Ã¥¯²ò½ü */
+  /* ãƒ­ãƒƒã‚¯è§£é™¤ */
   pthread_mutex_unlock(&(ydfp->cache->size_mutex));
 
   if (docs_num == 0) {
-    /* °ì·ï¤â°ìÃ×¤·¤Ê¤«¤Ã¤¿ */
+    /* ä¸€ä»¶ã‚‚ä¸€è‡´ã—ãªã‹ã£ãŸ */
     free(result->docs_list);
     free(result);
     return NULL;
@@ -135,8 +135,8 @@ SEARCH_RESULT *YAP_Search_result_delete_size (YAPPO_DB_FILES *ydfp, SEARCH_RESUL
 }
 
 /*
- *¸¡º÷·ë²Ì¤«¤éºï½üÊ¸½ñ¤ò¼è¤ê½ü¤¯
- *¤Ş¤¿¤Ï¡¢°Û¾ï¤Ê¸¡º÷·ë²Ì¤ò¼è¤ê½ü¤¯
+ *æ¤œç´¢çµæœã‹ã‚‰å‰Šé™¤æ–‡æ›¸ã‚’å–ã‚Šé™¤ã
+ *ã¾ãŸã¯ã€ç•°å¸¸ãªæ¤œç´¢çµæœã‚’å–ã‚Šé™¤ã
  */
 SEARCH_RESULT *YAP_Search_result_delete (YAPPO_DB_FILES *ydfp, SEARCH_RESULT *p)
 {
@@ -153,7 +153,7 @@ SEARCH_RESULT *YAP_Search_result_delete (YAPPO_DB_FILES *ydfp, SEARCH_RESULT *p)
 
   docs_num = total_num = 0;
 
-  /* ¥í¥Ã¥¯³«»Ï */
+  /* ãƒ­ãƒƒã‚¯é–‹å§‹ */
   pthread_mutex_lock(&(ydfp->cache->domainid_mutex));
   for (i = 0; i < p->keyword_docs_num; i++) {
     if (p->docs_list[i].fileindex == 0) {
@@ -166,19 +166,19 @@ SEARCH_RESULT *YAP_Search_result_delete (YAPPO_DB_FILES *ydfp, SEARCH_RESULT *p)
     if ( ! (*(ydfp->cache->deletefile + seek) & (1 << bit))) {
       result->docs_list[docs_num].fileindex = p->docs_list[i].fileindex;
       result->docs_list[docs_num].score = p->docs_list[i].score;
-      result->docs_list[docs_num].pos = NULL;/* ½Ğ¸½°ÌÃÖ¤Ï¥³¥Ô¡¼¤·¤Ê¤¤ */
-      result->docs_list[docs_num].pos_len =  0;/* Ä¹¤µ¾ğÊó¤âÆ±¾å */
+      result->docs_list[docs_num].pos = NULL;/* å‡ºç¾ä½ç½®ã¯ã‚³ãƒ”ãƒ¼ã—ãªã„ */
+      result->docs_list[docs_num].pos_len =  0;/* é•·ã•æƒ…å ±ã‚‚åŒä¸Š */
       total_num += p->docs_list[i].pos_len;
       docs_num++;
     }
   }
 
-  /*¥í¥Ã¥¯²ò½ü */
+  /*ãƒ­ãƒƒã‚¯è§£é™¤ */
   pthread_mutex_unlock(&(ydfp->cache->domainid_mutex));
 
 
   if (docs_num == 0) {
-    /* °ì·ï¤â°ìÃ×¤·¤Ê¤«¤Ã¤¿ */
+    /* ä¸€ä»¶ã‚‚ä¸€è‡´ã—ãªã‹ã£ãŸ */
     free(result->docs_list);
     free(result);
     return NULL;
@@ -192,9 +192,9 @@ SEARCH_RESULT *YAP_Search_result_delete (YAPPO_DB_FILES *ydfp, SEARCH_RESULT *p)
 
 
 /*
- *Æó¤Î½Ğ¸½°ÌÃÖ¥ê¥¹¥È¤òÄ´¤Ù¤Æ¡¢¤½¤ì¤¾¤ì¤ÎÃ±¸ì¤Î°ÌÃÖ¤¬order¥Ğ¥¤¥È¤Ï¤Ê¤ì¤Æ¤¤¤ë¤«Ä´¤Ù¤ë
+ *äºŒã®å‡ºç¾ä½ç½®ãƒªã‚¹ãƒˆã‚’èª¿ã¹ã¦ã€ãã‚Œãã‚Œã®å˜èªã®ä½ç½®ãŒorderãƒã‚¤ãƒˆã¯ãªã‚Œã¦ã„ã‚‹ã‹èª¿ã¹ã‚‹
  *
- *°ìÃ×¤·¤¿¤é0¤òÊÖ¤¹
+ *ä¸€è‡´ã—ãŸã‚‰0ã‚’è¿”ã™
  *
  */
 int YAP_Search_word_pos (int *left_pos, int left_pos_len, int *right_pos, int right_pos_len, int order)
@@ -204,14 +204,14 @@ int YAP_Search_word_pos (int *left_pos, int left_pos_len, int *right_pos, int ri
   int base_last, target_last;
   int *base, *target;
 
-  /* ÇÛÎó¤¬Ã»¤¤¤Û¤¦¤ò´ğËÜ¤Ë¤¹¤ë */
+  /* é…åˆ—ãŒçŸ­ã„ã»ã†ã‚’åŸºæœ¬ã«ã™ã‚‹ */
   if (left_pos_len > right_pos_len) {
     base = right_pos;
     base_len = right_pos_len;
     target = left_pos;
     target_len = left_pos_len;
 
-    /* order¤ÎµÕÅ¾ */
+    /* orderã®é€†è»¢ */
     order = 0 - order;
   } else {
     base = left_pos;
@@ -225,24 +225,24 @@ int YAP_Search_word_pos (int *left_pos, int left_pos_len, int *right_pos, int ri
   target_last = target[0];
   while (1) {
     if (target_last - base_last == order) {
-      /* ¥Ò¥Ã¥È */
+      /* ãƒ’ãƒƒãƒˆ */
       return 0;
     } else if (base_last > target_last) {
-      /* target¤Î¥«¥¦¥ó¥¿¤ò¾å¤²¤ë */
+      /* targetã®ã‚«ã‚¦ãƒ³ã‚¿ã‚’ä¸Šã’ã‚‹ */
       if (target_i < target_len) {
 	target_i++;
 	target_last += target[target_i];
       }
     } else if (base_last < target_last) {
-      /* base¤Î¥«¥¦¥ó¥¿¤ò¾å¤²¤ë */
+      /* baseã®ã‚«ã‚¦ãƒ³ã‚¿ã‚’ä¸Šã’ã‚‹ */
       if (base_i < base_len) {
 	base_i++;
 	base_last += base[base_i];
       }
     } else {
       /*
-       *Î¾ÊıÆ±¤¸¤Ê¤Î¤Ç(Í×¤¹¤ë¤ËÆ±¤¸Ê¸»úÎó¤ÎÏ¢Â³È½Äê¤ò¤¹¤ë»ö¤Ë¤Ê¤ë)
-       *target¤Î¥«¥¦¥ó¥¿¤ò¾å¤²¤ë
+       *ä¸¡æ–¹åŒã˜ãªã®ã§(è¦ã™ã‚‹ã«åŒã˜æ–‡å­—åˆ—ã®é€£ç¶šåˆ¤å®šã‚’ã™ã‚‹äº‹ã«ãªã‚‹)
+       *targetã®ã‚«ã‚¦ãƒ³ã‚¿ã‚’ä¸Šã’ã‚‹
        */
       if (target_i < target_len) {
 	target_i++;
@@ -251,7 +251,7 @@ int YAP_Search_word_pos (int *left_pos, int left_pos_len, int *right_pos, int ri
     }
 
     if (! (target_i <target_len && base_i < base_len)) {
-      /* °ìÃ×¤·¤Ê¤«¤Ã¤¿ */
+      /* ä¸€è‡´ã—ãªã‹ã£ãŸ */
       return 1;
     }
   }
@@ -261,10 +261,10 @@ int YAP_Search_word_pos (int *left_pos, int left_pos_len, int *right_pos, int ri
 
 
 /*
- *2¤Ä¤Î¸¡º÷·ë²Ì¤«¤éAND¤Î¸¡º÷·ë²Ì¤òÊÖ¤¹
- *¥Õ¥ì¡¼¥º¸¡º÷ÍÑ
- *order left¤Î¥­¡¼¥ï¡¼¥É¤Èright¤¬order¥Ğ¥¤¥ÈÊ¬¤Ï¤Ê¤ì¤Æ¤¤¤¿¤é°ìÃ×
- *order ¤¬0¤Ê¤éÉáÄÌ¤ÎAND
+ *2ã¤ã®æ¤œç´¢çµæœã‹ã‚‰ANDã®æ¤œç´¢çµæœã‚’è¿”ã™
+ *ãƒ•ãƒ¬ãƒ¼ã‚ºæ¤œç´¢ç”¨
+ *order leftã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã¨rightãŒorderãƒã‚¤ãƒˆåˆ†ã¯ãªã‚Œã¦ã„ãŸã‚‰ä¸€è‡´
+ *order ãŒ0ãªã‚‰æ™®é€šã®AND
  */
 SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int order)
 {
@@ -274,12 +274,12 @@ SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int
   int new_i;
   int total_num = 0, docs_num = 0;
 
-  /* NULLÂĞºö */
+  /* NULLå¯¾ç­– */
   if (left == NULL || right == NULL) {
     return NULL;
   }
 
-  /* ¸¡º÷·ë²Ì¤Î¾¯¤Ê¤¤Êı¤ò¥á¥¤¥ó¤Ë¤¹¤ë */
+  /* æ¤œç´¢çµæœã®å°‘ãªã„æ–¹ã‚’ãƒ¡ã‚¤ãƒ³ã«ã™ã‚‹ */
   if ( left->keyword_docs_num > right->keyword_docs_num) {
     base   = right;
     target = left;
@@ -292,26 +292,26 @@ SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int
 
 
   /*
-   *base¤ÈÆ±¤¸Ê¸½ñID¤ò¤â¤Ädocs_list¤òÃµ¤¹¡£
-   *Á°Äé¤È¤·¤Ædocs_list¤¬fileindex¤Ç¾º½ç¤Ë¤Ê¤Ã¤Æ¤¤¤ëÉ¬Í×¤¬Í­¤ë
+   *baseã¨åŒã˜æ–‡æ›¸IDã‚’ã‚‚ã¤docs_listã‚’æ¢ã™ã€‚
+   *å‰å ¤ã¨ã—ã¦docs_listãŒfileindexã§æ˜‡é †ã«ãªã£ã¦ã„ã‚‹å¿…è¦ãŒæœ‰ã‚‹
    */
   target_i = 0;
   for (base_i = 0; base_i < base->keyword_docs_num; base_i++) {
-    l_i = target_i;/* º¸Â¦¤ò¥¿¡¼¥²¥Ã¥È¤Îi¤ËÀßÄê */
-    r_i = target->keyword_docs_num;/* ±¦Â¦¤ò¥¿¡¼¥²¥Ã¥È¤ÎËöÈø¤ËÀßÄê */
+    l_i = target_i;/* å·¦å´ã‚’ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®iã«è¨­å®š */
+    r_i = target->keyword_docs_num;/* å³å´ã‚’ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æœ«å°¾ã«è¨­å®š */
     found_i = -1;
     while (l_i < r_i) {
-      int c_i = (l_i + r_i) / 2;/* º¸¤È±¦¤Î¿¿¤óÃæ */
+      int c_i = (l_i + r_i) / 2;/* å·¦ã¨å³ã®çœŸã‚“ä¸­ */
       if (base->docs_list[base_i].fileindex < target->docs_list[c_i].fileindex) {
-	/* º¸¤òÃµ¤¹ */
+	/* å·¦ã‚’æ¢ã™ */
 	r_i = c_i;
       } else if (base->docs_list[base_i].fileindex > target->docs_list[c_i].fileindex) {
-	/* ±¦¤òÃµ¤¹ */
+	/* å³ã‚’æ¢ã™ */
 	l_i = c_i + 1;
       } else {
-	/* ¸«¤Ä¤«¤Ã¤¿ */
+	/* è¦‹ã¤ã‹ã£ãŸ */
 	if (order > 0) {
-	  /* ½Ğ¸½°ÌÃÖ¥ê¥¹¥È¤òÄ´¤Ù¤ë */	  
+	  /* å‡ºç¾ä½ç½®ãƒªã‚¹ãƒˆã‚’èª¿ã¹ã‚‹ */	  
 	  int ret;
 	  int _r, _l;
 	  if (left == base) {
@@ -325,11 +325,11 @@ SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int
 				  left->docs_list[_l].pos, left->docs_list[_l].pos_len,
 				  right->docs_list[_r].pos, right->docs_list[_r].pos_len,
 				  order)) {
-	    /* ÉÔ°ìÃ× */
+	    /* ä¸ä¸€è‡´ */
 	    l_i++;
 	    found_i = -1;
 	  } else {
-	    /* °ìÃ× */
+	    /* ä¸€è‡´ */
 	    found_i = c_i;
 	  }
 	} else {
@@ -340,13 +340,13 @@ SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int
     }
 
     if (found_i == -1) {
-      /* ¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿ */
+      /* è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ */
       target_i = l_i;
     } else {
       /*
-       *¸«¤Ä¤«¤Ã¤¿
+       *è¦‹ã¤ã‹ã£ãŸ
        *
-       *±¦Â¦¤Î¥­¡¼¥ï¡¼¥É¤ò´ğËÜ¤Ë¿·¤·¤¤·ë²Ì¤òºîÀ®¤¹¤ë
+       *å³å´ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’åŸºæœ¬ã«æ–°ã—ã„çµæœã‚’ä½œæˆã™ã‚‹
        */
       if (base == right) {
 	new_i = base_i;
@@ -359,14 +359,14 @@ SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int
 
       if (order > 0) {
 	/*
-	 *½Ğ¸½°ÌÃÖ¤Îµ÷Î¥¤òÈæ³Ó¤¹¤ë¤Î¤Ç
-	 *½Ğ¸½°ÌÃÖ¤ò¥³¥Ô¡¼¤¹¤ë
+	 *å‡ºç¾ä½ç½®ã®è·é›¢ã‚’æ¯”è¼ƒã™ã‚‹ã®ã§
+	 *å‡ºç¾ä½ç½®ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 	 */
 	result->docs_list[docs_num].pos = (int *) YAP_malloc(sizeof(int) * right->docs_list[new_i].pos_len);      
 	memcpy(result->docs_list[docs_num].pos, right->docs_list[new_i].pos, right->docs_list[new_i].pos_len);
 	result->docs_list[docs_num].pos_len = right->docs_list[new_i].pos_len;
       } else {
-	/* ½Ğ¸½°ÌÃÖ¤Ï¥³¥Ô¡¼¤·¤Ê¤¤ */
+	/* å‡ºç¾ä½ç½®ã¯ã‚³ãƒ”ãƒ¼ã—ãªã„ */
 	result->docs_list[docs_num].pos = NULL;
 	result->docs_list[docs_num].pos_len =  0;
       }
@@ -379,7 +379,7 @@ SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int
   }
 
   if (docs_num == 0) {
-    /* °ì·ï¤â°ìÃ×¤·¤Ê¤«¤Ã¤¿ */
+    /* ä¸€ä»¶ã‚‚ä¸€è‡´ã—ãªã‹ã£ãŸ */
     free(result->docs_list);
     free(result);
     return NULL;
@@ -393,7 +393,7 @@ SEARCH_RESULT *YAP_Search_op_and (SEARCH_RESULT *left, SEARCH_RESULT *right, int
 
 
 /*
- *2¤Ä¤Î¸¡º÷·ë²Ì¤«¤éOR¤Î¸¡º÷·ë²Ì¤òÊÖ¤¹
+ *2ã¤ã®æ¤œç´¢çµæœã‹ã‚‰ORã®æ¤œç´¢çµæœã‚’è¿”ã™
  *
  */
 SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
@@ -403,7 +403,7 @@ SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
   int total_num = 0, docs_num = 0;
   double score;
 
-  /* NULLÂĞºö */
+  /* NULLå¯¾ç­– */
   if (left == NULL || right == NULL) {
     return NULL;
   }
@@ -413,7 +413,7 @@ SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
 						     (left->keyword_docs_num + right->keyword_docs_num));
 
   /*
-   *Á°Äé¤È¤·¤Ædocs_list¤¬fileindex¤Ç¾º½ç¤Ë¤Ê¤Ã¤Æ¤¤¤ëÉ¬Í×¤¬Í­¤ë
+   *å‰å ¤ã¨ã—ã¦docs_listãŒfileindexã§æ˜‡é †ã«ãªã£ã¦ã„ã‚‹å¿…è¦ãŒæœ‰ã‚‹
    */
   left_i = right_i = 0;
   while (1) {
@@ -424,24 +424,24 @@ SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
     */
 
     if (left->keyword_docs_num > left_i && right->keyword_docs_num > right_i) {
-      /* º¸±¦¤Î¥«¥¦¥ó¥¿¤¬¸Â³¦¤Ç¤Ê¤¤¤È¤­ */
+      /* å·¦å³ã®ã‚«ã‚¦ãƒ³ã‚¿ãŒé™ç•Œã§ãªã„ã¨ã */
 
       if (left->docs_list[left_i].fileindex > right->docs_list[right_i].fileindex) {
-	/* º¸Â¦¤ÎÊ¸½ñID¤¬Âç¤­¤¤¤Î¤Ç¡¢±¦Â¦¤Î·ë²Ì¤ò¥³¥Ô¡¼¤¹¤ë */
+	/* å·¦å´ã®æ–‡æ›¸IDãŒå¤§ãã„ã®ã§ã€å³å´ã®çµæœã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ */
 	new = right;
 	new_i = right_i;
 	score = new->docs_list[new_i].score;
 
 	right_i++;
       } else if (left->docs_list[left_i].fileindex < right->docs_list[right_i].fileindex) {
-	/* ±¦Â¦¤ÎÊ¸½ñID¤¬Âç¤­¤¤¤Î¤Ç¡¢º¸Â¦¤Î·ë²Ì¤ò¥³¥Ô¡¼¤¹¤ë */
+	/* å³å´ã®æ–‡æ›¸IDãŒå¤§ãã„ã®ã§ã€å·¦å´ã®çµæœã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ */
 	new = left;
 	new_i = left_i;
 	score = new->docs_list[new_i].score;
 
 	left_i++;
       } else {
-	/* Î¾Êı¤Ò¤Ã¤«¤«¤ë¤Î¤Ç±¦Â¦¤Î·ë²Ì¤ò¥³¥Ô¡¼ */
+	/* ä¸¡æ–¹ã²ã£ã‹ã‹ã‚‹ã®ã§å³å´ã®çµæœã‚’ã‚³ãƒ”ãƒ¼ */
 	new = right;
 	new_i = right_i;
 	score = left->docs_list[left_i].score + right->docs_list[right_i].score;
@@ -450,21 +450,21 @@ SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
 	right_i++;
       }
     } else if (left->keyword_docs_num > left_i && right->keyword_docs_num <= right_i) {
-      /* ±¦¤Î½èÍı¤¬½ªÎ»¤·¤¿¤Î¤Çº¸¤Î½èÍı¤Î¤ß¤ò¹Ô¤Ê¤¦ */
+      /* å³ã®å‡¦ç†ãŒçµ‚äº†ã—ãŸã®ã§å·¦ã®å‡¦ç†ã®ã¿ã‚’è¡Œãªã† */
       new = left;
       new_i = left_i;
       score = new->docs_list[new_i].score;
 
       left_i++;
     } else if (left->keyword_docs_num <= left_i && right->keyword_docs_num > right_i) {
-      /* º¸¤Î½èÍı¤¬½ªÎ»¤·¤¿¤Î¤Ç±¦¤Î½èÍı¤Î¤ß¤ò¹Ô¤Ê¤¦ */
+      /* å·¦ã®å‡¦ç†ãŒçµ‚äº†ã—ãŸã®ã§å³ã®å‡¦ç†ã®ã¿ã‚’è¡Œãªã† */
       new = right;
       new_i = right_i;
       score = new->docs_list[new_i].score;
 
       right_i++;
     } else {
-    /* ½ªÎ» */
+    /* çµ‚äº† */
       break;
     }
 
@@ -472,11 +472,11 @@ SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
       printf("num:%d id:%d\n",  docs_num, new->docs_list[new_i].fileindex);
     */
 
-    /* ¥Ç¡¼¥¿¤Î¥³¥Ô¡¼ */
+    /* ãƒ‡ãƒ¼ã‚¿ã®ã‚³ãƒ”ãƒ¼ */
     result->docs_list[docs_num].fileindex = new->docs_list[new_i].fileindex;
     result->docs_list[docs_num].score = score;
-    result->docs_list[docs_num].pos = NULL;/* ½Ğ¸½°ÌÃÖ¤Ï¥³¥Ô¡¼¤·¤Ê¤¤ */
-    result->docs_list[docs_num].pos_len =  0;/* Ä¹¤µ¾ğÊó¤âÆ±¾å */
+    result->docs_list[docs_num].pos = NULL;/* å‡ºç¾ä½ç½®ã¯ã‚³ãƒ”ãƒ¼ã—ãªã„ */
+    result->docs_list[docs_num].pos_len =  0;/* é•·ã•æƒ…å ±ã‚‚åŒä¸Š */
     
     /*
       printf("MATCH BASE:%d:%d/%.4f\n", docs_num, result->docs_list[docs_num].fileindex, result->docs_list[docs_num].score);
@@ -487,7 +487,7 @@ SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
   }
 
   if (docs_num == 0) {
-    /* °ì·ï¤â°ìÃ×¤·¤Ê¤«¤Ã¤¿ */
+    /* ä¸€ä»¶ã‚‚ä¸€è‡´ã—ãªã‹ã£ãŸ */
     free(result->docs_list);
     free(result);
     return NULL;
@@ -502,8 +502,8 @@ SEARCH_RESULT *YAP_Search_op_or (SEARCH_RESULT *left, SEARCH_RESULT *right)
 
 
 /*
- *2¤Ä¤Î¸¡º÷·ë²Ì¤«¤éOR¤Î¸¡º÷·ë²Ì¤òÊÖ¤¹
- *½Ğ¸½°ÌÃÖ¥ê¥¹¥È¤âµ­Ï¿
+ *2ã¤ã®æ¤œç´¢çµæœã‹ã‚‰ORã®æ¤œç´¢çµæœã‚’è¿”ã™
+ *å‡ºç¾ä½ç½®ãƒªã‚¹ãƒˆã‚‚è¨˜éŒ²
  *
  */
 SEARCH_RESULT *YAP_Search_op_or_add_position (SEARCH_RESULT *left, SEARCH_RESULT *right)
@@ -513,7 +513,7 @@ SEARCH_RESULT *YAP_Search_op_or_add_position (SEARCH_RESULT *left, SEARCH_RESULT
   int total_num = 0, docs_num = 0;
   double score;
 
-  /* NULLÂĞºö */
+  /* NULLå¯¾ç­– */
   if (left == NULL || right == NULL) {
     return NULL;
   }
@@ -523,7 +523,7 @@ SEARCH_RESULT *YAP_Search_op_or_add_position (SEARCH_RESULT *left, SEARCH_RESULT
 						     (left->keyword_docs_num + right->keyword_docs_num));
 
   /*
-   *Á°Äé¤È¤·¤Ædocs_list¤¬fileindex¤Ç¾º½ç¤Ë¤Ê¤Ã¤Æ¤¤¤ëÉ¬Í×¤¬Í­¤ë
+   *å‰å ¤ã¨ã—ã¦docs_listãŒfileindexã§æ˜‡é †ã«ãªã£ã¦ã„ã‚‹å¿…è¦ãŒæœ‰ã‚‹
    */
   left_i = right_i = 0;
   while (1) {
@@ -533,36 +533,36 @@ SEARCH_RESULT *YAP_Search_op_or_add_position (SEARCH_RESULT *left, SEARCH_RESULT
       right->keyword_data.docs_num, right_i, right->docs_list[right_i].fileindex);
     */
     if (left->keyword_docs_num > left_i && right->keyword_docs_num > right_i) {
-      /* º¸±¦¤Î¥«¥¦¥ó¥¿¤¬¸Â³¦¤Ç¤Ê¤¤¤È¤­ */
+      /* å·¦å³ã®ã‚«ã‚¦ãƒ³ã‚¿ãŒé™ç•Œã§ãªã„ã¨ã */
 
       if (left->docs_list[left_i].fileindex > right->docs_list[right_i].fileindex) {
-	/* º¸Â¦¤ÎÊ¸½ñID¤¬Âç¤­¤¤¤Î¤Ç¡¢±¦Â¦¤Î·ë²Ì¤ò¥³¥Ô¡¼¤¹¤ë */
+	/* å·¦å´ã®æ–‡æ›¸IDãŒå¤§ãã„ã®ã§ã€å³å´ã®çµæœã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ */
 	result->docs_list[docs_num].fileindex = right->docs_list[right_i].fileindex;
 	result->docs_list[docs_num].score = right->docs_list[right_i].score;
 
-	/* ½Ğ¸½°ÌÃÖ¤ò¥³¥Ô¡¼ */
+	/* å‡ºç¾ä½ç½®ã‚’ã‚³ãƒ”ãƒ¼ */
 	result->docs_list[docs_num].pos = (int *) YAP_malloc(sizeof(int) * right->docs_list[right_i].pos_len);
 	memcpy(result->docs_list[docs_num].pos, right->docs_list[right_i].pos, right->docs_list[right_i].pos_len * sizeof(int));
 	result->docs_list[docs_num].pos_len = right->docs_list[right_i].pos_len;
 
 	right_i++;
       } else if (left->docs_list[left_i].fileindex < right->docs_list[right_i].fileindex) {
-	/* ±¦Â¦¤ÎÊ¸½ñID¤¬Âç¤­¤¤¤Î¤Ç¡¢º¸Â¦¤Î·ë²Ì¤ò¥³¥Ô¡¼¤¹¤ë */
+	/* å³å´ã®æ–‡æ›¸IDãŒå¤§ãã„ã®ã§ã€å·¦å´ã®çµæœã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ */
 	result->docs_list[docs_num].fileindex = left->docs_list[left_i].fileindex;
 	result->docs_list[docs_num].score = left->docs_list[left_i].score;
 
-	/* ½Ğ¸½°ÌÃÖ¤ò¥³¥Ô¡¼ */
+	/* å‡ºç¾ä½ç½®ã‚’ã‚³ãƒ”ãƒ¼ */
 	result->docs_list[docs_num].pos = (int *) YAP_malloc(sizeof(int) * left->docs_list[left_i].pos_len);
 	memcpy(result->docs_list[docs_num].pos, left->docs_list[left_i].pos, left->docs_list[left_i].pos_len * sizeof(int));
 	result->docs_list[docs_num].pos_len = left->docs_list[left_i].pos_len;
 
 	left_i++;
       } else {
-	/* Î¾Êı¤Ò¤Ã¤«¤«¤ë¤Î¤ÇÎ¾Êı¤Î·ë²Ì¤ò¥³¥Ô¡¼ */
+	/* ä¸¡æ–¹ã²ã£ã‹ã‹ã‚‹ã®ã§ä¸¡æ–¹ã®çµæœã‚’ã‚³ãƒ”ãƒ¼ */
 	result->docs_list[docs_num].fileindex = right->docs_list[right_i].fileindex;
 	result->docs_list[docs_num].score = right->docs_list[right_i].score;
 
-	/* ½Ğ¸½°ÌÃÖ¤ò¥³¥Ô¡¼ */
+	/* å‡ºç¾ä½ç½®ã‚’ã‚³ãƒ”ãƒ¼ */
 	result->docs_list[docs_num].pos = (int *) YAP_malloc(sizeof(int) * 
 							     (right->docs_list[right_i].pos_len + left->docs_list[left_i].pos_len));
 
@@ -576,39 +576,39 @@ SEARCH_RESULT *YAP_Search_op_or_add_position (SEARCH_RESULT *left, SEARCH_RESULT
 	right_i++;
       }
     } else if (left->keyword_docs_num > left_i && right->keyword_docs_num <= right_i) {
-      /* ±¦¤Î½èÍı¤¬½ªÎ»¤·¤¿¤Î¤Çº¸¤Î½èÍı¤Î¤ß¤ò¹Ô¤Ê¤¦ */
+      /* å³ã®å‡¦ç†ãŒçµ‚äº†ã—ãŸã®ã§å·¦ã®å‡¦ç†ã®ã¿ã‚’è¡Œãªã† */
       result->docs_list[docs_num].fileindex = left->docs_list[left_i].fileindex;
       result->docs_list[docs_num].score = left->docs_list[left_i].score;
       
-      /* ½Ğ¸½°ÌÃÖ¤ò¥³¥Ô¡¼ */
+      /* å‡ºç¾ä½ç½®ã‚’ã‚³ãƒ”ãƒ¼ */
       result->docs_list[docs_num].pos = (int *) YAP_malloc(sizeof(int) * left->docs_list[left_i].pos_len);
       memcpy(result->docs_list[docs_num].pos, left->docs_list[left_i].pos, left->docs_list[left_i].pos_len * sizeof(int));
       result->docs_list[docs_num].pos_len = left->docs_list[left_i].pos_len;
 
       left_i++;
     } else if (left->keyword_docs_num <= left_i && right->keyword_docs_num > right_i) {
-      /* º¸¤Î½èÍı¤¬½ªÎ»¤·¤¿¤Î¤Ç±¦¤Î½èÍı¤Î¤ß¤ò¹Ô¤Ê¤¦ */
+      /* å·¦ã®å‡¦ç†ãŒçµ‚äº†ã—ãŸã®ã§å³ã®å‡¦ç†ã®ã¿ã‚’è¡Œãªã† */
       result->docs_list[docs_num].fileindex = right->docs_list[right_i].fileindex;
       result->docs_list[docs_num].score = right->docs_list[right_i].score;
 
-      /* ½Ğ¸½°ÌÃÖ¤ò¥³¥Ô¡¼ */
+      /* å‡ºç¾ä½ç½®ã‚’ã‚³ãƒ”ãƒ¼ */
       result->docs_list[docs_num].pos = (int *) YAP_malloc(sizeof(int) * right->docs_list[right_i].pos_len);
       memcpy(result->docs_list[docs_num].pos, right->docs_list[right_i].pos, right->docs_list[right_i].pos_len * sizeof(int));
       result->docs_list[docs_num].pos_len = right->docs_list[right_i].pos_len;
 
       right_i++;
     } else {
-      /* ½ªÎ» */
+      /* çµ‚äº† */
       break;
     }
 
-    /* ¥Ç¡¼¥¿¤Î¥³¥Ô¡¼ */
+    /* ãƒ‡ãƒ¼ã‚¿ã®ã‚³ãƒ”ãƒ¼ */
     total_num += result->docs_list[docs_num].pos_len;
     docs_num++;
   }
 
   if (docs_num == 0) {
-    /* °ì·ï¤â°ìÃ×¤·¤Ê¤«¤Ã¤¿ */
+    /* ä¸€ä»¶ã‚‚ä¸€è‡´ã—ãªã‹ã£ãŸ */
     free(result->docs_list);
     free(result);
     return NULL;
@@ -623,7 +623,7 @@ SEARCH_RESULT *YAP_Search_op_or_add_position (SEARCH_RESULT *left, SEARCH_RESULT
 
 
 /*
- *N¥°¥é¥à¤ÇÀÚ¤ê½Ğ¤·¤¿¥­¡¼¥ï¡¼¥É¤Ç¥Õ¥ì¡¼¥º¸¡º÷¤ò¹Ô¤Ê¤¦
+ *Nã‚°ãƒ©ãƒ ã§åˆ‡ã‚Šå‡ºã—ãŸã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã§ãƒ•ãƒ¬ãƒ¼ã‚ºæ¤œç´¢ã‚’è¡Œãªã†
  */
 SEARCH_RESULT *YAP_Search_phrase (YAPPO_DB_FILES *ydfp, NGRAM_SEARCH_LIST *ngram_list, int ngram_list_len)
 {
@@ -637,10 +637,10 @@ SEARCH_RESULT *YAP_Search_phrase (YAPPO_DB_FILES *ydfp, NGRAM_SEARCH_LIST *ngram
 
   printf("start phrease\n");
 
-  /* ¤Ş¤º¤Ï£±¤Ä¸¡º÷¤¹¤ë */
+  /* ã¾ãšã¯ï¼‘ã¤æ¤œç´¢ã™ã‚‹ */
   result = YAP_Search_gram(ydfp, ngram_list[0].keyword);
   if (ngram_list_len == 1) {
-    /* £±¤Ä¤·¤«Ìµ¤«¤Ã¤¿ */
+    /* ï¼‘ã¤ã—ã‹ç„¡ã‹ã£ãŸ */
     return result;
   }
   last_pos = ngram_list[0].pos;
@@ -648,21 +648,21 @@ SEARCH_RESULT *YAP_Search_phrase (YAPPO_DB_FILES *ydfp, NGRAM_SEARCH_LIST *ngram
 
   for (i = 1; i < ngram_list_len; i++) {
     left = result;
-    /* ±¦¤ò¸¡º÷ */
+    /* å³ã‚’æ¤œç´¢ */
     right =  YAP_Search_gram(ydfp, ngram_list[i].keyword);
     printf("phrease %s %d\n", ngram_list[i].keyword, time(NULL));
-    /* ½Ğ¸½°ÌÃÖ¤ò»ØÄê¤·¤ÆAND¥Ş¡¼¥¸ */
+    /* å‡ºç¾ä½ç½®ã‚’æŒ‡å®šã—ã¦ANDãƒãƒ¼ã‚¸ */
     result = YAP_Search_op_and(left, right, ngram_list[i].pos - last_pos);
     printf("phrease and %d\n", time(NULL));
 
-    /* ¥á¥â¥ê²òÊü */
+    /* ãƒ¡ãƒ¢ãƒªè§£æ”¾ */
     YAP_Search_result_free(left);
     free(left);
     YAP_Search_result_free(right);
     free(right);
 
     if (result == NULL) {
-      /* ¸¡º÷ÉÔ°ìÃ× */
+      /* æ¤œç´¢ä¸ä¸€è‡´ */
       break;
     }
     last_pos = ngram_list[i].pos;
@@ -673,7 +673,7 @@ SEARCH_RESULT *YAP_Search_phrase (YAPPO_DB_FILES *ydfp, NGRAM_SEARCH_LIST *ngram
 
 
 /*
- *¥­¡¼¥ï¡¼¥ÉID¤ËÂĞ±ş¤¹¤ë°ÌÃÖ¥ê¥¹¥È¤òÊÖ¤¹
+ *ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰IDã«å¯¾å¿œã™ã‚‹ä½ç½®ãƒªã‚¹ãƒˆã‚’è¿”ã™
  */
 SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int keyword_id, int total_num, int docs_num, int *ret_docs_num)
 {
@@ -685,14 +685,14 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
   FILEDATA filedata;
   double base_idf;
 
-  /* Á´Ê¸½ñÃæ¤ÎÂĞ¾İÊ¸½ñ¤Î½Ğ¸½Î¨¤òµá¤á¤ë */
+  /* å…¨æ–‡æ›¸ä¸­ã®å¯¾è±¡æ–‡æ›¸ã®å‡ºç¾ç‡ã‚’æ±‚ã‚ã‚‹ */
   base_idf = log( ydfp->total_filenum / docs_num) + 1.0;
 
   printf("get %s/%d pos start: %d\n", key, keyword_id, time(NULL));
 
   /*
-   *¥İ¥¸¥·¥ç¥ó¥ê¥¹¥È¤ò¼èÆÀ
-   *Á´¥İ¥¸¥·¥ç¥ó¥Õ¥¡¥¤¥ë¤«¤éÁß¤­½¸¤á¤ë
+   *ãƒã‚¸ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆã‚’å–å¾—
+   *å…¨ãƒã‚¸ã‚·ãƒ§ãƒ³ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰æ»ãé›†ã‚ã‚‹
    */
   posbuf_tmp = (unsigned char *) YAP_malloc(sizeof(int) * (total_num + docs_num + docs_num) * 2);
   posbuf_len_tmp = 0;
@@ -737,7 +737,7 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
 
     docs_list = (SEARCH_DOCUMENT *) YAP_malloc(sizeof(SEARCH_DOCUMENT) * docs_num * 2);
 
-    /* ¥í¥Ã¥¯³«»Ï */
+    /* ãƒ­ãƒƒã‚¯é–‹å§‹ */
     pthread_mutex_lock(&(ydfp->cache->score_mutex));
     pthread_mutex_lock(&(ydfp->cache->size_mutex));
     pthread_mutex_lock(&(ydfp->cache->urllen_mutex));
@@ -752,7 +752,7 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
 	printf("pos: %d / i = %d /  df = %d / %d\n",pos_len, i, df, docs_num);
       */
 
-      /* ¥Ğ¥°ÂĞºö */
+      /* ãƒã‚°å¯¾ç­– */
       if (pos[i] == 0) {
 	printf("pos ZERO BUG: %d\n", i);
 	i++;
@@ -764,7 +764,7 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
       docs_list[df].pos_len   = pos[i];
       i++;
 
-      /* °ÌÃÖ¥ê¥¹¥È¤Î¥³¥Ô¡¼ */
+      /* ä½ç½®ãƒªã‚¹ãƒˆã®ã‚³ãƒ”ãƒ¼ */
       /*
 	printf("pos: %d/ lon: %d / %d\n", pos_len, docs_list[df].pos_len, docs_list[df].fileindex);
 	printf("0=%d/1=%d/2=%d/3=%d/4=%d/5=%d/6=%d/7=%d/8=%d/9=%d\n", pos[i], pos[i+1], pos[i+2], pos[i+3], pos[i+4], pos[i+5], pos[i+6], pos[i+7], pos[i+8], pos[i+9]);
@@ -785,22 +785,22 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
 	size = urllen = filekeywordnum = 1;
 	now_index = docs_list[df].fileindex;
 
-	/* ¥¹¥³¥¢¥Õ¥¡¥¤¥ë¼èÆÀ */
+	/* ã‚¹ã‚³ã‚¢ãƒ•ã‚¡ã‚¤ãƒ«å–å¾— */
 	if (ydfp->cache->score_num > now_index) {
 	  score = ydfp->cache->score[now_index];
 	}
 
-	/* ¥Õ¥¡¥¤¥ë¥µ¥¤¥º¼èÆÀ */
+	/* ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾— */
 	if (ydfp->cache->size_num > now_index) {
 	  size = ydfp->cache->size[now_index];
 	}
 	
-	/* URL¤ÎÄ¹¤µ¼èÆÀ */
+	/* URLã®é•·ã•å–å¾— */
 	if (ydfp->cache->urllen_num > now_index) {
 	  urllen = ydfp->cache->urllen[now_index];
 	}
 
-	/* Ê¸½ñÃæ¤Î¥­¡¼¥ï¡¼¥É¿ô¤Î¼èÆÀ */
+	/* æ–‡æ›¸ä¸­ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ•°ã®å–å¾— */
 	if (ydfp->cache->filekeywordnum_num > now_index) {
 	  filekeywordnum = ydfp->cache->filekeywordnum[now_index];
 	}
@@ -808,23 +808,23 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
 
 
       /*
-       *¥¹¥³¥¢¤Î·×»»
+       *ã‚¹ã‚³ã‚¢ã®è¨ˆç®—
        */
       {
 	tf =  idf = tmp = 0.0;
 	score = log(score) + 1.0;
 
-	/* idf¤òÊ¸½ñ¥µ¥¤¥º¤ÇÀµµ¬²½ */
+	/* idfã‚’æ–‡æ›¸ã‚µã‚¤ã‚ºã§æ­£è¦åŒ– */
 	idf = ((base_idf + 1.0) / (log10(size) + 1.0) * 100.0) + 1.0;
-	idf = score / idf * 100.0;/* ¥¹¥³¥¢¤ÇÀµµ¬²½ */
+	idf = score / idf * 100.0;/* ã‚¹ã‚³ã‚¢ã§æ­£è¦åŒ– */
 
 
-	/* Ê¸½ñÃæ¤Î¥­¡¼¥ï¡¼¥É½Ğ¸½Î¨ */
+	/* æ–‡æ›¸ä¸­ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰å‡ºç¾ç‡ */
 	tf = ((double) docs_list[df].pos_len / (double) filekeywordnum * 100.0) + 1.0;
 
 
 
-	/* ¥¹¥³¥¢¥ê¥ó¥° */
+	/* ã‚¹ã‚³ã‚¢ãƒªãƒ³ã‚° */
 	/*
 	  score = score * score * score;
 	*/
@@ -836,7 +836,7 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
       df++;
     }
 
-    /* ¥í¥Ã¥¯²ò½ü */
+    /* ãƒ­ãƒƒã‚¯è§£é™¤ */
     pthread_mutex_unlock(&(ydfp->cache->score_mutex));
     pthread_mutex_unlock(&(ydfp->cache->size_mutex));
     pthread_mutex_unlock(&(ydfp->cache->urllen_mutex));
@@ -847,16 +847,16 @@ SEARCH_DOCUMENT *YAP_Search_position_get (YAPPO_DB_FILES *ydfp, char *key, int k
 
     printf("RETURN get pos end end: %d %d\n", time(NULL), df);
 
-    *ret_docs_num = df;/* ËÜÍè¤ÎÊ¸½ñ¿ô¤òÊÖ¤¹ */
+    *ret_docs_num = df;/* æœ¬æ¥ã®æ–‡æ›¸æ•°ã‚’è¿”ã™ */
     return docs_list;
   }
-  *ret_docs_num = 0;/* ËÜÍè¤ÎÊ¸½ñ¿ô¤òÊÖ¤¹ */
+  *ret_docs_num = 0;/* æœ¬æ¥ã®æ–‡æ›¸æ•°ã‚’è¿”ã™ */
   return NULL;
 }
 
 /*
- *¥­¡¼¥ï¡¼¥É¼­½ñ¤è¤êkey¤ò¸¡º÷¤·¤Æ¥Ò¥Ã¥È¤·¤¿Ê¸½ñ°ìÍ÷Åù¤òÊÖ¤¹
- *key¤ÏN-gram¤ÇÊ¬³ä¤µ¤ì¤¿Ê¸»úÎó¼ã¤·¤¯¤ÏascÊ¸»ú
+ *ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰è¾æ›¸ã‚ˆã‚Škeyã‚’æ¤œç´¢ã—ã¦ãƒ’ãƒƒãƒˆã—ãŸæ–‡æ›¸ä¸€è¦§ç­‰ã‚’è¿”ã™
+ *keyã¯N-gramã§åˆ†å‰²ã•ã‚ŒãŸæ–‡å­—åˆ—è‹¥ã—ãã¯ascæ–‡å­—
  */
 SEARCH_RESULT *YAP_Search_gram (YAPPO_DB_FILES *ydfp, unsigned char *key)
 {
@@ -868,17 +868,17 @@ SEARCH_RESULT *YAP_Search_gram (YAPPO_DB_FILES *ydfp, unsigned char *key)
 
   if (! isalnum(key[0]) && strlen(key) < Ngram_N && 0) { 
     /*
-     *Ngram_N¥Ğ¥¤¥È°Ê²¼¤Î2¥Ğ¥¤¥ÈÊ¸»ú
-     *¤¢¤Ş¤ê¤Ë¤â½èÍıÎÌ¤¬Â¿¤¤¤Î¤Ç°ì»şµÙ»ß
+     *Ngram_Nãƒã‚¤ãƒˆä»¥ä¸‹ã®2ãƒã‚¤ãƒˆæ–‡å­—
+     *ã‚ã¾ã‚Šã«ã‚‚å‡¦ç†é‡ãŒå¤šã„ã®ã§ä¸€æ™‚ä¼‘æ­¢
      */
     int key_list_len;
     char **key_list;
     ret = YAP_Index_get_keyword_prefix(ydfp, key, &key_list, &key_list_len);
     if (ret == 0) {
-      /* ¥­¡¼¥ï¡¼¥É¤¬Í­¤Ã¤¿ */
+      /* ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãŒæœ‰ã£ãŸ */
       SEARCH_RESULT *left, *right;
 
-      /* Àè¤º¤Ï°ì¤Ä¤á */
+      /* å…ˆãšã¯ä¸€ã¤ã‚ */
       docs_num = keyword_total_num = keyword_docs_num = keyword_id = 0;
       result = (SEARCH_RESULT *) YAP_malloc(sizeof(SEARCH_RESULT));
       ret = YAP_Index_get_keyword(ydfp, key_list[0], &keyword_id);
@@ -901,7 +901,7 @@ SEARCH_RESULT *YAP_Search_gram (YAPPO_DB_FILES *ydfp, unsigned char *key)
 	  left = result;
 
 
-	  /* ±¦ÊÕ¤ò¼èÆÀ */
+	  /* å³è¾ºã‚’å–å¾— */
 	  docs_num = keyword_total_num = keyword_docs_num = keyword_id = 0;
 	  right = (SEARCH_RESULT *) YAP_malloc(sizeof(SEARCH_RESULT));
 	  ret = YAP_Index_get_keyword(ydfp, key_list[i], &keyword_id);
@@ -919,12 +919,12 @@ SEARCH_RESULT *YAP_Search_gram (YAPPO_DB_FILES *ydfp, unsigned char *key)
 						    right->keyword_docs_num, &docs_num);
 	  right->keyword_docs_num = docs_num;
 	  if (right->docs_list == NULL) {
-	    /* ½ªÎ» */
+	    /* çµ‚äº† */
 	    free(right);
 	    break;
 	  }
 
-	  /* º¸ÊÕ¤È±¦ÊÕ¤ò¥Ş¡¼¥¸ */
+	  /* å·¦è¾ºã¨å³è¾ºã‚’ãƒãƒ¼ã‚¸ */
 	  result = YAP_Search_op_or_add_position(left, right);
 	  YAP_Search_result_free(left);
 	  free(left);
@@ -961,7 +961,7 @@ SEARCH_RESULT *YAP_Search_gram (YAPPO_DB_FILES *ydfp, unsigned char *key)
   ret = YAP_Index_get_keyword(ydfp, key, &keyword_id);
 
   if (ret == 0) {
-    /* ¥­¡¼¥ï¡¼¥É¤¬Í­¤Ã¤¿ */
+    /* ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãŒæœ‰ã£ãŸ */
 
     fseek(ydfp->keyword_totalnum_file, sizeof(int) * keyword_id, SEEK_SET);
     fread(&keyword_total_num, sizeof(int), 1, ydfp->keyword_totalnum_file);
@@ -986,13 +986,13 @@ SEARCH_RESULT *YAP_Search_gram (YAPPO_DB_FILES *ydfp, unsigned char *key)
     }
   }
 
-  /* Ìµ¤«¤Ã¤¿ */
+  /* ç„¡ã‹ã£ãŸ */
   free(result);
   return NULL;
 }
 
 /*
- *¥­¡¼¥ï¡¼¥É¤òN-gramÊÑ´¹¤·¤Æ¸¡º÷¤ò¹Ô¤Ê¤¦
+ *ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’N-gramå¤‰æ›ã—ã¦æ¤œç´¢ã‚’è¡Œãªã†
  */
 SEARCH_RESULT *YAP_Search_word (YAPPO_DB_FILES *ydfp, char *keyword)
 {
@@ -1004,7 +1004,7 @@ SEARCH_RESULT *YAP_Search_word (YAPPO_DB_FILES *ydfp, char *keyword)
   ngram_list = YAP_Ngram_tokenize_search( keyword, &ngram_list_len);
   result = YAP_Search_phrase(ydfp, ngram_list, ngram_list_len);
 
-  /* n-gram¥­¡¼¥ï¡¼¥É¤Î¥á¥â¥ê²òÊü */
+  /* n-gramã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®ãƒ¡ãƒ¢ãƒªè§£æ”¾ */
   for (i = 0; i < ngram_list_len; i++) {
     free(ngram_list[i].keyword);
   }
@@ -1014,7 +1014,7 @@ SEARCH_RESULT *YAP_Search_word (YAPPO_DB_FILES *ydfp, char *keyword)
 }
 
 /*
- *¥­¡¼¥ï¡¼¥É¥ê¥¹¥È¤ò¸µ¤Ë¸¡º÷¤ò¹Ô¤Ê¤¦
+ *ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã‚’å…ƒã«æ¤œç´¢ã‚’è¡Œãªã†
  */
 SEARCH_RESULT *YAP_Search (YAPPO_DB_FILES *ydfp, char **keyword_list, int keyword_list_num, int max_size, int op)
 {
@@ -1027,12 +1027,12 @@ SEARCH_RESULT *YAP_Search (YAPPO_DB_FILES *ydfp, char **keyword_list, int keywor
     return NULL;
   }
 
-  /* Àè¤º¤Ï°ì¤Ä¤á¤Î¥­¡¼¥ï¡¼¥É¤Î½èÍı¤ò¹Ô¤Ê¤¦ */
+  /* å…ˆãšã¯ä¸€ã¤ã‚ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®å‡¦ç†ã‚’è¡Œãªã† */
   result = YAP_Search_word(ydfp, keyword_list[0]);
   if (keyword_list_num != 1) {
     for (i = 1; i < keyword_list_num; i++) {
       left = result;
-      /* ±¦¤ò¸¡º÷ */
+      /* å³ã‚’æ¤œç´¢ */
       right =  YAP_Search_word(ydfp, keyword_list[1]);
       if (op == 0) {
 	/* AND */
@@ -1041,7 +1041,7 @@ SEARCH_RESULT *YAP_Search (YAPPO_DB_FILES *ydfp, char **keyword_list, int keywor
 	/* OR */
 	result = YAP_Search_op_or(left, right);
 	if (result == NULL) {
-	  /* ¤É¤Á¤é¤«¤Î¸¡º÷·ë²Ì¤¬Ìµ¤«¤Ã¤¿ */
+	  /* ã©ã¡ã‚‰ã‹ã®æ¤œç´¢çµæœãŒç„¡ã‹ã£ãŸ */
 	  if (left != NULL) {
 	    result = left;
 	    left = NULL;
@@ -1052,7 +1052,7 @@ SEARCH_RESULT *YAP_Search (YAPPO_DB_FILES *ydfp, char **keyword_list, int keywor
 	}
       }
 
-      /* ¥á¥â¥ê²òÊü */
+      /* ãƒ¡ãƒ¢ãƒªè§£æ”¾ */
       if (left != NULL) {
 	YAP_Search_result_free(left);
 	free(left);
@@ -1063,7 +1063,7 @@ SEARCH_RESULT *YAP_Search (YAPPO_DB_FILES *ydfp, char **keyword_list, int keywor
       }
       
       if (result == NULL) {
-	/* ¸¡º÷ÉÔ°ìÃ× */
+	/* æ¤œç´¢ä¸ä¸€è‡´ */
 	break;
       }
     }
@@ -1071,12 +1071,12 @@ SEARCH_RESULT *YAP_Search (YAPPO_DB_FILES *ydfp, char **keyword_list, int keywor
   }
 
   if (result != NULL) {
-    /* ºï½ü°·¤¤¤ÎURL¤ò½ü³° */
+    /* å‰Šé™¤æ‰±ã„ã®URLã‚’é™¤å¤– */
     result_tmp = YAP_Search_result_delete(ydfp, result);
     YAP_Search_result_free(result);
     free(result);
 
-    /* »ØÄê¥µ¥¤¥º¤è¤êÂç¤­¤¤URL¤ò½ü³° */
+    /* æŒ‡å®šã‚µã‚¤ã‚ºã‚ˆã‚Šå¤§ãã„URLã‚’é™¤å¤– */
     result = YAP_Search_result_delete_size(ydfp, result_tmp, max_size);
     YAP_Search_result_free(result_tmp);
     free(result_tmp);

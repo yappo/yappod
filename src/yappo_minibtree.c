@@ -1,7 +1,7 @@
 /*
  *
- *�����Ϥ�btree
- *�ɲû��ΥХ�󥹤ʤɤϹԤʤ��ʤ�
+ *小規模なbtree
+ *追加時のバランスなどは行なわれない
  *
  */
 #include <stdio.h>
@@ -11,7 +11,7 @@
 
 
 /*
- *btree�ν����
+ *btreeの初期化
  */
 MINIBTREE *YAP_Minibtree_init()
 {
@@ -28,18 +28,18 @@ MINIBTREE *YAP_Minibtree_init()
 
 
 /*
- *root��key�Ǹ������ư��פ���Ρ��ɤ��֤�
+ *rootをkeyで検索して一致するノードを返す
  */
 MINIBTREE *YAP_Minibtree_search( MINIBTREE *root, unsigned char *key)
 {
   MINIBTREE *this;
 
-  /*�ҥΡ��ɤ�¸�ߤ��ʤ�*/
+  /*子ノードが存在しない*/
   if (root->left == NULL && root->right == NULL) {
     return NULL;
   }
 
-  /*õ������*/
+  /*探索開始*/
   this = root->left;
   while (1) {
     int cmp = 0;
@@ -47,22 +47,22 @@ MINIBTREE *YAP_Minibtree_search( MINIBTREE *root, unsigned char *key)
     cmp = strcmp( this->key, key);
 
     if (cmp == 0) {
-      /*����*/
+      /*一致*/
       return this;
     } else if(cmp > 0){
-      /*���դ�����å�*/
+      /*左辺をチェック*/
       if (this->left == NULL) {
 	return NULL;
       } else {
-	/*���դ˰�ư*/
+	/*左辺に移動*/
 	this = this->left;
       }
     } else if(cmp < 0){
-      /*���դ�����å�*/
+      /*右辺をチェック*/
       if (this->right == NULL) {
 	return NULL;
       } else {
-	/*���դ˰�ư*/
+	/*右辺に移動*/
 	this = this->right;
       }
     }
@@ -72,20 +72,20 @@ MINIBTREE *YAP_Minibtree_search( MINIBTREE *root, unsigned char *key)
 }
 
 /*
- *root�Ρ��ɤ�add�Ρ��ɤ��ɲä���
+ *rootノードにaddノードを追加する
  */
 int YAP_Minibtree_add( MINIBTREE *root, MINIBTREE *add)
 {
   MINIBTREE *this;
   
-  /*�ҥΡ��ɤ�¸�ߤ��ʤ��ΤǺ��Ρ��ɤ��ɲä���*/
+  /*子ノードが存在しないので左ノードに追加する*/
   if (root->left == NULL && root->right == NULL) {
     root->left = add;
     add->top = root;
     return 0;
   }
 
-  /*�ɲò�ǽ�ʥΡ��ɤޤǤ����äƤ���*/
+  /*追加可能なノードまでさがっていく*/
   this = root->left;
   while (1) {
     int cmp = 0;
@@ -93,28 +93,28 @@ int YAP_Minibtree_add( MINIBTREE *root, MINIBTREE *add)
     cmp = strcmp( this->key, add->key);
 
     if (cmp == 0) {
-      /*���פ��Ƥ��ޤä�����Ͽ�Ǥ��ʤ�*/
+      /*一致してしまったら登録できない*/
       return 1;
     } else if(cmp > 0){
-      /*���դ�����å�*/
+      /*左辺をチェック*/
       if (this->left == NULL) {
-	/*���դ���Ͽ*/
+	/*左辺に登録*/
 	this->left = add;
 	this->left->top = this->left;
 	return 0;
       } else {
-	/*���դ˰�ư*/
+	/*左辺に移動*/
 	this = this->left;
       }
     } else if(cmp < 0){
-      /*���դ�����å�*/
+      /*右辺をチェック*/
       if (this->right == NULL) {
-	/*���դ���Ͽ*/
+	/*右辺に登録*/
 	this->right = add;
 	this->right->top = this->right;
 	return 0;
       } else {
-	/*���դ˰�ư*/
+	/*右辺に移動*/
 	this = this->right;
       }
     }

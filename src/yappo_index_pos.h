@@ -1,5 +1,5 @@
 /*
- *������ɽи����֥ǡ�����谷��
+ *キーワード出現位置データを取扱う
  */
 #ifndef __INDEX_POS_H__
 #define __INDEX_POS_H__

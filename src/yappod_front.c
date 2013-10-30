@@ -1,7 +1,7 @@
 /*
-  ¥Õ¥í¥ó¥È¥µ¡¼¥Ğ
-  HTTP¤Ë¤è¤ê¸¡º÷¾ò·ï¤ò¼õ¤±¤Ä¤±¡¢³Æ¸¡º÷¥³¥¢¥µ¡¼¥Ğ¤ËÍ×µá¤òÁ÷¤ê
-  ¸¡º÷·ë²Ì¤ò¤Ş¤È¤á¤Æ¥¯¥é¥¤¥¢¥ó¥È¤ËÊÖ¤¹
+  ãƒ•ãƒ­ãƒ³ãƒˆã‚µãƒ¼ãƒ
+  HTTPã«ã‚ˆã‚Šæ¤œç´¢æ¡ä»¶ã‚’å—ã‘ã¤ã‘ã€å„æ¤œç´¢ã‚³ã‚¢ã‚µãƒ¼ãƒã«è¦æ±‚ã‚’é€ã‚Š
+  æ¤œç´¢çµæœã‚’ã¾ã¨ã‚ã¦ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«è¿”ã™
 */
 #include <stdio.h>
 #include <signal.h>
@@ -25,7 +25,7 @@
 #define CORE_PORT 10086
 
 /*
- *¥¹¥ì¥Ã¥ÉËè¤Î¹½Â¤
+ *ã‚¹ãƒ¬ãƒƒãƒ‰æ¯ã®æ§‹é€ 
  */
 typedef struct{
   int id;
@@ -38,7 +38,7 @@ typedef struct{
 }YAP_THREAD_DATA;
 
 
-/* ¥¹¥ì¥Ã¥É¤Î¿ô */
+/* ã‚¹ãƒ¬ãƒƒãƒ‰ã®æ•° */
 #define MAX_THREAD 5
 
 
@@ -52,7 +52,7 @@ void YAP_Error( char *msg){
 
 
 /*
- *¸¡º÷·ë²Ì¤òÉ¸¼¨
+ *æ¤œç´¢çµæœã‚’æ¨™ç¤º
  */
 void search_result_print (YAPPO_DB_FILES *ydfp, FILE *socket, SEARCH_RESULT *p, int start, int end)
 {
@@ -97,7 +97,7 @@ void search_result_print (YAPPO_DB_FILES *ydfp, FILE *socket, SEARCH_RESULT *p, 
 
 
 /*
- *¸¡º÷¥µ¡¼¥Ğ¤«¤éÁ÷¤é¤ì¤ÆÍè¤¿¸¡º÷·ë²Ì¤ò¼õ¤±¼è¤ë
+ *æ¤œç´¢ã‚µãƒ¼ãƒã‹ã‚‰é€ã‚‰ã‚Œã¦æ¥ãŸæ¤œç´¢çµæœã‚’å—ã‘å–ã‚‹
  */
 SEARCH_RESULT *search_result_recv(FILE *socket)
 {
@@ -106,15 +106,15 @@ SEARCH_RESULT *search_result_recv(FILE *socket)
   unsigned long keyword_id;
   int keyword_total_num, keyword_docs_num;
 
-  /* ¥ê¥¿¡¼¥ó¥³¡¼¥É¤ò¼èÆÀ */
+  /* ãƒªã‚¿ãƒ¼ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’å–å¾— */
   i = 0; 
   fread(&i, sizeof(int), 1, socket); 
   if (i == 0) {
-    /* ¥Ò¥Ã¥È¤·¤Ê¤«¤Ã¤¿ */
+    /* ãƒ’ãƒƒãƒˆã—ãªã‹ã£ãŸ */
   } else {
     p = (SEARCH_RESULT *) YAP_malloc(sizeof(SEARCH_RESULT));
 
-    /* KEYWORD¤ò¼èÆÀ */
+    /* KEYWORDã‚’å–å¾— */
     fread(&keyword_id, sizeof(long), 1, socket);
     fread(&keyword_total_num, sizeof(int), 1, socket);
     fread(&keyword_docs_num, sizeof(int), 1, socket);
@@ -122,11 +122,11 @@ SEARCH_RESULT *search_result_recv(FILE *socket)
     p->keyword_total_num = keyword_total_num;
     p->keyword_docs_num = keyword_docs_num;
 
-    /* SEARCH_DOCUMENT¤ò¤Ş¤º¼èÆÀ¤¹¤ë */
+    /* SEARCH_DOCUMENTã‚’ã¾ãšå–å¾—ã™ã‚‹ */
     p->docs_list = (SEARCH_DOCUMENT *) YAP_malloc(sizeof(SEARCH_DOCUMENT) * p->keyword_docs_num);
     fread(p->docs_list, sizeof(SEARCH_DOCUMENT), p->keyword_docs_num, socket);
 
-    /* pos¤ò¼èÆÀ */
+    /* posã‚’å–å¾— */
     for (i = 0; i < p->keyword_docs_num; i++) {
       p->docs_list[i].pos = (int *) YAP_malloc(sizeof(int) * p->docs_list[i].pos_len);
       fread(p->docs_list[i].pos, sizeof(int), p->docs_list[i].pos_len, socket);
@@ -137,7 +137,7 @@ SEARCH_RESULT *search_result_recv(FILE *socket)
 
 
 /*
- *¥Õ¥¡¥¤¥ë¥İ¥¤¥ó¥¿¤«¤é°ì¹ÔÊ¬ÆÉ¤ß¹ş¤ß¥á¥â¥ê¤ò³ä¤êÅö¤Æ¤ÆÊÖ¤¹
+ *ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã‹ã‚‰ä¸€è¡Œåˆ†èª­ã¿è¾¼ã¿ãƒ¡ãƒ¢ãƒªã‚’å‰²ã‚Šå½“ã¦ã¦è¿”ã™
  */
 char *readline (FILE *socket)
 {
@@ -150,19 +150,19 @@ char *readline (FILE *socket)
     memset(socket_buf, 0, BUF_SIZE);
 
     if ( fgets(socket_buf, BUF_SIZE, socket) ==NULL) {
-      /* ¥¨¥é¡¼ */
+      /* ã‚¨ãƒ©ãƒ¼ */
       break;
     }
 
     if (line_buf[0] != '\0') {
-      /* ÄÉµ­ */
+      /* è¿½è¨˜ */
       int new_buf_len = strlen(line_buf) + strlen(socket_buf) + 1;
       line_buf = (char *) YAP_realloc(line_buf, new_buf_len);
     }
     line_buf = (char *) strcat(line_buf, socket_buf);
 
     if ( socket_buf[BUF_SIZE-2] == '\n' || strlen(socket_buf) < BUF_SIZE - 1) {
-      /* °ì¹ÔÊ¬¼èÆÀ¤Ç¤­¤¿¤Î¤Ç½ªÎ» */
+      /* ä¸€è¡Œåˆ†å–å¾—ã§ããŸã®ã§çµ‚äº† */
       break;
     }
   }
@@ -172,7 +172,7 @@ char *readline (FILE *socket)
 }
 
 /*
- *¥µ¡¼¥Ğ¤ÎËÜÂÎ
+ *ã‚µãƒ¼ãƒã®æœ¬ä½“
  */
 void thread_server (void *ip) 
 {
@@ -182,7 +182,7 @@ void thread_server (void *ip)
  int i;
 
   /*
-   *¥Ç¡¼¥¿¥Ù¡¼¥¹¤Î½àÈ÷
+   *ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®æº–å‚™
    */
   memset(&yappo_db_files, 0, sizeof(YAPPO_DB_FILES)); 
   yappo_db_files.base_dir = p->base_dir;
@@ -190,7 +190,7 @@ void thread_server (void *ip)
 
 
   /*
-   *³Æ¥µ¡¼¥Ğ¤È¤ÎÀÜÂ³¤ò³«»Ï¤¹¤ë
+   *å„ã‚µãƒ¼ãƒã¨ã®æ¥ç¶šã‚’é–‹å§‹ã™ã‚‹
    */
   for (i = 0; i < p->server_num; i++) {
     struct hostent *cl_host;
@@ -207,12 +207,12 @@ void thread_server (void *ip)
 
     cl_sin.sin_port = htons(CORE_PORT);
 
-    /* ¥½¥±¥Ã¥ÈºîÀ® */
+    /* ã‚½ã‚±ãƒƒãƒˆä½œæˆ */
     if ((p->server_fd[i] = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
       YAP_Error( "client socket error");
     }
 
-    /* ÀÜÂ³ */
+    /* æ¥ç¶š */
     if (connect(p->server_fd[i], (struct sockaddr *) &cl_sin, sizeof(struct sockaddr_in)) == -1) {
       YAP_Error( "client connect error");
     }
@@ -228,7 +228,7 @@ void thread_server (void *ip)
     int accept_socket;
     char *line, *line_buf;
     FILE *socket;
-    char *dict, *op, *keyword;/* ¥ê¥¯¥¨¥¹¥È */
+    char *dict, *op, *keyword;/* ãƒªã‚¯ã‚¨ã‚¹ãƒˆ */
     int max_size;
     int start, end;
 
@@ -243,7 +243,7 @@ void thread_server (void *ip)
         while (! feof(socket)) {
       line = readline(socket);
       
-      /* ¥Ğ¥Ã¥Õ¥¡¤Î½é´ü²½ */
+      /* ãƒãƒƒãƒ•ã‚¡ã®åˆæœŸåŒ– */
       dict = (char *) YAP_malloc(strlen(line));
       op = (char *) YAP_malloc(strlen(line));
       keyword = (char *) YAP_malloc(strlen(line));
@@ -252,7 +252,7 @@ void thread_server (void *ip)
 	printf("ok:%d: %s/%d/%s/%s (%d-%d)\n", p->id, dict, max_size, op, keyword, start, end);
 
 	if (strlen(dict) == 0 || max_size == 0 || strlen(op) == 0 || strlen(keyword) == 0) {
-	  /* ¥Ğ¥Ã¥É¥ê¥¯¥¨¥¹¥È */
+	  /* ãƒãƒƒãƒ‰ãƒªã‚¯ã‚¨ã‚¹ãƒˆ */
 	  char buf[BUF_SIZE];
 	  sprintf( buf, "HTTP/1.0 400 Bad Request\r\nServer: Yappo Search/1.0\r\nContent-Type: text/html\r\n\r\nBad Search Request<br>By Yappo Search");
 	  write(accept_socket, buf, strlen(buf));
@@ -260,8 +260,8 @@ void thread_server (void *ip)
 	} else {
 
 	  /*
-	   *Àµ¾ï¤Ê¥ê¥¯¥¨¥¹¥È
-	   *¥Ø¥Ã¥À¤¬½ªÎ»¤¹¤ë¤Ş¤ÇÆşÎÏ¤òÂ³¤±¤ë
+	   *æ­£å¸¸ãªãƒªã‚¯ã‚¨ã‚¹ãƒˆ
+	   *ãƒ˜ãƒƒãƒ€ãŒçµ‚äº†ã™ã‚‹ã¾ã§å…¥åŠ›ã‚’ç¶šã‘ã‚‹
 	   */
 	  while (! feof(socket)) {
 	    char cr, lf;
@@ -276,7 +276,7 @@ void thread_server (void *ip)
 
 
 	  /*
-	   *³Æ¸¡º÷¥µ¡¼¥Ğ¤Ë¸¡º÷Í×µá¤ò½Ğ¤¹¡£
+	   *å„æ¤œç´¢ã‚µãƒ¼ãƒã«æ¤œç´¢è¦æ±‚ã‚’å‡ºã™ã€‚
 	   */
 	  for (i = 0; i < p->server_num; i++) {
 	    int buf_size;
@@ -306,17 +306,17 @@ void thread_server (void *ip)
 	  YAP_Db_base_open(&yappo_db_files);
 	  YAP_Db_linklist_open(&yappo_db_files);
 
-	  /* ¸¡º÷·ë²Ì¤ò¼õ¤±¼è¤ê¥Ş¡¼¥¸¤¹¤ë */
+	  /* æ¤œç´¢çµæœã‚’å—ã‘å–ã‚Šãƒãƒ¼ã‚¸ã™ã‚‹ */
 	  result = search_result_recv(p->server_socket[0]);
 
 	  for (i = 1; i < p->server_num; i++) {
 	    left = result;
-	    /* ±¦¤ò¸¡º÷ */
+	    /* å³ã‚’æ¤œç´¢ */
 	    right =  search_result_recv(p->server_socket[i]);
 
 	    result = YAP_Search_op_or(left, right);
 	    if (result == NULL) {
-	      /* ¤É¤Á¤é¤«¤Î¸¡º÷·ë²Ì¤¬Ìµ¤«¤Ã¤¿ */
+	      /* ã©ã¡ã‚‰ã‹ã®æ¤œç´¢çµæœãŒç„¡ã‹ã£ãŸ */
 	      if (left != NULL) {
 		result = left;
 		left = NULL;
@@ -327,7 +327,7 @@ void thread_server (void *ip)
 	    }
 
 
-	    /* ¥á¥â¥ê²òÊü */
+	    /* ãƒ¡ãƒ¢ãƒªè§£æ”¾ */
 	    if (left != NULL) {
 	      YAP_Search_result_free(left);
 	      free(left);
@@ -338,16 +338,16 @@ void thread_server (void *ip)
 	    }
 	    
 	    if (result == NULL) {
-	      /* ¸¡º÷ÉÔ°ìÃ× */
+	      /* æ¤œç´¢ä¸ä¸€è‡´ */
 	      break;
 	    }
 	  }
 
-	  /* ¸¡º÷·ë²ÌÆâ¤Î¥Ú¡¼¥¸Æ±»Î¤Î¥ê¥ó¥¯´Ø·¸¤Ë¤è¤ê¥¹¥³¥¢¤ò²ÄÊÑ¤¹¤ë */
+	  /* æ¤œç´¢çµæœå†…ã®ãƒšãƒ¼ã‚¸åŒå£«ã®ãƒªãƒ³ã‚¯é–¢ä¿‚ã«ã‚ˆã‚Šã‚¹ã‚³ã‚¢ã‚’å¯å¤‰ã™ã‚‹ */
 	  YAP_Linklist_Score(&yappo_db_files, result);
-	  /* ¥¹¥³¥¢½ç¥½¡¼¥È */
+	  /* ã‚¹ã‚³ã‚¢é †ã‚½ãƒ¼ãƒˆ */
 	  YAP_Search_result_sort_score(result);
-	  /* ·ë²Ì½ĞÎÏ */
+	  /* çµæœå‡ºåŠ› */
 	  search_result_print(&yappo_db_files, socket, result, start, end);
 	  
 	  if (result != NULL) {
@@ -381,7 +381,7 @@ void thread_server (void *ip)
   }
   
   /*
-   *³Æ¥µ¡¼¥Ğ¤È¤ÎÀÜÂ³¤òÊÄ¤¸¤ë
+   *å„ã‚µãƒ¼ãƒã¨ã®æ¥ç¶šã‚’é–‰ã˜ã‚‹
    */
   for (i = 0; i < p->server_num; i++) {
     int buf_size = 0;
@@ -401,18 +401,18 @@ void start_deamon_thread(char *indextexts_dirpath, int server_num, int *server_s
   pthread_t *pthread;
   YAP_THREAD_DATA *thread_data;
 
-  /* ¥½¥±¥Ã¥È¤ÎºîÀ® */
+  /* ã‚½ã‚±ãƒƒãƒˆã®ä½œæˆ */
   yap_socket = socket( AF_INET, SOCK_STREAM, 0);
   if (yap_socket == -1)
     YAP_Error( "socket open error");
 
-  /* ¥½¥±¥Ã¥È¤ÎÀßÄê */
+  /* ã‚½ã‚±ãƒƒãƒˆã®è¨­å®š */
   if (setsockopt(yap_socket, SOL_SOCKET, SO_REUSEADDR,
 		&sock_optval, sizeof(sock_optval)) == -1) {
     YAP_Error( "setsockopt error");
   }
 
-  /* bind¤¹¤ë */
+  /* bindã™ã‚‹ */
   yap_sin.sin_family = AF_INET;
   yap_sin.sin_port = htons(PORT);
   yap_sin.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -425,13 +425,13 @@ void start_deamon_thread(char *indextexts_dirpath, int server_num, int *server_s
     YAP_Error( "listen error");
   }
 
-  /* ¥¹¥ì¥Ã¥É¤Î½àÈ÷ */
+  /* ã‚¹ãƒ¬ãƒƒãƒ‰ã®æº–å‚™ */
   pthread = (pthread_t *) YAP_malloc(sizeof(pthread_t) * MAX_THREAD);
   thread_data  = (YAP_THREAD_DATA *) YAP_malloc(sizeof(YAP_THREAD_DATA) * MAX_THREAD);
   for (i = 0; i < MAX_THREAD; i++) {
     int ii;
 
-    /* µ¯Æ°½àÈ÷ */
+    /* èµ·å‹•æº–å‚™ */
     thread_data[i].id = i;
     thread_data[i].base_dir = (char *) YAP_malloc(strlen(indextexts_dirpath) + 1);
     strcpy(thread_data[i].base_dir, indextexts_dirpath);
@@ -453,7 +453,7 @@ void start_deamon_thread(char *indextexts_dirpath, int server_num, int *server_s
   }
 
   /*
-   *¥á¥¤¥ó¥ë¡¼¥×
+   *ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
    */
   while(1){
     sleep(120);
@@ -474,7 +474,7 @@ int main(int argc, char *argv[])
 
 
   /*
-   *¥ª¥×¥·¥ç¥ó¤ò¼èÆÀ
+   *ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’å–å¾—
    */
   if (argc > 1) {
     i = 1;
@@ -483,13 +483,13 @@ int main(int argc, char *argv[])
 	break;
 
       if (! strcmp(argv[i], "-l")) {
-	/* ¥¤¥ó¥Ç¥Ã¥¯¥¹¥Ç¥£¥ì¥¯¥È¥ê¤ò¼èÆÀ */
+	/* ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å–å¾— */
 	i++;
 	if (argc == i)
 	  break;
 	indextexts_dirpath = argv[i];
       } else if(! strcmp(argv[i], "-s")) {
-	/* ¸¡º÷¥µ¡¼¥Ğ»ØÄê */
+	/* æ¤œç´¢ã‚µãƒ¼ãƒæŒ‡å®š */
 	i++;
 	if (argc == i)
 	  break;
@@ -521,7 +521,7 @@ int main(int argc, char *argv[])
   printf("Start\n");
 
   /*
-   *¥Ç¡¼¥â¥ó²½
+   *ãƒ‡ãƒ¼ãƒ¢ãƒ³åŒ–
    */
   
   fclose(stdin);
@@ -538,7 +538,7 @@ int main(int argc, char *argv[])
   }
   
   /*
-   *SIGPIPE¤òÌµ»ë
+   *SIGPIPEã‚’ç„¡è¦–
    */
   signal(SIGPIPE, SIG_IGN);
 

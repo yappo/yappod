@@ -1,14 +1,14 @@
 /*
- *¥ê¥ó¥¯¥ê¥¹¥È¤ÎÁàºî¤ò¹Ô¤Ê¤¦
+ *ãƒªãƒ³ã‚¯ãƒªã‚¹ãƒˆã®æ“ä½œã‚’è¡Œãªã†
  */
 #ifndef __LINKLIST_H__
 #define __LINKLIST_H__
 
-/* ¥ê¥ó¥¯¥ê¥¹¥ÈËÜÂÎ */
+/* ãƒªãƒ³ã‚¯ãƒªã‚¹ãƒˆæœ¬ä½“ */
 #define LINKLIST_NAME "linklist"
-/* ³ÆURLËè¤Î¥ê¥¹¥È¥µ¥¤¥º */
+/* å„URLæ¯ã®ãƒªã‚¹ãƒˆã‚µã‚¤ã‚º */
 #define LINKLIST_SIZE_NAME "linklist_size"
-/* ³ÆURLËè¤Îlinklist¥Õ¥¡¥¤¥ëÃæ¤Î°ÌÃÖ */
+/* å„URLæ¯ã®linklistãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã®ä½ç½® */
 #define LINKLIST_INDEX_NAME "linklist_index"
 
 #endif

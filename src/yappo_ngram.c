@@ -1,14 +1,14 @@
 /*
- *N-gram¤Ë´Ø¤¹¤ë½èÍı
+ *N-gramã«é–¢ã™ã‚‹å‡¦ç†
  *
- *ÆşÎÏ²ÄÇ½¤ÊÊ¸»ú¥³¡¼¥É¤ÏEUC¤Î¤ß
+ *å…¥åŠ›å¯èƒ½ãªæ–‡å­—ã‚³ãƒ¼ãƒ‰ã¯EUCã®ã¿
  */
 #include "yappo_ngram.h"
 #include "yappo_alloc.h"
 
 
 /*
- *½Ğ¸½°ÌÃÖ¥ê¥¹¥È¤Î½é´ü²½
+ *å‡ºç¾ä½ç½®ãƒªã‚¹ãƒˆã®åˆæœŸåŒ–
  */
 NGRAM_LIST *__YAP_Ngram_List_init(void)
 {
@@ -21,7 +21,7 @@ NGRAM_LIST *__YAP_Ngram_List_init(void)
 }
 
 /*
- *keyword¤¬°ìÃ×¤¹¤ë¥ì¥³¡¼¥É¤ò¤«¤¨¤¹
+ *keywordãŒä¸€è‡´ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’ã‹ãˆã™
  */
 NGRAM_LIST *__YAP_Ngram_List_search(NGRAM_LIST *list, unsigned char *keyword)
 {
@@ -32,14 +32,14 @@ NGRAM_LIST *__YAP_Ngram_List_search(NGRAM_LIST *list, unsigned char *keyword)
   }
   next = list->next;
   /*
-   *°ìÃ×¤¹¤ë¥ì¥³¡¼¥É¤¬¸«¤Ä¤«¤ë¤«¡¢Á´¤Æ¤Î¥ì¥³¡¼¥É¤òÃµº÷¤¹¤ë¤Ş¤ÇÂ³¤±¤ë
+   *ä¸€è‡´ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚‹ã‹ã€å…¨ã¦ã®ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’æ¢ç´¢ã™ã‚‹ã¾ã§ç¶šã‘ã‚‹
    */
   while (1) {
     if (next == NULL) {
       return NULL;
     }
     if (! strcmp(next->keyword, keyword)) {
-      /* °ìÃ× */
+      /* ä¸€è‡´ */
       return next;
     }
     next = next->next;
@@ -48,8 +48,8 @@ NGRAM_LIST *__YAP_Ngram_List_search(NGRAM_LIST *list, unsigned char *keyword)
 }
 
 /*
- *¥ê¥¹¥È¤ËÄÉ²Ã
- *¤¹¤Ç¤Ëkeyword¤¬Â¸ºß¤·¤Æ¤¤¤ë¾ì¹ç¤Ï¡¢index¤Î¥ê¥¹¥È¤ËÄÉ²Ã¤¹¤ë
+ *ãƒªã‚¹ãƒˆã«è¿½åŠ 
+ *ã™ã§ã«keywordãŒå­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã¯ã€indexã®ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹
  */
 void __YAP_Ngram_List_add(NGRAM_LIST *list, unsigned char *keyword, int index)
 {
@@ -57,7 +57,7 @@ void __YAP_Ngram_List_add(NGRAM_LIST *list, unsigned char *keyword, int index)
   add = __YAP_Ngram_List_search(list, keyword);
 
   if (add == NULL) {
-    /* ¿·µ¬ */
+    /* æ–°è¦ */
     p = __YAP_Ngram_List_init();
     p->keyword = (unsigned char *) YAP_malloc(strlen(keyword) + 1);
     strcpy(p->keyword, keyword);
@@ -65,7 +65,7 @@ void __YAP_Ngram_List_add(NGRAM_LIST *list, unsigned char *keyword, int index)
     p->index[p->index_count] = index;
     p->index_count++;
 
-    /* ºÇ¸å¤Î¥ì¥³¡¼¥É¤ò¸¡º÷¤·¤Æ¡¢ÄÉ²Ã¤¹¤ë */
+    /* æœ€å¾Œã®ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’æ¤œç´¢ã—ã¦ã€è¿½åŠ ã™ã‚‹ */
     next = list;
     while (1) {
       if (next->next == NULL) {
@@ -75,7 +75,7 @@ void __YAP_Ngram_List_add(NGRAM_LIST *list, unsigned char *keyword, int index)
     }
     next->next = p;
   } else {
-    /* ÄÉ²Ã */
+    /* è¿½åŠ  */
     add->index_count++;
     add->index = (int *) YAP_realloc(add->index, (sizeof(int) * (add->index_count)));
     add->index[add->index_count-1] = index;
@@ -85,7 +85,7 @@ void __YAP_Ngram_List_add(NGRAM_LIST *list, unsigned char *keyword, int index)
 
 
 /*
- *»ØÄê¥ê¥¹¥È°Ê¹ß¤Ë·Ñ¤ì¤Æ¤¤¤ë¥ê¥¹¥È¤Î¾Ãµî
+ *æŒ‡å®šãƒªã‚¹ãƒˆä»¥é™ã«ç¶™ã‚Œã¦ã„ã‚‹ãƒªã‚¹ãƒˆã®æ¶ˆå»
  */
 NGRAM_LIST *YAP_Ngram_List_free(NGRAM_LIST *list)
 {
@@ -112,7 +112,7 @@ NGRAM_LIST *YAP_Ngram_List_free(NGRAM_LIST *list)
 
 
 /*
- *N-gram¤ÇÊ¸»úÎó¤òÊ¬²ò
+ *N-gramã§æ–‡å­—åˆ—ã‚’åˆ†è§£
  */
 NGRAM_LIST *YAP_Ngram_tokenize(char *body, int *keyword_num)
 {
@@ -128,35 +128,35 @@ NGRAM_LIST *YAP_Ngram_tokenize(char *body, int *keyword_num)
     gram = NULL;
 
     if (*tokp <= 0x20) {
-      /* ¥¨¥¹¥±¡¼¥×Ê¸»ú¤ÏÌµ»ë¤¹¤ë */
+      /* ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—æ–‡å­—ã¯ç„¡è¦–ã™ã‚‹ */
       tokp++;
       continue;
     } else if (*tokp < 0x80) {
-      /* 1byteÊ¸»ú */
+      /* 1byteæ–‡å­— */
 
       if (isalnum(*tokp)) {
 	/*
-	 *¥¢¥ë¥Õ¥¡¥Ù¥Ã¥È¤«¿ô»ú
+	 *ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆã‹æ•°å­—
 	 *
-	 *1byteÊ¸»ú¤ÎN-gram¼èÆÀ
+	 *1byteæ–‡å­—ã®N-gramå–å¾—
 	 */
 	gram = YAP_Ngram_get_1byte(tokp);
 
 	tokp_next = tokp + strlen(gram);
       } else {
-	/* µ­¹æ¤Ê¤é¥¹¥­¥Ã¥× */
+	/* è¨˜å·ãªã‚‰ã‚¹ã‚­ãƒƒãƒ— */
 	tokp_next = tokp + 1;
       }
     } else {
-      /* EUC¥³¡¼¥É */
+      /* EUCã‚³ãƒ¼ãƒ‰ */
 
-      /* 2byteÊ¸»ú¤ÎN-gram¼èÆÀ */
+      /* 2byteæ–‡å­—ã®N-gramå–å¾— */
       gram = YAP_Ngram_get_2byte(tokp);
 
       if (*(tokp + Ngram_N) < 0x80) {
 	/*
-	 *Ngram_N¥Ğ¥¤¥ÈÀè¤¬1byteÊ¸»ú¤Ê¤é¡¢¼¡¤ÎN-gram¤¬¾¯¤Ê¤¤Ê¸»ú¿ô¤Ë¤Ê¤Ã¤Æ¤·¤Ş¤¦¤Î¤Ç
-	 *Ngram_N¥Ğ¥¤¥ÈÊ¬°ÜÆ°¤¹¤ë
+	 *Ngram_Nãƒã‚¤ãƒˆå…ˆãŒ1byteæ–‡å­—ãªã‚‰ã€æ¬¡ã®N-gramãŒå°‘ãªã„æ–‡å­—æ•°ã«ãªã£ã¦ã—ã¾ã†ã®ã§
+	 *Ngram_Nãƒã‚¤ãƒˆåˆ†ç§»å‹•ã™ã‚‹
 	 */
 	tokp_next = tokp + Ngram_N;
       } else {
@@ -165,7 +165,7 @@ NGRAM_LIST *YAP_Ngram_tokenize(char *body, int *keyword_num)
     }
 
     if (gram != NULL) {
-      /* ngram¥ê¥¹¥È¤ËÄÉ²Ã */
+      /* ngramãƒªã‚¹ãƒˆã«è¿½åŠ  */
       __YAP_Ngram_List_add(ngram_item_list, gram, (tokp - tokp_start));
       (*keyword_num)++;
       free(gram);
@@ -180,7 +180,7 @@ NGRAM_LIST *YAP_Ngram_tokenize(char *body, int *keyword_num)
 
 
 /*
- *1byteÊ¸»ú¤Î¾ì¹ç¤Ï¡¢1byteÊ¸»ú(µ­¹æ¤ò½ü¤¯)¤¬Â³¤¯¸Â¤êÀÚ¤ê½Ğ¤¹¡£
+ *1byteæ–‡å­—ã®å ´åˆã¯ã€1byteæ–‡å­—(è¨˜å·ã‚’é™¤ã)ãŒç¶šãé™ã‚Šåˆ‡ã‚Šå‡ºã™ã€‚
  */
 char *YAP_Ngram_get_1byte(unsigned char *tokp)
 {
@@ -195,7 +195,7 @@ char *YAP_Ngram_get_1byte(unsigned char *tokp)
     }
   }
 
-  /* ¾®Ê¸»ú¤ËÊÑ´¹¤·¤Ä¤Ä¥³¥Ô¡¼ */
+  /* å°æ–‡å­—ã«å¤‰æ›ã—ã¤ã¤ã‚³ãƒ”ãƒ¼ */
   ret = YAP_malloc((p - tokp) +1);
   a = ret;
   b = tokp;
@@ -209,7 +209,7 @@ char *YAP_Ngram_get_1byte(unsigned char *tokp)
 
 
 /*
- *2byteÊ¸»ú¤ÎN-gram¤òÀÚ¤ê½Ğ¤¹
+ *2byteæ–‡å­—ã®N-gramã‚’åˆ‡ã‚Šå‡ºã™
  */
 char *YAP_Ngram_get_2byte(unsigned char *tokp)
 {
@@ -232,8 +232,8 @@ char *YAP_Ngram_get_2byte(unsigned char *tokp)
 
 
 /*
- *N-gram¤ÇÊ¸»úÎó¤òÊ¬²ò
- *¥­¡¼¥ï¡¼¥É¸¡º÷ÍÑ¤ÎN-gram¥ê¥¹¥È¤òºîÀ®
+ *N-gramã§æ–‡å­—åˆ—ã‚’åˆ†è§£
+ *ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ¤œç´¢ç”¨ã®N-gramãƒªã‚¹ãƒˆã‚’ä½œæˆ
  */
 NGRAM_SEARCH_LIST *YAP_Ngram_tokenize_search(char *body, int *keyword_num)
 {
@@ -247,35 +247,35 @@ NGRAM_SEARCH_LIST *YAP_Ngram_tokenize_search(char *body, int *keyword_num)
     gram = NULL;
 
     if (*tokp <= 0x20) {
-      /* ¥¨¥¹¥±¡¼¥×Ê¸»ú¤ÏÌµ»ë¤¹¤ë */
+      /* ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—æ–‡å­—ã¯ç„¡è¦–ã™ã‚‹ */
       tokp++;
       continue;
     } else if (*tokp < 0x80) {
-      /* 1byteÊ¸»ú */
+      /* 1byteæ–‡å­— */
 
       if (isalnum(*tokp)) {
 	/*
-	 *¥¢¥ë¥Õ¥¡¥Ù¥Ã¥È¤«¿ô»ú
+	 *ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆã‹æ•°å­—
 	 *
-	 *1byteÊ¸»ú¤ÎN-gram¼èÆÀ
+	 *1byteæ–‡å­—ã®N-gramå–å¾—
 	 */
 	gram = YAP_Ngram_get_1byte(tokp);
 	
 	tokp_next = tokp + strlen(gram);
       } else {
-	/* µ­¹æ¤Ê¤é¥¹¥­¥Ã¥× */
+	/* è¨˜å·ãªã‚‰ã‚¹ã‚­ãƒƒãƒ— */
 	tokp_next = tokp + 1;
       }
     } else {
-      /* EUC¥³¡¼¥É */
+      /* EUCã‚³ãƒ¼ãƒ‰ */
 
-      /* 2byteÊ¸»ú¤ÎN-gram¼èÆÀ */
+      /* 2byteæ–‡å­—ã®N-gramå–å¾— */
       gram = YAP_Ngram_get_2byte(tokp);
 
       if (*(tokp + Ngram_N) > 0x7f) {
 	/*
-	 *¼¡¤ÎÃ±¸ì¤â2¥Ğ¥¤¥ÈÊ¸»ú¤Ç¡¢N¥°¥é¥àÊ¬¤Î2¥Ğ¥¤¥ÈÊ¸»ú¿ô¤ËËş¤¿¤Ê¤¤
-	 *2¥Ğ¥¤¥ÈÊ¬°ÜÆ°¤¹¤ë
+	 *æ¬¡ã®å˜èªã‚‚2ãƒã‚¤ãƒˆæ–‡å­—ã§ã€Nã‚°ãƒ©ãƒ åˆ†ã®2ãƒã‚¤ãƒˆæ–‡å­—æ•°ã«æº€ãŸãªã„
+	 *2ãƒã‚¤ãƒˆåˆ†ç§»å‹•ã™ã‚‹
 	 */
 	unsigned char *np;
 	np = tokp + Ngram_N + 2;
@@ -289,7 +289,7 @@ NGRAM_SEARCH_LIST *YAP_Ngram_tokenize_search(char *body, int *keyword_num)
     }
 
     if (gram != NULL) {
-      /* ¥ê¥¹¥È¤ËÄÉ²Ã */
+      /* ãƒªã‚¹ãƒˆã«è¿½åŠ  */
       list = (NGRAM_SEARCH_LIST *) YAP_realloc(list, sizeof(NGRAM_SEARCH_LIST) * (*keyword_num + 1));
 
       list[*keyword_num].keyword = (char *) YAP_malloc(strlen(gram) + 1);

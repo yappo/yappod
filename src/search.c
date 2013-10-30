@@ -1,6 +1,6 @@
 /*
  *
- *¥³¥Ş¥ó¥É¥é¥¤¥ó¤«¤é¥­¡¼¥ï¡¼¥É¸¡º÷¤ò¹Ô¤Ê¤¦
+ *ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‹ã‚‰ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ¤œç´¢ã‚’è¡Œãªã†
  *
  */
 #include <stdio.h>
@@ -19,7 +19,7 @@
 YAPPO_CACHE yappod_core_cache;
 
 /*
- *¸¡º÷·ë²Ì¤òÉ¸¼¨
+ *æ¤œç´¢çµæœã‚’æ¨™ç¤º
  */
 void search_result_print (YAPPO_DB_FILES *ydfp, SEARCH_RESULT *p)
 {
@@ -50,7 +50,7 @@ void search_result_print (YAPPO_DB_FILES *ydfp, SEARCH_RESULT *p)
 
 }
 
-/*¥á¥¤¥ó*/
+/*ãƒ¡ã‚¤ãƒ³*/
 int main(int argc, char *argv[])
 {
   YAPPO_DB_FILES yappo_db_files;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
 
   /*
-   *¥ª¥×¥·¥ç¥ó¤ò¼èÆÀ
+   *ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’å–å¾—
    */
   if (argc > 1) {
     i = 1;
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 	break;
 
       if (! strcmp(argv[i], "-l")) {
-	/*¥¤¥ó¥Ç¥Ã¥¯¥¹¥Ç¥£¥ì¥¯¥È¥ê¤ò¼èÆÀ*/
+	/*ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å–å¾—*/
 	i++;
 	if (argc == i)
 	  break;
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 	/*OR*/
 	op = 1;
       } else {
-	/*¥­¡¼¥ï¡¼¥É¤ò¼èÆÀ*/
+	/*ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’å–å¾—*/
 	keyword_list = (char **) YAP_realloc( keyword_list, sizeof(char *) + keyword_list_num + 1);
 	keyword_list[keyword_list_num] = (char *) YAP_malloc( strlen(argv[i]) + 1);
 	strcpy( keyword_list[keyword_list_num], argv[i]);
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
   }
 
   /*
-   *¥Ç¡¼¥¿¥Ù¡¼¥¹¤Î½àÈ÷
+   *ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®æº–å‚™
    */
   YAP_Db_cache_init(&yappod_core_cache);
   yappo_db_files.mode = YAPPO_DB_READ;
@@ -123,11 +123,11 @@ int main(int argc, char *argv[])
   {
     SEARCH_RESULT *result;
     result = YAP_Search(&yappo_db_files, keyword_list, keyword_list_num, 100000000, op);
-    /*¸¡º÷·ë²ÌÆâ¤Î¥Ú¡¼¥¸Æ±»Î¤Î¥ê¥ó¥¯´Ø·¸¤Ë¤è¤ê¥¹¥³¥¢¤ò²ÄÊÑ¤¹¤ë*/
+    /*æ¤œç´¢çµæœå†…ã®ãƒšãƒ¼ã‚¸åŒå£«ã®ãƒªãƒ³ã‚¯é–¢ä¿‚ã«ã‚ˆã‚Šã‚¹ã‚³ã‚¢ã‚’å¯å¤‰ã™ã‚‹*/
     printf("go link\n");
     YAP_Linklist_Score(&yappo_db_files, result);
 
-    /*¥¹¥³¥¢½ç¥½¡¼¥È*/
+    /*ã‚¹ã‚³ã‚¢é †ã‚½ãƒ¼ãƒˆ*/
     printf("go sort\n");
     YAP_Search_result_sort_score(result);
     search_result_print(&yappo_db_files, result);

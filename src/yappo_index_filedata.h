@@ -1,5 +1,5 @@
 /*
- *URL¥á¥¿¥Ç¡¼¥¿¤ò¼è°·¤¦
+ *URLãƒ¡ã‚¿ãƒ‡ãƒ¼ã‚¿ã‚’å–æ‰±ã†
  */
 #ifndef __INDEX_FILEDATA_H__
 #define __INDEX_FILEDATA_H__
@@ -8,7 +8,7 @@
 #include "yappo_index.h"
 
 /*
- *filedate¤ÇÍøÍÑ¤µ¤ì¤ë
+ *filedateã§åˆ©ç”¨ã•ã‚Œã‚‹
  *
  */
 typedef struct{
@@ -16,7 +16,7 @@ typedef struct{
   char *title;
   char *comment;
   int size;
-  int keyword_num;/* Ê¸½ñ¤Ë´Ş¤Ş¤ì¤ë¥­¡¼¥ï¡¼¥É¿ô */
+  int keyword_num;/* æ–‡æ›¸ã«å«ã¾ã‚Œã‚‹ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ•° */
   time_t lastmod;
   int domainid;
   unsigned char *other;

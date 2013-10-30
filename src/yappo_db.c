@@ -1,6 +1,6 @@
 /*
  *
- *DB▓єдъд╬╜ш═¤дЄ╣╘д╩дж
+ *DBхЫЮуВКуБохЗжчРЖуВТшбМуБкуБЖ
  *
  */
 #include <sys/stat.h>
@@ -17,7 +17,7 @@
 #include "yappo_ngram.h"
 
 /*
- *YAPPO_DB_FILESд╦╔м═╫д╩е╒ебедеы╠╛дЄе╗е├е╚д╣ды
+ *YAPPO_DB_FILESуБлх┐ЕшжБуБкуГХуВбуВдуГлхРНуВТуВ╗уГГуГИуБЩуВЛ
  */
 void YAP_Db_filename_set (YAPPO_DB_FILES *p)
 {
@@ -26,7 +26,7 @@ void YAP_Db_filename_set (YAPPO_DB_FILES *p)
   int base_len = strlen(base) + 2;
 
 
-  /* URLд╚IDд╬┬╨╚ц╔╜ */
+  /* URLуБиIDуБохп╛цпФшби */
   tmp = (char *) YAP_malloc(base_len + strlen(FILEINDEX_NAME) + 1);
   sprintf( tmp, "%s/%s", base, FILEINDEX_NAME);
   p->fileindex = tmp;
@@ -34,7 +34,7 @@ void YAP_Db_filename_set (YAPPO_DB_FILES *p)
   sprintf( tmp, "%s/%s_tmp", base, FILEINDEX_NAME);
   p->fileindex_tmp = tmp;
 
-  /* DOMAINд╚IDд╬┬╨╚ц╔╜ */
+  /* DOMAINуБиIDуБохп╛цпФшби */
   tmp = (char *) YAP_malloc(base_len + strlen(DOMAININDEX_NAME) + 1);
   sprintf( tmp, "%s/%s", base, DOMAININDEX_NAME);
   p->domainindex = tmp;
@@ -42,7 +42,7 @@ void YAP_Db_filename_set (YAPPO_DB_FILES *p)
   sprintf( tmp, "%s/%s_tmp", base, DOMAININDEX_NAME);
   p->domainindex_tmp = tmp;
 
-  /* ║я╜№URL */
+  /* хЙКщЩдURL */
   tmp = (char *) YAP_malloc(base_len + strlen(DELETEFILE_NAME) + 1);
   sprintf( tmp, "%s/%s", base, DELETEFILE_NAME);
   p->deletefile = tmp;
@@ -50,7 +50,7 @@ void YAP_Db_filename_set (YAPPO_DB_FILES *p)
   sprintf( tmp, "%s/%s_tmp", base, DELETEFILE_NAME);
   p->deletefile_tmp = tmp;
 
-  /* URLесе┐е╟б╝е┐ */
+  /* URLуГбуВ┐уГЗуГ╝уВ┐ */
   tmp = (char *) YAP_malloc(base_len + strlen(FILEDATA_NAME) + 1);
   sprintf( tmp, "%s/%s", base, FILEDATA_NAME);
   p->filedata = tmp;
@@ -72,7 +72,7 @@ void YAP_Db_filename_set (YAPPO_DB_FILES *p)
   sprintf( tmp, "%s/%s_tmp", base, FILEDATA_INDEX_NAME);
   p->filedata_index_tmp = tmp;
 
-  /* ╝н╜ёе╒ебедеы */
+  /* ш╛ЮцЫ╕уГХуВбуВдуГл */
   tmp = (char *) YAP_malloc(base_len + strlen(KEYWORD_2BYTE_NAME) + 1);
   sprintf( tmp, "%s/%s", base, KEYWORD_2BYTE_NAME);
   p->key2byte = tmp;
@@ -87,60 +87,60 @@ void YAP_Db_filename_set (YAPPO_DB_FILES *p)
   sprintf( tmp, "%s/%s_tmp", base, KEYWORD_1BYTE_NAME);
   p->key1byte_tmp = tmp;
 
-  /* ┼╨╧┐URL┐Ї */
+  /* чЩ╗щМ▓URLцХ░ */
   tmp = (char *) YAP_malloc(base_len + strlen(FILENUM_NAME) + 1);
   sprintf( tmp, "%s/%s", base, FILENUM_NAME);
   p->filenum = tmp;
 
-  /* ┼╨╧┐DOMAIN┐Ї */
+  /* чЩ╗щМ▓DOMAINцХ░ */
   tmp = (char *) YAP_malloc(base_len + strlen(DOMAINNUM_NAME) + 1);
   sprintf( tmp, "%s/%s", base, DOMAINNUM_NAME);
   p->domainnum = tmp;
 
-  /* ┼╨╧┐енб╝еяб╝е╔┐Ї */
+  /* чЩ╗щМ▓уВнуГ╝уГпуГ╝уГЙцХ░ */
   tmp = (char *) YAP_malloc(base_len + strlen(KEYWORDNUM_NAME) + 1);
   sprintf( tmp, "%s/%s", base, KEYWORDNUM_NAME);
   p->keywordnum = tmp;
 
-  /* │╞URLд╬е╡еде║ */
+  /* хРДURLуБоуВ╡уВдуВ║ */
   tmp = (char *) YAP_malloc(base_len + strlen(SIZE_NAME) + 1);
   sprintf( tmp, "%s/%s", base, SIZE_NAME);
   p->size = tmp;
 
-  /* │╞URLд╬DOMAIN ID */
+  /* хРДURLуБоDOMAIN ID */
   tmp = (char *) YAP_malloc(base_len + strlen(DOMAINID_NAME) + 1);
   sprintf( tmp, "%s/%s", base, DOMAINID_NAME);
   p->domainid = tmp;
 
-  /* │╞URLд╬е╣е│ев */
+  /* хРДURLуБоуВ╣уВ│уВв */
   tmp = (char *) YAP_malloc(base_len + strlen(SCORE_NAME) + 1);
   sprintf( tmp, "%s/%s", base, SCORE_NAME);
   p->score = tmp;
 
-  /* │╞URLд╬енб╝еяб╝е╔┐Ї */
+  /* хРДURLуБоуВнуГ╝уГпуГ╝уГЙцХ░ */
   tmp = (char *) YAP_malloc(base_len + strlen(FILEKEYWORDNUM_NAME) + 1);
   sprintf( tmp, "%s/%s", base, FILEKEYWORDNUM_NAME);
   p->filekeywordnum = tmp;
 
-  /* URLд╬─╣д╡ */
+  /* URLуБощХ╖уБХ */
   tmp = (char *) YAP_malloc(base_len + strlen(URLLEN_NAME) + 1);
   sprintf( tmp, "%s/%s", base, URLLEN_NAME);
   p->urllen = tmp;
 
-  /* енб╝еяб╝е╔д╬┴э╜╨╕╜┐Ї */
+  /* уВнуГ╝уГпуГ╝уГЙуБоч╖ПхЗ║чП╛цХ░ */
   tmp = (char *) YAP_malloc(base_len + strlen(KEYWORD_TOTALNUM_NAME) + 1);
   sprintf( tmp, "%s/%s", base, KEYWORD_TOTALNUM_NAME);
   p->keyword_totalnum = tmp;
 
-  /* енб╝еяб╝е╔д╬┴э╜╨╕╜URL┐Ї */
+  /* уВнуГ╝уГпуГ╝уГЙуБоч╖ПхЗ║чП╛URLцХ░ */
   tmp = (char *) YAP_malloc(base_len + strlen(KEYWORD_DOCSNUM_NAME) + 1);
   sprintf( tmp, "%s/%s", base, KEYWORD_DOCSNUM_NAME);
   p->keyword_docsnum = tmp;
 }
 
 /*
- *baseе╒ебедеыдм┬╕║▀д╖д╞ддд┐дщбвdestе╒ебедеыд╦е│е╘б╝д╣ды
- *destдм┬╕║▀д╖д╞ддд┐дщд╩д╦дтд╖д╩дд
+ *baseуГХуВбуВдуГлуБМхнШхЬиуБЧуБжуБДуБЯуВЙуАБdestуГХуВбуВдуГлуБлуВ│уГФуГ╝уБЩуВЛ
+ *destуБМхнШхЬиуБЧуБжуБДуБЯуВЙуБкуБлуВВуБЧуБкуБД
  */
 void _tmp_copy (char *base, char *dest)
 {
@@ -167,7 +167,7 @@ void _tmp_copy (char *base, char *dest)
 }
 
 /*
- *╛я╗■│лддд╞дкдпDBдЄ│лдп
+ *х╕╕цЩВщЦЛуБДуБжуБКуБПDBуВТщЦЛуБП
  */
 void YAP_Db_base_open (YAPPO_DB_FILES *p)
 {
@@ -177,10 +177,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
   char *filedata, *filedata_size, *filedata_index;
 
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёднд│д▀етб╝е╔ */
+    /* цЫ╕уБНуБУуБ┐уГвуГ╝уГЙ */
     mode = DB_CREATE;
 
-    /* д╣д╟д╦е╒ебедеыдм┬╕║▀д╖д╞ддды╛ь╣чд╧бв║ю╢╚═╤е╒ебедеыдЄе│е╘б╝д╣ды */
+    /* уБЩуБзуБлуГХуВбуВдуГлуБМхнШхЬиуБЧуБжуБДуВЛха┤хРИуБпуАБф╜ЬценчФиуГХуВбуВдуГлуВТуВ│уГФуГ╝уБЩуВЛ */
     _tmp_copy(p->fileindex, p->fileindex_tmp);
     _tmp_copy(p->domainindex, p->domainindex_tmp);
     _tmp_copy(p->deletefile, p->deletefile_tmp);
@@ -190,7 +190,7 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     _tmp_copy(p->key2byte, p->key2byte_tmp);
     _tmp_copy(p->key1byte, p->key1byte_tmp);
 
-    /* е╒ебедеы╠╛д╬└▀─ъ */
+    /* уГХуВбуВдуГлхРНуБошинхоЪ */
     fileindex = p->fileindex_tmp;
     domainindex = p->domainindex_tmp;
     deletefile = p->deletefile_tmp;
@@ -200,7 +200,7 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     key2byte = p->key2byte_tmp;
     key1byte = p->key1byte_tmp;
   } else {
-    /* е╒ебедеы╠╛д╬└▀─ъ */
+    /* уГХуВбуВдуГлхРНуБошинхоЪ */
     fileindex = p->fileindex;
     domainindex = p->domainindex;
     deletefile = p->deletefile;
@@ -211,19 +211,19 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     key1byte = p->key1byte;
   }
 
-  /* URLд╚IDд╬┬╨╚ц╔╜ */
+  /* URLуБиIDуБохп╛цпФшби */
   db_create(&(p->fileindex_db), NULL, 0);
   p->fileindex_db->open(p->fileindex_db, NULL, fileindex, NULL,
                     DB_BTREE, mode, 0);
 
-  /* DOMAINд╚IDд╬┬╨╚ц╔╜ */
+  /* DOMAINуБиIDуБохп╛цпФшби */
   db_create(&(p->domainindex_db), NULL, 0);
   p->domainindex_db->open(p->domainindex_db, NULL, domainindex, NULL,
                     DB_BTREE, mode, 0);
 
-  /* ║я╜№URL */
+  /* хЙКщЩдURL */
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёднд│д▀╗■ */
+    /* цЫ╕уБНуБУуБ┐цЩВ */
     memset(&f_stats, 0, sizeof(struct stat));
     stat(deletefile, &f_stats);
     if ( ! S_ISREG(f_stats.st_mode)) {
@@ -232,14 +232,14 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     }
     p->deletefile_file = fopen(deletefile, "r+");
   } else {
-    /* ╞╔д▀╣■д▀╗■ */
+    /* шкнуБ┐ш╛╝уБ┐цЩВ */
     p->deletefile_file = fopen(deletefile, "r");
   }
 
 
-  /* URLесе┐е╟б╝е┐ */
+  /* URLуГбуВ┐уГЗуГ╝уВ┐ */
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёднд│д▀╗■ */
+    /* цЫ╕уБНуБУуБ┐цЩВ */
     memset(&f_stats, 0, sizeof(struct stat));
     stat(filedata, &f_stats);
     if ( ! S_ISREG(f_stats.st_mode)) {
@@ -263,15 +263,15 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     p->filedata_size_file = fopen(filedata_size, "r+");
     p->filedata_index_file = fopen(filedata_index, "r+");
   } else {
-    /* ╞╔д▀╣■д▀╗■ */
+    /* шкнуБ┐ш╛╝уБ┐цЩВ */
     p->filedata_file = fopen(filedata, "r");
     p->filedata_size_file = fopen(filedata_size, "r");
     p->filedata_index_file = fopen(filedata_index, "r");
   }
 
-  /* ╝н╜ёе╒ебедеы 2byte */
+  /* ш╛ЮцЫ╕уГХуВбуВдуГл 2byte */
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёднд│д▀╗■ */
+    /* цЫ╕уБНуБУуБ┐цЩВ */
     memset(&f_stats, 0, sizeof(struct stat));
     stat(key2byte, &f_stats);
     if ( ! S_ISREG(f_stats.st_mode)) {
@@ -285,52 +285,52 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     }
     p->key2byte_file = fopen(key2byte, "r+");
   } else {
-    /* ╞╔д▀╣■д▀╗■ */
+    /* шкнуБ┐ш╛╝уБ┐цЩВ */
     p->key2byte_file = fopen(key2byte, "r");
   }
 
-  /* ╝н╜ёе╒ебедеы 1byte */
+  /* ш╛ЮцЫ╕уГХуВбуВдуГл 1byte */
   db_create(&(p->key1byte_db), NULL, 0);
   p->key1byte_db->open(p->key1byte_db, NULL, key1byte, NULL,
                     DB_BTREE, mode, 0);
 
 
 
-  /* ┼╨╧┐URL┐Ї */
+  /* чЩ╗щМ▓URLцХ░ */
   memset(&f_stats, 0, sizeof(struct stat));
   stat(p->filenum, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->total_filenum = 0;
   } else {
-    /* ╞╔д▀╣■д▀ */
+    /* шкнуБ┐ш╛╝уБ┐ */
     p->filenum_file = fopen(p->filenum, "r");
     fread(&(p->total_filenum), sizeof(int), 1, p->filenum_file);
     fclose(p->filenum_file);
   }
   memset(&f_stats, 0, sizeof(struct stat));
 
-  /* ┼╨╧┐DOMAIN┐Ї */
+  /* чЩ╗щМ▓DOMAINцХ░ */
   memset(&f_stats, 0, sizeof(struct stat));
   stat(p->domainnum, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->total_domainnum = 0;
   } else {
-    /* ╞╔д▀╣■д▀ */
+    /* шкнуБ┐ш╛╝уБ┐ */
     p->domainnum_file = fopen(p->domainnum, "r");
     fread(&(p->total_domainnum), sizeof(int), 1, p->domainnum_file);
     fclose(p->domainnum_file);
   }
   memset(&f_stats, 0, sizeof(struct stat));
 
-  /* ┼╨╧┐енб╝еяб╝е╔┐Ї */
+  /* чЩ╗щМ▓уВнуГ╝уГпуГ╝уГЙцХ░ */
   stat(p->keywordnum, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->total_keywordnum = 0;
   } else {
-    /* ╞╔д▀╣■д▀ */
+    /* шкнуБ┐ш╛╝уБ┐ */
     p->keywordnum_file = fopen(p->keywordnum, "r");
     fread(&(p->total_keywordnum), sizeof(int), 1, p->keywordnum_file);
     fclose(p->keywordnum_file);
@@ -340,10 +340,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
   printf("url=%d:key=%d\n", p->total_filenum, p->total_keywordnum);
 
 
-  /* │╞URLд╬е╡еде║ */
+  /* хРДURLуБоуВ╡уВдуВ║ */
   stat(p->size, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->size_file = fopen(p->size, "w");
     fclose(p->size_file);
   }
@@ -355,10 +355,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     p->size_file = fopen(p->size, "r");
   }
 
-  /* │╞URLд╬DOMAIN ID */
+  /* хРДURLуБоDOMAIN ID */
   stat(p->domainid, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->domainid_file = fopen(p->domainid, "w");
     fclose(p->domainid_file);
   }
@@ -370,10 +370,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     p->domainid_file = fopen(p->domainid, "r");
   }
 
-  /* │╞URLд╬е╣е│ев */
+  /* хРДURLуБоуВ╣уВ│уВв */
   stat(p->score, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->score_file = fopen(p->score, "w");
     fclose(p->score_file);
   }
@@ -386,10 +386,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
   }
 
 
-  /* │╞URLд╬енб╝еяб╝е╔┐Ї */
+  /* хРДURLуБоуВнуГ╝уГпуГ╝уГЙцХ░ */
   stat(p->filekeywordnum, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->filekeywordnum_file = fopen(p->filekeywordnum, "w");
     fclose(p->filekeywordnum_file);
   }
@@ -401,10 +401,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     p->filekeywordnum_file = fopen(p->filekeywordnum, "r");
   }
 
-  /* URLд╬─╣д╡ */
+  /* URLуБощХ╖уБХ */
   stat(p->urllen, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->urllen_file = fopen(p->urllen, "w");
     fclose(p->urllen_file);
   }
@@ -416,10 +416,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     p->urllen_file = fopen(p->urllen, "r");
   }
 
-  /* енб╝еяб╝е╔д╬┴э╜╨╕╜┐Ї */
+  /* уВнуГ╝уГпуГ╝уГЙуБоч╖ПхЗ║чП╛цХ░ */
   stat(p->keyword_totalnum, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->keyword_totalnum_file = fopen(p->keyword_totalnum, "w");
     fclose(p->keyword_totalnum_file);
   }
@@ -430,10 +430,10 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
     p->keyword_totalnum_file = fopen(p->keyword_totalnum, "r");
   }
 
-  /* енб╝еяб╝е╔д╬┴э╜╨╕╜URL┐Ї */
+  /* уВнуГ╝уГпуГ╝уГЙуБоч╖ПхЗ║чП╛URLцХ░ */
   stat(p->keyword_docsnum, &f_stats);
   if (! S_ISREG(f_stats.st_mode)) {
-    /* ┐╖╡м║ю└о */
+    /* цЦ░шжПф╜ЬцИР */
     p->keyword_docsnum_file = fopen(p->keyword_docsnum, "w");
     fclose(p->keyword_docsnum_file);
   }
@@ -447,39 +447,39 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
 
 
 /*
- *╛я╗■│лддд╞дкдпDBдЄ╩─д╕ды
+ *х╕╕цЩВщЦЛуБДуБжуБКуБПDBуВТщЦЙуБШуВЛ
  */
 void YAP_Db_base_close (YAPPO_DB_FILES *p)
 {
 
-  /* URLд╚IDд╬┬╨╚ц╔╜ */
+  /* URLуБиIDуБохп╛цпФшби */
   p->fileindex_db->close(p->fileindex_db, 0);
   free(p->fileindex);
   p->fileindex = NULL;
   free(p->fileindex_tmp);
   p->fileindex_tmp = NULL;
 
-  /* DOMAINд╚IDд╬┬╨╚ц╔╜ */
+  /* DOMAINуБиIDуБохп╛цпФшби */
   p->domainindex_db->close(p->domainindex_db, 0);
   free(p->domainindex);
   p->domainindex = NULL;
   free(p->domainindex_tmp);
   p->domainindex_tmp = NULL;
 
-  /* ║я╜№URL */
+  /* хЙКщЩдURL */
   fclose(p->deletefile_file);
   free(p->deletefile);
   p->deletefile = NULL;
   free(p->deletefile_tmp);
   p->deletefile_tmp = NULL;
 
-  /* URLесе┐е╟б╝е┐ */
+  /* URLуГбуВ┐уГЗуГ╝уВ┐ */
   fclose(p->filedata_file);
   fclose(p->filedata_size_file);
   fclose(p->filedata_index_file);
 
   if (p->mode == YAPPO_DB_WRITE) {
-    /* е╟б╝е┐е╒ебедеыд╬┴▌╜№ */
+    /* уГЗуГ╝уВ┐уГХуВбуВдуГлуБоцОГщЩд */
     YAP_Index_Filedata_gc(p, p->filedata_tmp, p->filedata_size_tmp, p->filedata_index_tmp);
   }
 
@@ -496,7 +496,7 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
   free(p->filedata_index_tmp);
   p->filedata_index_tmp = NULL;
 
-  /* ╝н╜ёе╒ебедеы */
+  /* ш╛ЮцЫ╕уГХуВбуВдуГл */
   fclose(p->key2byte_file);
   free(p->key2byte);
   p->key2byte = NULL;
@@ -514,7 +514,7 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
     struct dirent *direntp;
     char *dir_path;
 
-    /* tmpе╒ебедеыдЄ╕╡д╦дтд╔д╣ */
+    /* tmpуГХуВбуВдуГлуВТхЕГуБлуВВуБйуБЩ */
     dir_path = (char *) YAP_malloc(strlen(p->base_dir) + 1);
     sprintf(dir_path, "%s", p->base_dir);
     pos_dir = opendir(dir_path);
@@ -544,7 +544,7 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
     closedir(pos_dir);
     free(dir_path);
 
-    /* ░╠├╓╛Ё╩єе╒ебедеыдт╕╡д╦дтд╔д╣ */
+    /* ф╜Нч╜оцГЕха▒уГХуВбуВдуГлуВВхЕГуБлуВВуБйуБЩ */
     dir_path = (char *) YAP_malloc(strlen(p->base_dir) + 5);
     sprintf(dir_path, "%s/pos", p->base_dir);
     pos_dir = opendir(dir_path);
@@ -576,9 +576,9 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
     free(dir_path);
   }
 
-  /* ┼╨╧┐URL┐Ї */
+  /* чЩ╗щМ▓URLцХ░ */
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёднд│д▀етб╝е╔ */
+    /* цЫ╕уБНуБУуБ┐уГвуГ╝уГЙ */
     p->filenum_file = fopen(p->filenum, "w"); 
     fwrite(&(p->total_filenum), sizeof(int), 1, p->filenum_file);
     fclose(p->filenum_file);
@@ -586,9 +586,9 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
   free(p->filenum);
   p->filenum = NULL;
 
-  /* ┼╨╧┐DOMAIN┐Ї */
+  /* чЩ╗щМ▓DOMAINцХ░ */
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёднд│д▀етб╝е╔ */
+    /* цЫ╕уБНуБУуБ┐уГвуГ╝уГЙ */
     p->domainnum_file = fopen(p->domainnum, "w"); 
     fwrite(&(p->total_domainnum), sizeof(int), 1, p->domainnum_file);
     fclose(p->domainnum_file);
@@ -596,9 +596,9 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
   free(p->domainnum);
   p->domainnum = NULL;
 
-  /* ┼╨╧┐енб╝еяб╝е╔┐Ї */
+  /* чЩ╗щМ▓уВнуГ╝уГпуГ╝уГЙцХ░ */
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёднд│д▀етб╝е╔ */
+    /* цЫ╕уБНуБУуБ┐уГвуГ╝уГЙ */
     p->keywordnum_file = fopen(p->keywordnum, "w");
     fwrite(&(p->total_keywordnum), sizeof(int), 1, p->keywordnum_file);
     fclose(p->keywordnum_file);
@@ -606,37 +606,37 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
   free(p->keywordnum);
   p->keywordnum = NULL;
 
-  /* │╞URLд╬е╡еде║ */
+  /* хРДURLуБоуВ╡уВдуВ║ */
   fclose(p->size_file);
   free(p->size);
   p->size = NULL;
 
-  /* │╞URLд╬DOMAIN ID */
+  /* хРДURLуБоDOMAIN ID */
   fclose(p->domainid_file);
   free(p->domainid);
   p->domainid = NULL;
 
-  /* │╞URLд╬е╣е│ев */
+  /* хРДURLуБоуВ╣уВ│уВв */
   fclose(p->score_file);
   free(p->score);
   p->score = NULL;
 
-  /* │╞URLд╬енб╝еяб╝е╔┐Ї */
+  /* хРДURLуБоуВнуГ╝уГпуГ╝уГЙцХ░ */
   fclose(p->filekeywordnum_file);
   free(p->filekeywordnum);
   p->filekeywordnum = NULL;
 
-  /* URLд╬─╣д╡ */
+  /* URLуБощХ╖уБХ */
   fclose(p->urllen_file);
   free(p->urllen);
   p->urllen = NULL;
 
-  /* енб╝еяб╝е╔д╬┴э╜╨╕╜┐Ї */
+  /* уВнуГ╝уГпуГ╝уГЙуБоч╖ПхЗ║чП╛цХ░ */
   fclose(p->keyword_totalnum_file);
   free(p->keyword_totalnum);
   p->keyword_totalnum = NULL;
 
-  /* енб╝еяб╝е╔д╬┴э╜╨╕╜URL┐Ї */
+  /* уВнуГ╝уГпуГ╝уГЙуБоч╖ПхЗ║чП╛URLцХ░ */
   fclose(p->keyword_docsnum_file);
   free(p->keyword_docsnum);
   p->keyword_docsnum = NULL;
@@ -644,7 +644,7 @@ void YAP_Db_base_close (YAPPO_DB_FILES *p)
 
 
 /*
- *linklistе╒ебедеыдЄ│лдп
+ *linklistуГХуВбуВдуГлуВТщЦЛуБП
  */
 void YAP_Db_linklist_open (YAPPO_DB_FILES *p)
 {
@@ -704,7 +704,7 @@ void YAP_Db_linklist_open (YAPPO_DB_FILES *p)
 }
 
 /*
- *linklistе╒ебедеыдЄ╩─д╕ды
+ *linklistуГХуВбуВдуГлуВТщЦЙуБШуВЛ
  */
 void YAP_Db_linklist_close (YAPPO_DB_FILES *p)
 {
@@ -726,7 +726,7 @@ void YAP_Db_linklist_close (YAPPO_DB_FILES *p)
 }
   
 /*
- *░╠├╓╛Ё╩єDBдЄ│лдп
+ *ф╜Нч╜оцГЕха▒DBуВТщЦЛуБП
  */
 int YAP_Db_pos_open (YAPPO_DB_FILES *p, int pos_id)
 {
@@ -737,20 +737,20 @@ int YAP_Db_pos_open (YAPPO_DB_FILES *p, int pos_id)
   char *pos, *pos_size, *pos_index;
   int ret;
 
-  /* е╒ебедеы╠╛║ю└о */
+  /* уГХуВбуВдуГлхРНф╜ЬцИР */
   tmp = (char *) YAP_malloc(base_len + strlen(POSTINGS_NAME) + 1);
   sprintf( tmp, "%s/"POSTINGS_NAME, base, pos_id);
 
   if (p->mode == YAPPO_DB_READ) {
     /*
-     *╞╔д▀╣■д▀етб╝е╔д╩дщ
-     *│лдп┴░д╦е╒ебедеыдм┬╕║▀д╖д╞дддыдл─┤д┘ды
+     *шкнуБ┐ш╛╝уБ┐уГвуГ╝уГЙуБкуВЙ
+     *щЦЛуБПхЙНуБлуГХуВбуВдуГлуБМхнШхЬиуБЧуБжуБДуВЛуБЛшк┐уБ╣уВЛ
      */
     memset(&f_stats, 0, sizeof(struct stat));
     stat(tmp, &f_stats);
 
     if (! S_ISREG(f_stats.st_mode)) {
-      /* ┬╕║▀д╖д╩дд */
+      /* хнШхЬиуБЧуБкуБД */
       free(tmp);
       return 0;
     }
@@ -780,23 +780,23 @@ int YAP_Db_pos_open (YAPPO_DB_FILES *p, int pos_id)
 
 
   /*
-   *DBдЄ│лдп
+   *DBуВТщЦЛуБП
    */
   if (p->mode == YAPPO_DB_WRITE) {
     /*
-     *╜ёднд│д▀етб╝е╔
-     *д╣д╟д╦е╒ебедеыдм┬╕║▀д╖д╞ддды╛ь╣чд╧бв║ю╢╚═╤е╒ебедеыдЄе│е╘б╝д╣ды
+     *цЫ╕уБНуБУуБ┐уГвуГ╝уГЙ
+     *уБЩуБзуБлуГХуВбуВдуГлуБМхнШхЬиуБЧуБжуБДуВЛха┤хРИуБпуАБф╜ЬценчФиуГХуВбуВдуГлуВТуВ│уГФуГ╝уБЩуВЛ
      */
     _tmp_copy(p->pos, p->pos_tmp);
     _tmp_copy(p->pos_size, p->pos_size_tmp);
     _tmp_copy(p->pos_index, p->pos_index_tmp);
 
-    /* е╒ебедеы╠╛д╬└▀─ъ */
+    /* уГХуВбуВдуГлхРНуБошинхоЪ */
     pos = p->pos_tmp;
     pos_size = p->pos_size_tmp;
     pos_index = p->pos_index_tmp;
   } else {
-    /* е╒ебедеы╠╛д╬└▀─ъ */
+    /* уГХуВбуВдуГлхРНуБошинхоЪ */
     pos = p->pos;
     pos_size = p->pos_size;
     pos_index = p->pos_index;
@@ -804,7 +804,7 @@ int YAP_Db_pos_open (YAPPO_DB_FILES *p, int pos_id)
 
 
   if (p->mode == YAPPO_DB_WRITE) {
-    /* ╜ёдн╣■д▀╗■ */
+    /* цЫ╕уБНш╛╝уБ┐цЩВ */
     memset(&f_stats, 0, sizeof(struct stat));
     stat(pos, &f_stats);
     if ( ! S_ISREG(f_stats.st_mode)) {
@@ -833,13 +833,13 @@ int YAP_Db_pos_open (YAPPO_DB_FILES *p, int pos_id)
     p->pos_size_file = fopen(pos_size, "r+");
     p->pos_index_file = fopen(pos_index, "r+");
   } else {
-    /* ╞╔д▀╣■д▀╗■ */
+    /* шкнуБ┐ш╛╝уБ┐цЩВ */
     p->pos_file = fopen(pos, "r");
     p->pos_size_file = fopen(pos_size, "r");
     p->pos_index_file = fopen(pos_index, "r");
   }
 
-  /* │╞╝я╛Ё╩єдЄ╞╔д▀д│др */
+  /* хРДчиоцГЕха▒уВТшкнуБ┐уБУуВА */
   ret = fread(&(p->pos_num), sizeof(long), 1, p->pos_file);
   if (ret == 0) {
     p->pos_num = 0;
@@ -857,13 +857,13 @@ int YAP_Db_pos_open (YAPPO_DB_FILES *p, int pos_id)
 }
 
 /*
- *░╠├╓╛Ё╩єDBдЄ╩─д╕ды
+ *ф╜Нч╜оцГЕха▒DBуВТщЦЙуБШуВЛ
  */
 void YAP_Db_pos_close (YAPPO_DB_FILES *p)
 {
 
 
-  /* │╞╝я╛Ё╩єдЄ╜ёднд│др */
+  /* хРДчиоцГЕха▒уВТцЫ╕уБНуБУуВА */
   if (p->mode == YAPPO_DB_WRITE) {
 
     if (p->pos_fileindex_start == 0) {
@@ -879,18 +879,18 @@ void YAP_Db_pos_close (YAPPO_DB_FILES *p)
     fwrite(&(p->pos_fileindex_end), sizeof(int), 1, p->pos_file);
   }
 
-  /* е╒ебедеыдЄ╩─д╕ды */
+  /* уГХуВбуВдуГлуВТщЦЙуБШуВЛ */
   fclose(p->pos_file);
   fclose(p->pos_size_file);
   fclose(p->pos_index_file);
 
-  /* е╟б╝е┐д╬└░═¤дЄ╣╘д╩дж */
+  /* уГЗуГ╝уВ┐уБоцХ┤чРЖуВТшбМуБкуБЖ */
   if (p->mode == YAPPO_DB_WRITE) {
     YAP_Index_Pos_gc(p, p->pos_tmp, p->pos_size_tmp, p->pos_index_tmp);
   }
 
   /*
-   *есетеъепеъев
+   *уГбуГвуГкуВпуГкуВв
    */
   free(p->pos);
   p->pos = NULL;
@@ -907,7 +907,7 @@ void YAP_Db_pos_close (YAPPO_DB_FILES *p)
 }
 
 /*
- *енеуе├е╖ехд╬╜щ┤№▓╜
+ *уВнуГгуГГуВ╖уГеуБохИЭцЬЯхМЦ
  */
 void YAP_Db_cache_init (YAPPO_CACHE *p) 
 {
@@ -940,7 +940,7 @@ void YAP_Db_cache_init (YAPPO_CACHE *p)
 }
 
 /*
- *енеуе├е╖ехд╬╟╦┤■
+ *уВнуГгуГГуВ╖уГеуБоча┤цгД
  */
 void YAP_Db_cache_destroy (YAPPO_CACHE *p) 
 {
@@ -989,7 +989,7 @@ void YAP_Db_cache_destroy (YAPPO_CACHE *p)
 }
 
 /*
- *╔м═╫д╩дщд╨│╞е╒ебедеыдЄесетеъ╛хд╦енеуе├е╖ехд╣ды
+ *х┐ЕшжБуБкуВЙуБ░хРДуГХуВбуВдуГлуВТуГбуГвуГкф╕КуБлуВнуГгуГГуВ╖уГеуБЩуВЛ
  */
 void YAP_Db_cache_load (YAPPO_DB_FILES *ydfp, YAPPO_CACHE *p) 
 {
@@ -998,27 +998,27 @@ void YAP_Db_cache_load (YAPPO_DB_FILES *ydfp, YAPPO_CACHE *p)
       ydfp->total_domainnum != p->total_domainnum ||
       ydfp->total_keywordnum != p->total_keywordnum) {
     /*
-     *енеуе├е╖ех╛хд╬┐Ї├═д╚╝┬║▌д╬┐Ї├═дм┐йдд░уд├д╞ддды
-     *д╬д╟╞╔д▀д│д▀│л╗╧д╣ды
+     *уВнуГгуГГуВ╖уГеф╕КуБоцХ░хАдуБихоЯщЪЫуБоцХ░хАдуБМщгЯуБДщБХуБгуБжуБДуВЛ
+     *уБоуБзшкнуБ┐уБУуБ┐щЦЛхзЛуБЩуВЛ
      */
 
     printf("CACHE LOAD\n");
 
-    /* е╣е│еве╒ебедеыенеуе├е╖ех */
+    /* уВ╣уВ│уВвуГХуВбуВдуГлуВнуГгуГГуВ╖уГе */
     pthread_mutex_lock(&(p->score_mutex));
     p->score = (double *) YAP_realloc(p->score, sizeof(double) * ydfp->total_filenum);
     fseek(ydfp->score_file, 0L, SEEK_SET);
     p->score_num = fread(p->score, sizeof(double), ydfp->total_filenum, ydfp->score_file);
     pthread_mutex_unlock(&(p->score_mutex));
 
-    /* е╒ебедеые╡еде║енеуе├е╖ех */
+    /* уГХуВбуВдуГлуВ╡уВдуВ║уВнуГгуГГуВ╖уГе */
     pthread_mutex_lock(&(p->size_mutex));
     p->size = (int *) YAP_realloc(p->size, sizeof(int) * ydfp->total_filenum);
     fseek(ydfp->size_file, 0L, SEEK_SET);
     p->size_num = fread(p->size, sizeof(int), ydfp->total_filenum, ydfp->size_file);
     pthread_mutex_unlock(&(p->size_mutex));
 
-    /* URL╩╕╗·┐Їе╒ебедеыенеуе├е╖ех */
+    /* URLцЦЗхнЧцХ░уГХуВбуВдуГлуВнуГгуГГуВ╖уГе */
     pthread_mutex_lock(&(p->urllen_mutex));
     p->urllen = (int *) YAP_realloc(p->urllen, sizeof(int) * ydfp->total_filenum);
     fseek(ydfp->urllen_file, 0L, SEEK_SET);
@@ -1026,7 +1026,7 @@ void YAP_Db_cache_load (YAPPO_DB_FILES *ydfp, YAPPO_CACHE *p)
     pthread_mutex_unlock(&(p->urllen_mutex));
 
 
-    /* │╞URLд╬енб╝еяб╝е╔┐Їе╒ебедеыенеуе├е╖ех */
+    /* хРДURLуБоуВнуГ╝уГпуГ╝уГЙцХ░уГХуВбуВдуГлуВнуГгуГГуВ╖уГе */
     pthread_mutex_lock(&(p->filekeywordnum_mutex));
     p->filekeywordnum = (int *) YAP_realloc(p->filekeywordnum, sizeof(int) * ydfp->total_filenum);
     fseek(ydfp->filekeywordnum_file, 0L, SEEK_SET);
@@ -1034,14 +1034,14 @@ void YAP_Db_cache_load (YAPPO_DB_FILES *ydfp, YAPPO_CACHE *p)
     pthread_mutex_unlock(&(p->filekeywordnum_mutex));
     
 
-    /* domain idе╒ебедеыенеуе├е╖ех */
+    /* domain idуГХуВбуВдуГлуВнуГгуГГуВ╖уГе */
     pthread_mutex_lock(&(p->domainid_mutex));
     p->domainid = (int *) YAP_realloc(p->domainid, sizeof(int) * ydfp->total_filenum);
     fseek(ydfp->domainid_file, 0L, SEEK_SET);
     p->domainid_num = fread(p->domainid, sizeof(int), ydfp->total_filenum, ydfp->domainid_file);
     pthread_mutex_unlock(&(p->domainid_mutex));
 
-    /* ║я╜№URLе╒ебедеыенеуе├е╖ех */
+    /* хЙКщЩдURLуГХуВбуВдуГлуВнуГгуГГуВ╖уГе */
     pthread_mutex_lock(&(p->domainid_mutex));
     p->deletefile = (char *) YAP_realloc(p->deletefile, (ydfp->total_filenum / 8) + 1);
     fseek(ydfp->deletefile_file, 0L, SEEK_SET);

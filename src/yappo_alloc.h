@@ -1,5 +1,5 @@
 /*
- *memory²ó¤ê¤Î´ÉÍý
+ *memoryå›žã‚Šã®ç®¡ç†
  */
 
 #include <stdio.h>

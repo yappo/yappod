@@ -1,6 +1,6 @@
 /*
  *
- *¥­¡¼¥ï¡¼¥É¤òÊİÍ­¤¹¤ë¥É¥­¥å¥á¥ó¥ÈÈÖ¹æ¤Î¼èÆÀÅù
+ *ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’ä¿æœ‰ã™ã‚‹ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆç•ªå·ã®å–å¾—ç­‰
  *
  */
 #ifndef __SEARCH_H__ 
@@ -11,23 +11,23 @@
 #include "yappo_ngram.h"
 
 /*
- *³ºÅöÊ¸½ñ¥Ç¡¼¥¿
+ *è©²å½“æ–‡æ›¸ãƒ‡ãƒ¼ã‚¿
  */
 typedef struct{ 
   int fileindex;/* URL ID */
-  int pos_len;/* ½Ğ¸½°ÌÃÖ¤Î¿ô */
+  int pos_len;/* å‡ºç¾ä½ç½®ã®æ•° */
   double score;/* tf.idf */
-  int *pos;/* ½Ğ¸½°ÌÃÖ */
+  int *pos;/* å‡ºç¾ä½ç½® */
 }SEARCH_DOCUMENT;
 
 /*
- *¸¡º÷·ë²Ì
+ *æ¤œç´¢çµæœ
  */
 typedef struct{
   unsigned long keyword_id;
   int keyword_total_num;
   int keyword_docs_num;
-  SEARCH_DOCUMENT *docs_list;/* ³ºÅöÊ¸½ñ¥Ç¡¼¥¿ */
+  SEARCH_DOCUMENT *docs_list;/* è©²å½“æ–‡æ›¸ãƒ‡ãƒ¼ã‚¿ */
 }SEARCH_RESULT;
 
 void YAP_Search_result_free (SEARCH_RESULT *p);

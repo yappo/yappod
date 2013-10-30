@@ -1,5 +1,5 @@
 /*
- *ºï½üURL¤Î½èÍý
+ *å‰Šé™¤URLã®å‡¦ç†
  */
 
 #include "yappo_db.h"
@@ -14,7 +14,7 @@ int YAP_Index_Deletefile_get(YAPPO_DB_FILES *ydfp, int fileindex)
   unsigned char c = 0;
 
   if (ydfp->total_filenum < fileindex) {
-    /*ÂÐ¾Ý¤È¤Ê¤ëID¤ÏÂ¸ºß¤·¤Æ¤¤¤Ê¤¤*/
+    /*å¯¾è±¡ã¨ãªã‚‹IDã¯å­˜åœ¨ã—ã¦ã„ãªã„*/
     return -1;
   }
 
@@ -25,10 +25,10 @@ int YAP_Index_Deletefile_get(YAPPO_DB_FILES *ydfp, int fileindex)
   fread(&c, 1, 1, ydfp->deletefile_file);
 
   if (c & (1 << bit)) {
-    /*ºï½üºÑ*/
+    /*å‰Šé™¤æ¸ˆ*/
     return 0;
   } else {
-    /*Ì¤ºï½ü*/
+    /*æœªå‰Šé™¤*/
     return -1;
   }
 }
@@ -42,7 +42,7 @@ int YAP_Index_Deletefile_put(YAPPO_DB_FILES *ydfp, int fileindex)
   unsigned char c = 0;
 
   if (ydfp->mode == YAPPO_DB_READ) {
-    /*ÆÉ¤ß¤³¤ß¥â¡¼¥É¤Ç¤Ï¥¨¥é¡¼*/
+    /*èª­ã¿ã“ã¿ãƒ¢ãƒ¼ãƒ‰ã§ã¯ã‚¨ãƒ©ãƒ¼*/
     return -1;
   }
 
@@ -53,10 +53,10 @@ int YAP_Index_Deletefile_put(YAPPO_DB_FILES *ydfp, int fileindex)
   fread(&c, 1, 1, ydfp->deletefile_file);
 
   if (c & (1 << bit)) {
-    /*ºï½üºÑ*/
+    /*å‰Šé™¤æ¸ˆ*/
     return -1;
   } else {
-    /*Ì¤ºï½ü*/
+    /*æœªå‰Šé™¤*/
     c |= (1 << bit);
     /*fseek(ydfp->deletefile_file, -1L, SEEK_CUR);*/
     fseek(ydfp->deletefile_file, seek, SEEK_SET);
@@ -74,7 +74,7 @@ int YAP_Index_Deletefile_del(YAPPO_DB_FILES *ydfp, int fileindex)
   unsigned char c = 0;
 
   if (ydfp->mode == YAPPO_DB_READ) {
-    /*ÆÉ¤ß¤³¤ß¥â¡¼¥É¤Ç¤Ï¥¨¥é¡¼*/
+    /*èª­ã¿ã“ã¿ãƒ¢ãƒ¼ãƒ‰ã§ã¯ã‚¨ãƒ©ãƒ¼*/
     return -1;
   }
 
@@ -85,13 +85,13 @@ int YAP_Index_Deletefile_del(YAPPO_DB_FILES *ydfp, int fileindex)
   fread(&c, 1, 1, ydfp->deletefile_file);
 
   if (c & (1 << bit)) {
-    /*ºï½üºÑ*/
+    /*å‰Šé™¤æ¸ˆ*/
     c -= (1 << bit);
     fseek(ydfp->deletefile_file, -1L, SEEK_CUR);
     fwrite(&c, 1, 1, ydfp->deletefile_file);
     return 0;
   } else {
-    /*Ì¤ºï½ü*/
+    /*æœªå‰Šé™¤*/
     return -1;
   }
 }

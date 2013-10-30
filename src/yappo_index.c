@@ -1,5 +1,5 @@
 /*
- *¥¤¥ó¥Ç¥¯¥·¥ó¥°²ó¤ê
+ *ã‚¤ãƒ³ãƒ‡ã‚¯ã‚·ãƒ³ã‚°å›ã‚Š
  */
 #include "yappo_index.h"
 #include "yappo_db.h"
@@ -7,7 +7,7 @@
 
 
 /*
- *domainindexDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥ÉID¤ò¼èÆÀ¤¹¤ë
+ *domainindexDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰IDã‚’å–å¾—ã™ã‚‹
  */
 int YAP_Index_get_domainindex(YAPPO_DB_FILES *ydfp, char *domain, int *record_id)
 {
@@ -31,7 +31,7 @@ int YAP_Index_get_domainindex(YAPPO_DB_FILES *ydfp, char *domain, int *record_id
 }
 
 /*
- *domainindexDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥ÉID¤òÀßÄê
+ *domainindexDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰IDã‚’è¨­å®š
  */
 int YAP_Index_put_domainindex(YAPPO_DB_FILES *ydfp, char *domain, int *record_id)
 {
@@ -53,7 +53,7 @@ int YAP_Index_put_domainindex(YAPPO_DB_FILES *ydfp, char *domain, int *record_id
 }
 
 /*
- *domainindexDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥É¤òºï½ü
+ *domainindexDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å‰Šé™¤
  */
 int YAP_Index_del_domainindex(YAPPO_DB_FILES *ydfp, char *domain)
 {
@@ -73,7 +73,7 @@ int YAP_Index_del_domainindex(YAPPO_DB_FILES *ydfp, char *domain)
 
 
 /*
- *fileindexDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥ÉID¤ò¼èÆÀ¤¹¤ë
+ *fileindexDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰IDã‚’å–å¾—ã™ã‚‹
  */
 int YAP_Index_get_fileindex(YAPPO_DB_FILES *ydfp, char *url, int *record_id)
 {
@@ -97,7 +97,7 @@ int YAP_Index_get_fileindex(YAPPO_DB_FILES *ydfp, char *url, int *record_id)
 }
 
 /*
- *fileindexDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥ÉID¤òÀßÄê
+ *fileindexDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰IDã‚’è¨­å®š
  */
 int YAP_Index_put_fileindex(YAPPO_DB_FILES *ydfp, char *url, int *record_id)
 {
@@ -119,7 +119,7 @@ int YAP_Index_put_fileindex(YAPPO_DB_FILES *ydfp, char *url, int *record_id)
 }
 
 /*
- *fileindexDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥É¤òºï½ü
+ *fileindexDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å‰Šé™¤
  */
 int YAP_Index_del_fileindex(YAPPO_DB_FILES *ydfp, char *url)
 {
@@ -139,7 +139,7 @@ int YAP_Index_del_fileindex(YAPPO_DB_FILES *ydfp, char *url)
 
 
 /*
- * 2ByteÊ¸»ú¤ÏEUC¥³¡¼¥É 0xa0a0¡Á0xffff¤Ş¤Ç¤ÎÈÏ°Ï¤ò°·¤¦
+ * 2Byteæ–‡å­—ã¯EUCã‚³ãƒ¼ãƒ‰ 0xa0a0ã€œ0xffffã¾ã§ã®ç¯„å›²ã‚’æ‰±ã†
  *
  *
  *
@@ -147,7 +147,7 @@ int YAP_Index_del_fileindex(YAPPO_DB_FILES *ydfp, char *url)
 
 
 /*
- *keywordDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥ÉID¤ò¼èÆÀ¤¹¤ë
+ *keywordDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰IDã‚’å–å¾—ã™ã‚‹
  */
 int YAP_Index_get_keyword(YAPPO_DB_FILES *ydfp, unsigned char *keyword, unsigned long *keyword_id)
 {
@@ -173,14 +173,14 @@ int YAP_Index_get_keyword(YAPPO_DB_FILES *ydfp, unsigned char *keyword, unsigned
     unsigned long id;
     char c;
 
-    /* Ê¸»úÎó¤ò¿ôÃÍ²½¤¹¤ë */
+    /* æ–‡å­—åˆ—ã‚’æ•°å€¤åŒ–ã™ã‚‹ */
     index = 0;
     key_len = strlen(keyword);
     byte = 1;
     for (i = key_len - 1; i >= 0; i--) {
       c = *(keyword + i) - 160;
       if (c < 0 || c > 95) {
-	/* µ¬³Ê³° */
+	/* è¦æ ¼å¤– */
 	printf("out: %d\n", c);
 	c = 95;
       }
@@ -212,7 +212,7 @@ int YAP_Index_get_keyword(YAPPO_DB_FILES *ydfp, unsigned char *keyword, unsigned
 }
 
 /*
- *keywordDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥ÉID¤òÀßÄê
+ *keywordDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰IDã‚’è¨­å®š
  */
 int YAP_Index_put_keyword(YAPPO_DB_FILES *ydfp, unsigned char *keyword, unsigned long *keyword_id)
 {
@@ -236,14 +236,14 @@ int YAP_Index_put_keyword(YAPPO_DB_FILES *ydfp, unsigned char *keyword, unsigned
     int index, key_len, byte, i;
     char c;
 
-    /* Ê¸»úÎó¤ò¿ôÃÍ²½¤¹¤ë */
+    /* æ–‡å­—åˆ—ã‚’æ•°å€¤åŒ–ã™ã‚‹ */
     index = 0;
     key_len = strlen(keyword);
     byte = 1;
     for (i = key_len - 1; i >= 0; i--) {
       c = *(keyword + i) - 160;
       if (c < 0 || c > 95) {
-	/* µ¬³Ê³° */
+	/* è¦æ ¼å¤– */
 	c = 95;
       }
       index += c * byte;
@@ -268,7 +268,7 @@ int YAP_Index_put_keyword(YAPPO_DB_FILES *ydfp, unsigned char *keyword, unsigned
 
 
 /*
- *8bitÉä¹æ¤Ë¥¨¥ó¥³¡¼¥É¤¹¤ë
+ *8bitç¬¦å·ã«ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã™ã‚‹
  */
 unsigned char *YAP_Index_8bit_encode(int *list, int list_len, int *ret_len)
 {
@@ -281,17 +281,17 @@ unsigned char *YAP_Index_8bit_encode(int *list, int list_len, int *ret_len)
   for (i = 0; i < list_len; i++) {
     unsigned int bit8 = list[i];
     while (1) {
-      int bit7 = bit8 & 0x7f;/* 7bit¤À¤±¼è¤ê¤À¤¹ */
-      bit8 = bit8 >> 7;/* ¸µ¤Î¿ôÃÍ¤ò7bitÊ¬±¦¤Ë¤º¤é¤¹ */
+      int bit7 = bit8 & 0x7f;/* 7bitã ã‘å–ã‚Šã ã™ */
+      bit8 = bit8 >> 7;/* å…ƒã®æ•°å€¤ã‚’7bitåˆ†å³ã«ãšã‚‰ã™ */
 
       if ( bit8 == 0) {
-	/* ºÇ¸å¤Î7bit */
+	/* æœ€å¾Œã®7bit */
 	*encode_p = (unsigned char) bit7;
 	encode_p++;
 	(*ret_len)++;
 	break;
       } else {
-	/* ¼¡¤Î7bit¤âÍ­¤ë */
+	/* æ¬¡ã®7bitã‚‚æœ‰ã‚‹ */
 	*encode_p = (unsigned char) (bit7 | 0x80);
 	encode_p++;
 	(*ret_len)++;
@@ -308,7 +308,7 @@ unsigned char *YAP_Index_8bit_encode(int *list, int list_len, int *ret_len)
 
 
 /*
- *8bitÉä¹æ¤ÎÊ¸»úÎó¤ò¥Ç¥³¡¼¥É¤¹¤ë
+ *8bitç¬¦å·ã®æ–‡å­—åˆ—ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹
  */
 int *YAP_Index_8bit_decode(unsigned char *encode, int *list_len, int len)
 {
@@ -329,7 +329,7 @@ int *YAP_Index_8bit_decode(unsigned char *encode, int *list_len, int len)
     list[*list_len] = list[*list_len] + ((*encode_p & 0x7f) << bits);
     bits += 7;
     if ((*encode_p & 0x80) == 0) {
-      /* ºÇ¸å¤Î7bit */
+      /* æœ€å¾Œã®7bit */
       (*list_len)++;
       list[*list_len] = 0;
       bits = 0;

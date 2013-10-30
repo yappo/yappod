@@ -1,11 +1,11 @@
 /*
- *memory²ó¤ê¤Î´ÉÍı
+ *memoryå›ã‚Šã®ç®¡ç†
  */
 
 #include "yappo_alloc.h"
 
 /*
- *malloc¤Î¥é¥Ã¥Ñ
+ *mallocã®ãƒ©ãƒƒãƒ‘
  */
 void *__YAP_malloc(char *filename, int line, size_t size)
 {
@@ -23,7 +23,7 @@ void *__YAP_malloc(char *filename, int line, size_t size)
 }
 
 /*
- *calloc¤Î¥é¥Ã¥Ñ
+ *callocã®ãƒ©ãƒƒãƒ‘
  */
 void *__YAP_realloc(char *filename, int line, void *inp, size_t size)
 {

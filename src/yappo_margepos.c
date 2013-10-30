@@ -1,6 +1,6 @@
 /*
  *
- *Ê£¿ô¤Î¥­¡¼¥ï¡¼¥É½Ğ¸½DB¤ò£±¤Ä¤ÎDB¤Ë¤Ş¤È¤á¤ë
+ *è¤‡æ•°ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰å‡ºç¾DBã‚’ï¼‘ã¤ã®DBã«ã¾ã¨ã‚ã‚‹
  *
  */
 #include <stdio.h>
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
   int seek_stops = 0;
 
   /*
-   *¥ª¥×¥·¥ç¥ó¤ò¼èÆÀ
+   *ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’å–å¾—
    */
   if (argc > 1) {
     i = 1;
@@ -69,25 +69,25 @@ int main(int argc, char *argv[])
 	break;
 
       if (! strcmp(argv[i], "-s")) {
-	/*¤Ş¤È¤á¤ëDB¤Î»Ï¤á*/
+	/*ã¾ã¨ã‚ã‚‹DBã®å§‹ã‚*/
 	i++;
 	if (argc == i)
 	  break;
 	start = atoi(argv[i]);
       } else if (! strcmp(argv[i], "-e")) {
-	/*¤Ş¤È¤á¤ëDB¤Î½ª¤ê*/
+	/*ã¾ã¨ã‚ã‚‹DBã®çµ‚ã‚Š*/
 	i++;
 	if (argc == i)
 	  break;
 	end = atoi(argv[i]);
       } else if (! strcmp(argv[i], "-l")) {
-	/*ÆşÎÏ¤ò¼èÆÀ*/
+	/*å…¥åŠ›ã‚’å–å¾—*/
 	i++;
 	if (argc == i)
 	  break;
 	input_dir = argv[i];
       } else if (! strcmp(argv[i], "-d")) {
-	/*½ĞÎÏÀè¤ò¼èÆÀ*/
+	/*å‡ºåŠ›å…ˆã‚’å–å¾—*/
 	i++;
 	if (argc == i)
 	  break;
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
   }
 
   /*
-   * ½ĞÎÏÀè¡¢ÆşÎÏÀè¤Î¥Õ¥¡¥¤¥ëÀßÄê
+   * å‡ºåŠ›å…ˆã€å…¥åŠ›å…ˆã®ãƒ•ã‚¡ã‚¤ãƒ«è¨­å®š
    */
   output = (pos_t *) YAP_malloc(sizeof(pos_t));
   output->data = (char *) YAP_malloc(strlen(output_file) + 1);
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
   }
 
   /*
-   * ½ĞÎÏÀè¡¢ÆşÎÏÀè¤Î¥Õ¥¡¥¤¥ë¤ò³«¤¯
+   * å‡ºåŠ›å…ˆã€å…¥åŠ›å…ˆã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
    */
   output->data_fp = fopen(output->data, "w");
   output->index_fp = fopen(output->index, "w");
@@ -163,14 +163,14 @@ int main(int argc, char *argv[])
   }
 
   /*
-   * ºï½ü¥Õ¥¡¥¤¥ë¤ò³«¤¯
+   * å‰Šé™¤ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
    */
   delete_file = (char *) YAP_malloc(strlen(input_dir) + 16);
   sprintf(delete_file, "%s/deletefile", input_dir);
   delete_fp = fopen(delete_file, "r");
 
   /*
-   * ¥­¡¼¥ï¡¼¥É¿ô¤òµá¤á¤ë
+   * ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ•°ã‚’æ±‚ã‚ã‚‹
    */
   key_num_file = (char *) YAP_malloc(strlen(input_dir) + 16);
   sprintf(key_num_file, "%s/keywordnum", input_dir);
@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
 
 
   /*
-   * ¥­¡¼¥ï¡¼¥ÉID¤Î¿ô¤À¤±¥ë¡¼¥×¤¹¤ë
+   * ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰IDã®æ•°ã ã‘ãƒ«ãƒ¼ãƒ—ã™ã‚‹
    */
   new_index = 0;
   for (key_pos = 0;key_pos < key_num;key_pos++) {
@@ -198,12 +198,12 @@ int main(int argc, char *argv[])
 */
     
     if (seek_stops == num) {
-      /* ËöÈø¤Ş¤ÇÍè¤¿¤Î¤ÇÃæÃÇ */
+      /* æœ«å°¾ã¾ã§æ¥ãŸã®ã§ä¸­æ–­ */
       break;
     }
 
     /*
-     * DB¤Î¿ô¤À¤±¤¯¤êÊÖ¤¹
+     * DBã®æ•°ã ã‘ãã‚Šè¿”ã™
      */
     for (i = 0;i < num;i++) {
       int size, index;
@@ -218,7 +218,7 @@ int main(int argc, char *argv[])
 	} else {
 	  ret = fread(&index, sizeof(int), 1, inputs[i]->index_fp);
 	  if (ret) {
-	    /* ÆÉ¤ß¹ş¤ß */
+	    /* èª­ã¿è¾¼ã¿ */
 	    /*	    printf("size:%d\tindex:%d\n", size, index);*/
 
 	    if (size) {
@@ -237,7 +237,7 @@ int main(int argc, char *argv[])
     }
 
     /*
-     * ¥İ¥·¥·¥ç¥ó¥ê¥¹¥È¤ò²òÅà¤¹¤ë
+     * ãƒã‚·ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆã‚’è§£å‡ã™ã‚‹
      */
     pos = YAP_Index_8bit_decode(bufs, &pos_len, total_size);
     new_pos = (int *) YAP_malloc(sizeof(int) * pos_len);
@@ -259,7 +259,7 @@ int main(int argc, char *argv[])
 	i++;
 
 	/*
-	 * ºï½üºÑ¤«¤É¤¦¤«Ä´¤Ù¤ë
+	 * å‰Šé™¤æ¸ˆã‹ã©ã†ã‹èª¿ã¹ã‚‹
 	 */
 	delete_f = 0;
 	delete_seek = fileindex / 8;
@@ -287,7 +287,7 @@ int main(int argc, char *argv[])
 	/*	printf("\nNEW SIZE: %d\n\n\n", new_pos_len);*/
 
 	/*
-	 * ÊİÂ¸¤¹¤ë
+	 * ä¿å­˜ã™ã‚‹
 	 */
 	key_pos_seek = sizeof(int) * key_pos;
 	fseek(output->index_fp, key_pos_seek, SEEK_SET);
@@ -324,7 +324,7 @@ int main(int argc, char *argv[])
 
 
   /*
-   * ½ĞÎÏÀè¡¢ÆşÎÏÀè¤Î¥Õ¥¡¥¤¥ë¤òÊÄ¤¸¤ë
+   * å‡ºåŠ›å…ˆã€å…¥åŠ›å…ˆã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
    */
   fclose(output->data_fp);
   fclose(output->index_fp);
@@ -341,8 +341,8 @@ int main(int argc, char *argv[])
 #ifdef AAAA
 
 /*
- *keywordDB¤«¤éURL¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤Æ¥ì¥³¡¼¥ÉID¤ò¼èÆÀ¤¹¤ë
- *Á°Êı°ìÃ×¤Ë¤è¤êÊ£¿ô¤Î¥­¡¼¥ï¡¼¥ÉID¤òÊÖ¤¹
+ *keywordDBã‹ã‚‰URLã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰IDã‚’å–å¾—ã™ã‚‹
+ *å‰æ–¹ä¸€è‡´ã«ã‚ˆã‚Šè¤‡æ•°ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰IDã‚’è¿”ã™
  */
 int get_keyword_pos(YAPPO_DB_FILES *ydfp, int byte)
 {
@@ -361,19 +361,19 @@ int get_keyword_pos(YAPPO_DB_FILES *ydfp, int byte)
     ret = ydfp->pos2byte_db->cursor(ydfp->pos2byte_db, NULL, &cur, 0);
   }
   
-  /*ºÇ½é¤Î¥ì¥³¡¼¥É¤ò¤ß¤Ä¤±¤ë*/
+  /*æœ€åˆã®ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’ã¿ã¤ã‘ã‚‹*/
   ret = cur->c_get(cur, &key, &value, DB_FIRST);
   if (ret == 0) {
-    /*¥ì¥³¡¼¥É¤¬Í­¤Ã¤¿*/
+    /*ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒæœ‰ã£ãŸ*/
     while(1){
-      /*¥«¡¼¥½¥ë¤òÄ´¤Ù¤ë*/
+      /*ã‚«ãƒ¼ã‚½ãƒ«ã‚’èª¿ã¹ã‚‹*/
       ret = cur->c_get(cur, &key, &value, DB_NEXT);
       if(ret != 0) {
-	/*¥«¡¼¥½¥ë½ªÎ»*/
+	/*ã‚«ãƒ¼ã‚½ãƒ«çµ‚äº†*/
 	printf("END: %d\n", ret);
 	break;
       }
-      /*°ìÃ×¤¹¤ë*/
+      /*ä¸€è‡´ã™ã‚‹*/
       
       {
 	int *id = key.data;
@@ -398,7 +398,7 @@ int get_keyword_pos(YAPPO_DB_FILES *ydfp, int byte)
 }
 
 
-/*¥­¡¼¥ï¡¼¥É¤Î¥Ş¡¼¥¸*/
+/*ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®ãƒãƒ¼ã‚¸*/
 void core (YAPPO_DB_FILES *in_p, YAPPO_DB_FILES *out_p,
 	   int start, int end, int byte
 	   ) 
@@ -412,7 +412,7 @@ void core (YAPPO_DB_FILES *in_p, YAPPO_DB_FILES *out_p,
   int long_len, char_len;
   int c = 0;
 
-  /*¥Ş¥Ã¥×¥Õ¥¡¥¤¥ë¤Î½é´ü²½*/
+  /*ãƒãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã®åˆæœŸåŒ–*/
   buf_file = (char *) YAP_malloc(strlen(MAP_TEMPLATE));
   buf_len_file = (char *) YAP_malloc(strlen(MAP_TEMPLATE));
   strcpy(buf_file, MAP_TEMPLATE);
@@ -436,7 +436,7 @@ void core (YAPPO_DB_FILES *in_p, YAPPO_DB_FILES *out_p,
 
 
   /*
-  //ÆşÎÏ¸µ¤Î°ÌÃÖ¾ğÊóDB¤òÁ´Éô³«¤¯
+  //å…¥åŠ›å…ƒã®ä½ç½®æƒ…å ±DBã‚’å…¨éƒ¨é–‹ã
   pos = (YAPPO_DB_FILES *) YAP_malloc(sizeof(YAPPO_DB_FILES) * (end - start + 1));
   for (i = start; i <= end; i++) {
     int num = i - start;
@@ -490,7 +490,7 @@ void core (YAPPO_DB_FILES *in_p, YAPPO_DB_FILES *out_p,
 
   
   /*
-  //ÆşÎÏ¸µ¤Î°ÌÃÖ¾ğÊóDB¤òÁ´ÉôÊÄ¤¸¤ë
+  //å…¥åŠ›å…ƒã®ä½ç½®æƒ…å ±DBã‚’å…¨éƒ¨é–‰ã˜ã‚‹
   for (i = start; i <= end; i++) {
     int num = i - start;
     YAP_Db_pos_close(pos + num);
@@ -512,7 +512,7 @@ int main(int argc, char *argv[])
   memset(&out_index, 0, sizeof(YAPPO_DB_FILES));
 
   /*
-   *¥ª¥×¥·¥ç¥ó¤ò¼èÆÀ
+   *ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’å–å¾—
    */
   if (argc > 1) {
     i = 1;
@@ -521,25 +521,25 @@ int main(int argc, char *argv[])
 	break;
 
       if (! strcmp(argv[i], "-s")) {
-	/*¤Ş¤È¤á¤ëDB¤Î»Ï¤á*/
+	/*ã¾ã¨ã‚ã‚‹DBã®å§‹ã‚*/
 	i++;
 	if (argc == i)
 	  break;
 	start = atoi(argv[i]);
       } else if (! strcmp(argv[i], "-e")) {
-	/*¤Ş¤È¤á¤ëDB¤Î½ª¤ï¤ê*/
+	/*ã¾ã¨ã‚ã‚‹DBã®çµ‚ã‚ã‚Š*/
 	i++;
 	if (argc == i)
 	  break;
 	end = atoi(argv[i]);
       } else if (! strcmp(argv[i], "-l")) {
-	/*ÆşÎÏÀè¤ò¼èÆÀ*/
+	/*å…¥åŠ›å…ˆã‚’å–å¾—*/
 	i++;
 	if (argc == i)
 	  break;
 	in_index.base_dir = argv[i];
       } else if (! strcmp(argv[i], "-d")) {
-	/*½ĞÎÏÀè¤ò¼èÆÀ*/
+	/*å‡ºåŠ›å…ˆã‚’å–å¾—*/
 	i++;
 	if (argc == i)
 	  break;
@@ -549,7 +549,7 @@ int main(int argc, char *argv[])
     }
   }
 
-  /*¥ª¥×¥·¥ç¥ó¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ê¤¤*/
+  /*ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„*/
   if ( in_index.base_dir == NULL || out_index.base_dir == NULL) {
     printf("Usage: %s -l input_index -d output_index -s start -e end\n", argv[0]);
     exit(-1);
@@ -570,7 +570,7 @@ int main(int argc, char *argv[])
   in_index.mode = YAPPO_DB_READ;
   out_index.mode = YAPPO_DB_READ;
 
-  /*DB¤ò³«¤¯*/
+  /*DBã‚’é–‹ã*/
   YAP_Db_filename_set(&in_index);
   YAP_Db_base_open(&in_index);
 

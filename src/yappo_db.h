@@ -1,6 +1,6 @@
 /*
  *
- *DB²ó¤ê¤Î½èÍı¤ò¹Ô¤Ê¤¦
+ *DBå›ã‚Šã®å‡¦ç†ã‚’è¡Œãªã†
  *
  */
 #ifndef __YAPPO_DB_H__
@@ -12,53 +12,53 @@ typedef unsigned long u_long;
 #include <db.h>
 #include <pthread.h>
 
-/* 1¤Ä¤Î½Ğ¸½°ÌÃÖ¥Õ¥¡¥¤¥ë¤Ç°·¤¦URL¿ô */
+/* 1ã¤ã®å‡ºç¾ä½ç½®ãƒ•ã‚¡ã‚¤ãƒ«ã§æ‰±ã†URLæ•° */
 #define MAX_POS_URL 10000
 
 
-/* DB¤ò³«¤¯¤È¤­¤Î¥ª¥×¥·¥ç¥ó */
+/* DBã‚’é–‹ãã¨ãã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ */
 #define YAPPO_DB_WRITE 0
 #define YAPPO_DB_READ 1
 
 /* 
- *  ¸¡º÷»ş¤Ë»ÈÍÑ¤µ¤ì¤ë³Æ¼ï¥­¥ã¥Ã¥·¥å
+ *  æ¤œç´¢æ™‚ã«ä½¿ç”¨ã•ã‚Œã‚‹å„ç¨®ã‚­ãƒ£ãƒƒã‚·ãƒ¥
 */
 typedef struct{ 
-  /* ÁíURL¿ô */
+  /* ç·URLæ•° */
   unsigned int total_filenum;
 
-  /* ÁíDOMAIN¿ô */
+  /* ç·DOMAINæ•° */
   unsigned int total_domainnum;
 
-  /* Áí¥­¡¼¥ï¡¼¥É¿ô */
+  /* ç·ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ•° */
   unsigned int total_keywordnum;
 
-  /* ¥¹¥³¥¢¥Õ¥¡¥¤¥ë¥­¥ã¥Ã¥·¥å */
+  /* ã‚¹ã‚³ã‚¢ãƒ•ã‚¡ã‚¤ãƒ«ã‚­ãƒ£ãƒƒã‚·ãƒ¥ */
   double *score;
   unsigned int score_num;
   pthread_mutex_t score_mutex;
 
-  /* ¥Õ¥¡¥¤¥ë¥µ¥¤¥º¥­¥ã¥Ã¥·¥å */
+  /* ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚­ãƒ£ãƒƒã‚·ãƒ¥ */
   int *size;
   unsigned int size_num;
   pthread_mutex_t size_mutex;
 
-  /* URLÊ¸»ú¿ô¥Õ¥¡¥¤¥ë¥­¥ã¥Ã¥·¥å */
+  /* URLæ–‡å­—æ•°ãƒ•ã‚¡ã‚¤ãƒ«ã‚­ãƒ£ãƒƒã‚·ãƒ¥ */
   int *urllen;
   unsigned int urllen_num;
   pthread_mutex_t urllen_mutex;
 
-  /* ³ÆURL¤Î¥­¡¼¥ï¡¼¥É¿ô¥Õ¥¡¥¤¥ë¥­¥ã¥Ã¥·¥å */
+  /* å„URLã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ•°ãƒ•ã‚¡ã‚¤ãƒ«ã‚­ãƒ£ãƒƒã‚·ãƒ¥ */
   int filekeywordnum_num;
   unsigned int *filekeywordnum;
   pthread_mutex_t filekeywordnum_mutex;
 
-  /* domain id¥Õ¥¡¥¤¥ë¥­¥ã¥Ã¥·¥å */
+  /* domain idãƒ•ã‚¡ã‚¤ãƒ«ã‚­ãƒ£ãƒƒã‚·ãƒ¥ */
   int *domainid;
   unsigned int domainid_num;
   pthread_mutex_t domainid_mutex;
 
-  /* ºï½üURL¥Õ¥¡¥¤¥ë¥­¥ã¥Ã¥·¥å */
+  /* å‰Šé™¤URLãƒ•ã‚¡ã‚¤ãƒ«ã‚­ãƒ£ãƒƒã‚·ãƒ¥ */
   unsigned char *deletefile;
   unsigned int deletefile_num;
   pthread_mutex_t deletefile_mutex;
@@ -66,84 +66,84 @@ typedef struct{
 
 
 /*
- *DB¤Î¥Õ¥¡¥¤¥ë¥Ï¥ó¥É¥ë
+ *DBã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ«
  */
 typedef struct{
-  int  mode;/* db¤ò³«¤¯¤È¤­¤Î¥ª¥×¥·¥ç¥ó */
+  int  mode;/* dbã‚’é–‹ãã¨ãã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ */
 
-  char *base_dir;/* db¤Î´ğËÜ¥Ç¥£¥ì¥¯¥È¥ê */
+  char *base_dir;/* dbã®åŸºæœ¬ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª */
 
   char *keyword_2byte_name, *postings_2byte_name;
   char *keyword_1byte_name, *postings_1byte_name;
   char *filedata_name;
 
-  /* URL/Ê¸½ñIDÂĞ±şÉ½ */
+  /* URL/æ–‡æ›¸IDå¯¾å¿œè¡¨ */
   char *fileindex;
   char *fileindex_tmp;
   DB *fileindex_db;
 
-  /* domain/domain IDÂĞ±şÉ½ */
+  /* domain/domain IDå¯¾å¿œè¡¨ */
   char *domainindex;
   char *domainindex_tmp;
   DB *domainindex_db;
 
-  /* ¼­½ñ¥Õ¥¡¥¤¥ë(2byte) */
+  /* è¾æ›¸ãƒ•ã‚¡ã‚¤ãƒ«(2byte) */
   char *key2byte;
   char *key2byte_tmp;
   FILE *key2byte_file;
 
-  /* ¼­½ñ¥Õ¥¡¥¤¥ë(1byte) */
+  /* è¾æ›¸ãƒ•ã‚¡ã‚¤ãƒ«(1byte) */
   char *key1byte;
   char *key1byte_tmp;
   DB *key1byte_db;
 
-  /* ÁíURL¿ô */
+  /* ç·URLæ•° */
   unsigned int total_filenum;
   char *filenum;
   FILE *filenum_file;
 
-  /* ÁíDOMAIN¿ô */
+  /* ç·DOMAINæ•° */
   unsigned int total_domainnum;
   char *domainnum;
   FILE *domainnum_file;
 
-  /* Áí¥­¡¼¥ï¡¼¥É¿ô */
+  /* ç·ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ•° */
   unsigned int total_keywordnum;
   char *keywordnum;
   FILE *keywordnum_file;
 
-  /* ³ÆURL¤ÎDOMAIN ID */
+  /* å„URLã®DOMAIN ID */
   char *domainid;
   FILE *domainid_file;
 
-  /* ³ÆURL¤Î¥µ¥¤¥º */
+  /* å„URLã®ã‚µã‚¤ã‚º */
   char *size;
   FILE *size_file;
 
-  /* ³ÆURL¤Î¤Î¥Ù¡¼¥¹¥¹¥³¥¢ */
+  /* å„URLã®ã®ãƒ™ãƒ¼ã‚¹ã‚¹ã‚³ã‚¢ */
   char *score;
   FILE *score_file;
 
-  /* ³ÆURL¤Î¥­¡¼¥ï¡¼¥É¿ô */
+  /* å„URLã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰æ•° */
   char *filekeywordnum;
   FILE *filekeywordnum_file;
 
-  /* URL¤ÎÄ¹¤µ */
+  /* URLã®é•·ã• */
   char *urllen;
   FILE *urllen_file;
 
-  /* ¥­¡¼¥ï¡¼¥É¤ÎÁí½Ğ¸½¿ô */
+  /* ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®ç·å‡ºç¾æ•° */
   char *keyword_totalnum;
   FILE *keyword_totalnum_file;
 
-  /* ¥­¡¼¥ï¡¼¥É¤ÎÁí½Ğ¸½URL¿ô */
+  /* ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®ç·å‡ºç¾URLæ•° */
   char *keyword_docsnum;
   FILE *keyword_docsnum_file;
 
   /*
-   *linklist´Ø·¸
+   *linklisté–¢ä¿‚
    */
-  /* linklist¤Ç¼è°·¤Ã¤Æ¤¤¤ëURL¿ô */
+  /* linklistã§å–æ‰±ã£ã¦ã„ã‚‹URLæ•° */
   int linklist_num;
   char *linklist;
   FILE *linklist_file;
@@ -153,11 +153,11 @@ typedef struct{
   FILE *linklist_index_file;
 
   /*
-   *½Ğ¸½°ÌÃÖ¥Õ¥¡¥¤¥ë´Ø·¸
+   *å‡ºç¾ä½ç½®ãƒ•ã‚¡ã‚¤ãƒ«é–¢ä¿‚
    */
   unsigned long pos_num;
   int pos_fileindex_start, pos_fileindex_end;
-  /* ¥¤¥ó¥Ç¥Ã¥¯¥¹ºîÀ®Åù¤Ç»ÈÍÑ¤¹¤ë ¸½ºß½èÍıÃæ¤Îfileindex */
+  /* ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ä½œæˆç­‰ã§ä½¿ç”¨ã™ã‚‹ ç¾åœ¨å‡¦ç†ä¸­ã®fileindex */
   int pos_fileindex_start_w, pos_fileindex_end_w;
   char *pos;
   char *pos_tmp;
@@ -170,7 +170,7 @@ typedef struct{
   FILE *pos_index_file;
 
   /*
-   *URL¥á¥¿¥Ç¡¼¥¿´Ø·¸
+   *URLãƒ¡ã‚¿ãƒ‡ãƒ¼ã‚¿é–¢ä¿‚
    */
   char *filedata;
   char *filedata_tmp;
@@ -183,14 +183,14 @@ typedef struct{
   FILE *filedata_index_file;
 
   /*
-   *ºï½üºßURL¥Õ¥¡¥¤¥ë
+   *å‰Šé™¤åœ¨URLãƒ•ã‚¡ã‚¤ãƒ«
    */
   char *deletefile;
   char *deletefile_tmp;
   FILE *deletefile_file;
 
 
-  /* ¸¡º÷»ş¤Ë»ÈÍÑ¤µ¤ì¤ë³Æ¼ï¥­¥ã¥Ã¥·¥å */
+  /* æ¤œç´¢æ™‚ã«ä½¿ç”¨ã•ã‚Œã‚‹å„ç¨®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ */
   YAPPO_CACHE *cache;
 }YAPPO_DB_FILES;
 

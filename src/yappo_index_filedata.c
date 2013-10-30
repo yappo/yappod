@@ -1,12 +1,12 @@
 /*
- *URL¥á¥¿¥Ç¡¼¥¿¤ò¼è°·¤¦
+ *URLãƒ¡ã‚¿ãƒ‡ãƒ¼ã‚¿ã‚’å–æ‰±ã†
  */
 
 #include "yappo_index_filedata.h"
 #include "yappo_alloc.h"
 
 /*
- *fileindex¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤ÆFILEDATA¤ò¼èÆÀ
+ *fileindexã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦FILEDATAã‚’å–å¾—
  */
 int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *filedata)
 {
@@ -17,13 +17,13 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
   unsigned char *buf, *bufp;
 
   if (ydfp->total_filenum < fileindex) {
-    /*ÂĞ¾İ¤È¤Ê¤ëID¤ÏÂ¸ºß¤·¤Æ¤¤¤Ê¤¤*/
+    /*å¯¾è±¡ã¨ãªã‚‹IDã¯å­˜åœ¨ã—ã¦ã„ãªã„*/
     return -1;
   }
 
   seek = sizeof(int) * fileindex;
 
-  /*¥µ¥¤¥º¤ÎÆÉ¤ß¤³¤ß*/
+  /*ã‚µã‚¤ã‚ºã®èª­ã¿ã“ã¿*/
   fseek(ydfp->filedata_size_file, seek, SEEK_SET);
   ret = fread(&filedata_size, sizeof(int), 1, ydfp->filedata_size_file);
   if (ret == 0) {
@@ -31,18 +31,18 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
   }
 
   if (filedata_size == 0) {
-    /*¥µ¥¤¥º¤¬0¤Ê¤Î¤ÇÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ê¤¤*/
+    /*ã‚µã‚¤ã‚ºãŒ0ãªã®ã§ç™»éŒ²ã•ã‚Œã¦ã„ãªã„*/
     return -1;
   }
 
-  /*index¤ÎÆÉ¤ß¤³¤ß*/
+  /*indexã®èª­ã¿ã“ã¿*/
   fseek(ydfp->filedata_index_file, seek, SEEK_SET);
   ret = fread(&filedata_index, sizeof(int), 1, ydfp->filedata_index_file);
   if (ret == 0) {
     return -1;
   }
 
-  /*¥Ç¡¼¥¿¤ÎÆÉ¤ß¤³¤ß*/
+  /*ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿ã“ã¿*/
   buf = (unsigned char *) YAP_malloc(filedata_size);
   fseek(ydfp->filedata_file, filedata_index, SEEK_SET);
   ret = fread(buf, 1, filedata_size, ydfp->filedata_file);
@@ -56,7 +56,7 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
 
   bufp = buf;
 
-  /*FIELDATA¤ò¥·¥ê¥¢¥é¥¤¥º¤¹¤ë
+  /*FIELDATAã‚’ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹
    * url\0title\0comment\0size\0keyword_num\0lastmod\0domainid\0other_len\0other
    */
   str_len = *((size_t *) bufp);
@@ -114,7 +114,7 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
 }
 
 /*
- *fileindex¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤ÆFILEDATA¤òÀßÄê
+ *fileindexã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦FILEDATAã‚’è¨­å®š
  */
 int YAP_Index_Filedata_put(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *filedata)
 {
@@ -124,12 +124,12 @@ int YAP_Index_Filedata_put(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
   int buf_len = 0;
 
   if (ydfp->mode == YAPPO_DB_READ) {
-    /*ÆÉ¤ß¤³¤ß¥â¡¼¥É¤Ç¤Ï¥¨¥é¡¼*/
+    /*èª­ã¿ã“ã¿ãƒ¢ãƒ¼ãƒ‰ã§ã¯ã‚¨ãƒ©ãƒ¼*/
     return -1;
   }
 
 
-  /*FIELDATA¤ò¥·¥ê¥¢¥é¥¤¥º¤¹¤ë
+  /*FIELDATAã‚’ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹
    *url\0title\0comment\0size\0keyword_num\0lastmod\0domainid\0other_len\0other
    */
 
@@ -197,20 +197,20 @@ int YAP_Index_Filedata_put(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
     strcpy(bufp, filedata->other);
   }
 
-  /*ÅĞÏ¿*/
+  /*ç™»éŒ²*/
 
   seek = sizeof(int) * fileindex;
 
-  /*¥µ¥¤¥º¤Î½ñ¤­¤³¤ß*/
+  /*ã‚µã‚¤ã‚ºã®æ›¸ãã“ã¿*/
   fseek(ydfp->filedata_size_file, seek, SEEK_SET);
   fwrite(&buf_len, sizeof(int), 1, ydfp->filedata_size_file);
 
-  /*¥Ç¡¼¥¿¤Î½ñ¤­¤³¤ß*/
+  /*ãƒ‡ãƒ¼ã‚¿ã®æ›¸ãã“ã¿*/
   fseek(ydfp->filedata_file, 0L, SEEK_END);
   filedata_index = ftell(ydfp->filedata_file);
   fwrite(buf, 1, buf_len, ydfp->filedata_file);
 
-  /*index¤Î½ñ¤­¤³¤ß*/
+  /*indexã®æ›¸ãã“ã¿*/
   fseek(ydfp->filedata_index_file, seek, SEEK_SET);
   fwrite(&filedata_index, sizeof(int), 1, ydfp->filedata_index_file);
 
@@ -220,7 +220,7 @@ int YAP_Index_Filedata_put(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
 }
 
 /*
- *fileindex¤ò¥­¡¼¤Ë¸¡º÷¤ò¤·¤ÆFILEDATA¤òºï½ü
+ *fileindexã‚’ã‚­ãƒ¼ã«æ¤œç´¢ã‚’ã—ã¦FILEDATAã‚’å‰Šé™¤
  */
 int YAP_Index_Filedata_del(YAPPO_DB_FILES *ydfp, int fileindex)
 {
@@ -228,17 +228,17 @@ int YAP_Index_Filedata_del(YAPPO_DB_FILES *ydfp, int fileindex)
   int seek;
 
   if (ydfp->mode == YAPPO_DB_READ) {
-    /*ÆÉ¤ß¤³¤ß¥â¡¼¥É¤Ç¤Ï¥¨¥é¡¼*/
+    /*èª­ã¿ã“ã¿ãƒ¢ãƒ¼ãƒ‰ã§ã¯ã‚¨ãƒ©ãƒ¼*/
     return -1;
   }
 
   seek = sizeof(int) * fileindex;
 
-  /*¥µ¥¤¥º¤Î½ñ¤­¤³¤ß*/
+  /*ã‚µã‚¤ã‚ºã®æ›¸ãã“ã¿*/
   fseek(ydfp->filedata_size_file, seek, SEEK_SET);
   fwrite(&c, sizeof(int), 1, ydfp->filedata_size_file);
 
-  /*index¤Î½ñ¤­¤³¤ß*/
+  /*indexã®æ›¸ãã“ã¿*/
   fseek(ydfp->filedata_index_file, seek, SEEK_SET);
   fwrite(&c, sizeof(int), 1, ydfp->filedata_index_file);
 
@@ -246,7 +246,7 @@ int YAP_Index_Filedata_del(YAPPO_DB_FILES *ydfp, int fileindex)
 }
 
 /*
- *FILEDATA¤Î¥á¥â¥ê¤ò¥¯¥ê¥¢¤¹¤ë
+ *FILEDATAã®ãƒ¡ãƒ¢ãƒªã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
  */
 int YAP_Index_Filedata_free (FILEDATA *p)
 {
@@ -274,8 +274,8 @@ int YAP_Index_Filedata_free (FILEDATA *p)
 
 
 /*
- *¥á¥¿¥Õ¥¡¥¤¥ë¤Î¤´¤ßÀ°Íı¤ò¹Ô¤Ê¤¦
- *¥á¥¿¥Õ¥¡¥¤¥ë¤òopen¤·¤Æ¤¤¤ë¥×¥í¥»¥¹¤¬Ìµ¤¤¤³¤È¤¬Á°Äé
+ *ãƒ¡ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«ã®ã”ã¿æ•´ç†ã‚’è¡Œãªã†
+ *ãƒ¡ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«ã‚’openã—ã¦ã„ã‚‹ãƒ—ãƒ­ã‚»ã‚¹ãŒç„¡ã„ã“ã¨ãŒå‰å ¤
  */
 int YAP_Index_Filedata_gc(YAPPO_DB_FILES *ydfp, char *filedata, char *filedata_size, char *filedata_index)
 {
@@ -289,13 +289,13 @@ int YAP_Index_Filedata_gc(YAPPO_DB_FILES *ydfp, char *filedata, char *filedata_s
 
   printf("Start YAP_Index_Filedata_gc\n");
 
-  /*ÂÔÈò¥Õ¥¡¥¤¥ëÌ¾¤ÎºîÀ®*/
+  /*å¾…é¿ãƒ•ã‚¡ã‚¤ãƒ«åã®ä½œæˆ*/
   filedata_tmp = (char *) YAP_malloc(strlen(filedata) + 5);
   sprintf(filedata_tmp, "%s_tmp", filedata);
   filedata_index_tmp = (char *) YAP_malloc(strlen(filedata_index) + 5);
   sprintf(filedata_index_tmp, "%s_tmp", filedata_index);
 
-  /*¥Õ¥¡¥¤¥ë¤ò³«¤¯*/
+  /*ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã*/
   filedata_file = fopen(filedata, "r");
   filedata_size_file = fopen(filedata_size, "r");
   filedata_index_file = fopen(filedata_index, "r");
@@ -307,21 +307,21 @@ int YAP_Index_Filedata_gc(YAPPO_DB_FILES *ydfp, char *filedata, char *filedata_s
   fseek(filedata_index_file, sizeof(int), SEEK_SET);
   fseek(filedata_index_tmp_file, sizeof(int), SEEK_SET);
 
-  /*°ÌÃÖ¾ğÊó¤Î¥³¥Ô¡¼*/
+  /*ä½ç½®æƒ…å ±ã®ã‚³ãƒ”ãƒ¼*/
   for (i = 1; i <= ydfp->total_filenum; i++) {
     seek = sizeof(int) * i;
 
-    /*¥µ¥¤¥º¤ÎÆÉ¤ß¤³¤ß*/
+    /*ã‚µã‚¤ã‚ºã®èª­ã¿ã“ã¿*/
     fread(&size, sizeof(int), 1, filedata_size_file);
 
     if (size > 0) {
-      /*ÅĞÏ¿¤¬Í­¤ë*/
+      /*ç™»éŒ²ãŒæœ‰ã‚‹*/
 
-      /*index¤ÎÆÉ¤ß¤³¤ß*/
+      /*indexã®èª­ã¿ã“ã¿*/
       fseek(filedata_index_file, seek, SEEK_SET);
       fread(&index, sizeof(int), 1, filedata_index_file);
 
-      /*¥Ç¡¼¥¿¤ÎÆÉ¤ß¤³¤ß*/
+      /*ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿ã“ã¿*/
       if (buf_len < size) {
 	buf = (char *) YAP_realloc(buf, size);
 	buf_len = size;
@@ -329,13 +329,13 @@ int YAP_Index_Filedata_gc(YAPPO_DB_FILES *ydfp, char *filedata, char *filedata_s
       fseek(filedata_file, index, SEEK_SET);
       fread(buf, 1, size, filedata_file);
 
-      /*¥Ç¡¼¥¿¤Î½ñ¤­¤³¤ß*/
+      /*ãƒ‡ãƒ¼ã‚¿ã®æ›¸ãã“ã¿*/
       index_tmp = ftell(filedata_tmp_file);
       fwrite(buf, 1, size, filedata_tmp_file);
     } else {
       index_tmp = 0;
     }
-    /*index¤Î½ñ¤­¤³¤ß*/
+    /*indexã®æ›¸ãã“ã¿*/
     fwrite(&index_tmp, sizeof(int), 1, filedata_index_tmp_file);
   }
 
@@ -343,14 +343,14 @@ int YAP_Index_Filedata_gc(YAPPO_DB_FILES *ydfp, char *filedata, char *filedata_s
     free(buf);
   }
   
-  /*¥Õ¥¡¥¤¥ë¤òÊÄ¤¸¤ë*/
+  /*ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹*/
   fclose(filedata_file);
   fclose(filedata_size_file);
   fclose(filedata_index_file);
   fclose(filedata_tmp_file);
   fclose(filedata_index_tmp_file);
 
-  /*¥Õ¥¡¥¤¥ë¤òÆş¤ì´¹¤¨¤ë*/
+  /*ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å…¥ã‚Œæ›ãˆã‚‹*/
   if (fork()) { int s; wait(&s);} else {
     execl("/bin/mv", "/bin/mv", filedata_tmp, filedata, (char *) 0);
     exit(0);

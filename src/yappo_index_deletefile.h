@@ -1,5 +1,5 @@
 /*
- *บ๏ฝüURLคฮฝ่อý
+ *ๅ้คURLใฎๅฆ็
  */
 #ifndef __INDEX_DELETEFILE_H__
 #define __INDEX_DELETEFILE_H__
