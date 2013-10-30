@@ -213,12 +213,12 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
 
   /* URLとIDの対比表 */
   db_create(&(p->fileindex_db), NULL, 0);
-  p->fileindex_db->open(p->fileindex_db, fileindex, NULL,
+  p->fileindex_db->open(p->fileindex_db, NULL, fileindex, NULL,
                     DB_BTREE, mode, 0);
 
   /* DOMAINとIDの対比表 */
   db_create(&(p->domainindex_db), NULL, 0);
-  p->domainindex_db->open(p->domainindex_db, domainindex, NULL,
+  p->domainindex_db->open(p->domainindex_db, NULL, domainindex, NULL,
                     DB_BTREE, mode, 0);
 
   /* 削除URL */
@@ -291,7 +291,7 @@ void YAP_Db_base_open (YAPPO_DB_FILES *p)
 
   /* 辞書ファイル 1byte */
   db_create(&(p->key1byte_db), NULL, 0);
-  p->key1byte_db->open(p->key1byte_db, key1byte, NULL,
+  p->key1byte_db->open(p->key1byte_db, NULL, key1byte, NULL,
                     DB_BTREE, mode, 0);
 
 
