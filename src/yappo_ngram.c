@@ -87,7 +87,7 @@ void __YAP_Ngram_List_add(NGRAM_LIST *list, unsigned char *keyword, int index)
 /*
  *指定リスト以降に継れているリストの消去
  */
-NGRAM_LIST *YAP_Ngram_List_free(NGRAM_LIST *list)
+void YAP_Ngram_List_free(NGRAM_LIST *list)
 {
   NGRAM_LIST *this, *next;
 
