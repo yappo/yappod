@@ -60,7 +60,7 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
    * url\0title\0comment\0size\0keyword_num\0lastmod\0domainid\0other_len\0other
    */
   str_len = *((size_t *) bufp);
-  *((size_t *) bufp)++;
+  bufp += sizeof(size_t);
   if (str_len > 0) {
     filedata->url = (char *) YAP_malloc(str_len + 1);
     memcpy(filedata->url, bufp, str_len);
@@ -70,7 +70,7 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
   }
 
   str_len = *((size_t *) bufp);
-  *((size_t *) bufp)++;
+  bufp += sizeof(size_t);
   if (str_len > 0) {
     filedata->title = (char *) YAP_malloc(str_len + 1);
     memcpy(filedata->title, bufp, str_len);
@@ -80,7 +80,7 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
   }
 
   str_len = *((size_t *) bufp);
-  *((size_t *) bufp)++;
+  bufp += sizeof(size_t);
   if (str_len > 0) {
     filedata->comment = (char *) YAP_malloc(str_len + 1);
     memcpy(filedata->comment, bufp, str_len);
@@ -90,16 +90,16 @@ int YAP_Index_Filedata_get(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
   }
 
   filedata->size = *((int *) bufp);
-  *((int *) bufp)++;
+  bufp += sizeof(int);
   filedata->keyword_num = *((int *) bufp);
-  *((int *) bufp)++;
+  bufp += sizeof(int);
   filedata->lastmod = *((time_t *) bufp);
-  *((time_t *) bufp)++;
+  bufp += sizeof(time_t);
   filedata->domainid = *((int *) bufp);
-  *((int *) bufp)++;
+  bufp += sizeof(int);
 
   filedata->other_len = *((int *) bufp);
-  *((int *) bufp)++;
+  bufp += sizeof(int);
   if (filedata->other_len > 0) {
     filedata->other = (char *) YAP_malloc(filedata->other_len + 1);
     memcpy(filedata->other, bufp, filedata->other_len);
@@ -156,43 +156,43 @@ int YAP_Index_Filedata_put(YAPPO_DB_FILES *ydfp, int fileindex, FILEDATA *fileda
 
   if (filedata->url != NULL) {
     *((size_t *) bufp) = strlen(filedata->url);
-    *((size_t *) bufp)++;
+    bufp += sizeof(size_t);
     strcpy(bufp, filedata->url);
     bufp += strlen(filedata->url);
   } else {
     *((size_t *) bufp) = 0;
-    *((size_t *) bufp)++;
+    bufp += sizeof(size_t);
   }
   if (filedata->title != NULL) {
     *((size_t *) bufp) = strlen(filedata->title);
-    *((size_t *) bufp)++;
+    bufp += sizeof(size_t);
     strcpy(bufp, filedata->title);
     bufp += strlen(filedata->title);
   } else {
     *((size_t *) bufp) = 0;
-    *((size_t *) bufp)++;
+    bufp += sizeof(size_t);
   }
   if (filedata->comment != NULL) {
     *((size_t *) bufp) = strlen(filedata->comment);
-    *((size_t *) bufp)++;
+    bufp += sizeof(size_t);
     strcpy(bufp, filedata->comment);
     bufp += strlen(filedata->comment);
   } else {
     *((size_t *) bufp) = 0;
-    *((size_t *) bufp)++;
+    bufp += sizeof(size_t);
   }
 
   *((int *) bufp) = filedata->size;
-  *((int *) bufp)++;
+  bufp += sizeof(int);
   *((int *) bufp) = filedata->keyword_num;
-  *((int *) bufp)++;
+  bufp += sizeof(int);
   *((time_t *) bufp) = filedata->lastmod;
-  *((time_t *) bufp)++;
+  bufp += sizeof(time_t);
   *((int *) bufp) = filedata->domainid;
-  *((int *) bufp)++;
+  bufp += sizeof(int);
 
   *((int *) bufp) = filedata->other_len;
-  *((int *) bufp)++;
+  bufp += sizeof(int);
   if ( filedata->other != NULL) {
     strcpy(bufp, filedata->other);
   }
